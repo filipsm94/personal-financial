@@ -1,0 +1,101 @@
+{
+    "login": {
+        "authenticated": true,
+        "clientId": "XXX222XXX",
+        "name": "Felipe Mesa",
+        "email": "felipe@mesa.com"
+    },
+    "user_register": {
+        "clientId": "XXX222XXX",
+        "date_register": "2021-05-24",
+        "name": "Felipe Mesa",
+        "email": "felipe@mesa.com"
+    },
+    "sales": {
+        "total_revenue": 5000000,
+        "total_expense": 2300000,
+        "list_expense": [
+            {
+                "amount": 4000000,
+                "type_expense": "SALARY",
+                "type": "REVENUE",
+                "name": "Salario",
+                "date": "2021-05-25"
+            },
+            {
+                "amount": 120000,
+                "type_expense": "FOOT",
+                "type": "EXPENSE",
+                "name": "Mercado",
+                "date": "2021-05-25"
+            },
+            {
+                "amount": 120000,
+                "type_expense": "FUN",
+                "type": "EXPENSE",
+                "name": "Mercado",
+                "date": "2021-05-25"
+            }
+        ],
+        "monthly_summary": [
+            {
+                "month": "Enero",
+                "revenue": 400000,
+                "expense": 280000
+            },
+            {
+                "month": "Febrero",
+                "revenue": 400000,
+                "expense": 320000
+            },
+            {
+                "month": "Marzo",
+                "revenue": 400000,
+                "expense": 150000
+            }
+        ]
+    },
+    "add_revenue": {
+        "list_revenues": [
+            {
+                "amount": 4000000,
+                "type_expense": "SALARY",
+                "type": "REVENUE",
+                "name": "Salario",
+                "date": "2021-05-25"
+            },
+            {
+                "amount": 1500000,
+                "type_expense": "REVENUE",
+                "type": "REVENUE",
+                "name": "Freelance",
+                "date": "2021-05-25"
+            }
+        ]
+    },
+    "add_expense": {
+        "list_expenses": [
+            {
+                "amount": 40000,
+                "type_expense": "FOOT",
+                "type": "REVENUE",
+                "name": "Salario",
+                "date": "2021-05-25"
+            },
+            {
+                "amount": 100000,
+                "type_expense": "FUN",
+                "type": "REVENUE",
+                "name": "Freelance",
+                "date": "2021-05-25"
+            },
+            {
+                "amount": 3000000,
+                "type_expense": "EDUCATION",
+                "type": "REVENUE",
+                "name": "Freelance",
+                "date": "2021-05-25"
+            }
+        ]
+    }
+}
