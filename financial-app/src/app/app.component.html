@@ -15,14 +15,19 @@
           <div class="_layer -mid"></div>
           <div class="_layer -bottom"></div>
         </div>
-        <div [ngClass]="{'mountain': isLoggedIn$ | async}">
+        <div class="text-secondary" [ngClass]="{'mountain': isLoggedIn$ | async}">
           <i class="fas fa-mountain"></i>
         </div>
       </div>
-      <div>
-        Mis Finanzas Personales
+      <div >
+        <h1 class="text-secondary">
+          Mis Finanzas Personales
+        </h1>
       </div>
-      <div>
+      <div class="text-secondary text-center">
+        <div>
+          <i class="fas fa-user fa-3x"></i>
+        </div>
         Informacion Usuario
       </div>
     </header>
