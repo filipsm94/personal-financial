@@ -20,7 +20,7 @@
         </div>
       </div>
       <div >
-        <h1 class="text-secondary">
+        <h1 class="text-secondary m-0">
           Mis Finanzas Personales
         </h1>
       </div>
@@ -28,7 +28,7 @@
         <div>
           <i class="fas fa-user fa-3x"></i>
         </div>
-        Informacion Usuario
+        <p *ngIf="isLoggedIn$ | async" class="m-0">Informacion Usuario</p> 
       </div>
     </header>
 
