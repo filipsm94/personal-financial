@@ -1,31 +1,36 @@
-<div class="container-app">
-  <header>
-    <div>
-      <!-- <a data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>
-        <nav class="menu">
-          <ul class="collapse list-unstyled" id="pageSubmenu">
-              <li>
-                  <a href="#">Dashboard</a>
-              </li>
-              <li>
-                  <a href="#">User Information</a>
-              </li>
-              <li>
-                  <a href="#">Revenue</a>
-              </li>
-          </ul>
-        </nav> -->
-        any
-    </div>
-    <div>
-      Mis Finanzas Personales
-    </div>
-    <div>
-      Informacion Usuario
-    </div>
-  </header>
-  <section class="content">
+<mat-drawer-container hasBackdrop="true" autosize>
+  <mat-drawer #drawer class="example-sidenav" mode="side">
+    <p>Auto-resizing sidenav</p>
+    <p *ngIf="showFiller">Lorem, ipsum dolor sit amet consectetur.</p>
+    <button (click)="showFiller = !showFiller" mat-raised-button>
+      Toggle extra text
+    </button>
+  </mat-drawer>
+
+  <div class="container-app">
+    <header>
+      <div class="menu">
+        <div *ngIf="isLoggedIn$ | async" class="hamburger" (click)="drawer.toggle()">
+          <div class="_layer -top"></div>
+          <div class="_layer -mid"></div>
+          <div class="_layer -bottom"></div>
+        </div>
+        <div [ngClass]="{'mountain': isLoggedIn$ | async}">
+          <i class="fas fa-mountain"></i>
+        </div>
+      </div>
+      <div>
+        Mis Finanzas Personales
+      </div>
+      <div>
+        Informacion Usuario
+      </div>
+    </header>
+
+    <section class="content">
       <router-outlet></router-outlet>
-  </section>
-  <footer><i class="fas fa-cloud"></i> Desarrollado por Cesar Yate, Felipe Mesa</footer>
-</div>
+    </section>
+    <footer><i class="fas fa-cloud"></i> Desarrollado por Cesar Yate, Felipe Mesa</footer>
+  </div>
+
+</mat-drawer-container>
