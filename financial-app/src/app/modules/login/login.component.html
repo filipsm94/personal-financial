@@ -1,9 +1,17 @@
-<form class="login-form" [formGroup]="loginForm">
+<form class="login-form text-center" [formGroup]="loginForm">
     <h2>Usuario</h2>
     <div class="mb-3">
         <input type="text" class="form-control" id="exampleInputEmail1" placeholder="C.C: 1000000130"
             aria-describedby="userHelp" formControlName="username">
         <div id="userHelp" class="form-text">Ingrese su usuario.</div>
+        <div *ngIf="username?.invalid && (username?.dirty || username?.touched)" class="alert-danger ps-3">
+            <div *ngIf="username?.errors?.required">
+                El nombre de usuario es requerido.
+            </div>
+            <div *ngIf="username?.errors?.minlength">
+                El nombre de usuario debe tener minimo 4 caracteres.
+            </div>
+        </div>
     </div>
     <hr>
     <button type="submit" class="btn btn-primary col-md-8 col-sm-10 col-12" (click)="loggIn()">Ingresar</button>

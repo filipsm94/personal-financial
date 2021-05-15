@@ -25,10 +25,11 @@ export class LoginComponent implements OnInit {
         Validators.minLength(4)]),
     });
     this.infoLogin = {
-      username: '',
-      password: ''
+      username: ''
     };
   }
+
+  get username(): any { return this.loginForm.get('username'); }
 
   ngOnInit(): void {
   }
