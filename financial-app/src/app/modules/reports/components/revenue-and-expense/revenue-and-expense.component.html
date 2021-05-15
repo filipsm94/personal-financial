@@ -1,1 +1,9 @@
-<p>revenue-and-expense works!</p>
+<p>revenue-and-expense works! holi</p>
+
+<p>Total ingresos: {{ totals.allRevenue | currency}}</p>
+<p>Total gastos: {{ totals.allExpense | currency}}</p>
+<p>Total disponible: {{ totals.allAvailable | currency}}</p>
+
+<google-chart [data]="pieChart"></google-chart>
+
+<google-chart [data]="columnChart"></google-chart>

@@ -9,6 +9,7 @@ import { AuthGuard } from './security/auth.guard';
 import { PageNotFoundComponent } from './shared/components/page-not-found/page-not-found.component';
 import { AuthApiService } from './shared/services/auth-api/auth-api.service';
 import { AuthService } from './shared/services/auth/auth.service';
+import { DashboardService } from './shared/services/dashboard/dashboard.service';
 import { StorageService } from './shared/services/storage/storage.service';
 
 
@@ -27,6 +28,7 @@ import { StorageService } from './shared/services/storage/storage.service';
   providers: [
     AuthService,
     AuthApiService,
+    DashboardService,
     StorageService,
     AuthGuard
   ],

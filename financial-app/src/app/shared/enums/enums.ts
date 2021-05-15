@@ -1,9 +1,9 @@
 enum TYPE_REGISTER {
-    SALARY,
-    REVENUE,
-    FOOT,
-    FUN,
-    EDUCATION
+    SALARY='Salario',
+    REVENUE='Ingresos',
+    FOOT='Comida',
+    FUN='Diversión',
+    EDUCATION='Educación'
 }
 
 enum TYPE_MOVEMENTS {

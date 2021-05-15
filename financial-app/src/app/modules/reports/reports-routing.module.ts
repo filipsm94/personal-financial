@@ -6,15 +6,15 @@ import { UserComponent } from './components/user/user.component';
 
 const routes: Routes = [
   {
-    path:'',
+    path: '',
     component: DasboardComponent
   },
   {
-    path:'user',
+    path: 'user',
     component: UserComponent
   },
   {
-    path:'revenue-expense',
+    path: 'revenue-expense',
     component: RevenueAndExpenseComponent
   },
 ];
