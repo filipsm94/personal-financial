@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { MatSidenav } from '@angular/material/sidenav';
 import { Observable, of } from 'rxjs';
 import { AuthService } from './shared/services/auth/auth.service';
 
@@ -8,6 +9,8 @@ import { AuthService } from './shared/services/auth/auth.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  @ViewChild('drawer') drawer: MatSidenav | undefined;
+
   public isLoggedIn$: Observable<boolean> = of(false);
   public title = 'finantial-app';
   public showFiller = false;
@@ -16,8 +19,16 @@ export class AppComponent {
 
   }
 
+  async ngOnInit(): Promise<void> {
+    this.isLoggedIn$ = this.authService.isLogged;
+  }
 
-  // async ngOnInit(): Promise<void> {
-  //   this.isLoggedIn$ = this.authService.isLogged;
-  // }
+  close(){
+    this.drawer?.close();
+  }
+
+  public logout(): void{
+    this.close();
+    this.authService.logoutUser();
+  }
 }

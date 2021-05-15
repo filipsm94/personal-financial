@@ -26,6 +26,7 @@ export class AuthService implements IAuthService{
 
   public loginUser(infoLogin: any): Promise<any> {
     return this.authApiService.loginUser(infoLogin).then((response) => {
+      this.storageService.setUser(response.login)
       return response.user;
     }).catch((error) => {
       throw Error(error);
@@ -40,7 +41,7 @@ export class AuthService implements IAuthService{
     return false;
   }
 
-  public loggoutUser(): void{
+  public logoutUser(): void{
     this.storageService.clearSessionInfo();
     this.setLogged(false);
     this.router.navigate(['/login']);
