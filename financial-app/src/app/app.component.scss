@@ -11,6 +11,7 @@ header {
     display: flex;
     justify-content: space-between;
     padding: 1.5rem;
+    background-color: lightgray;
 
     nav {
         padding: 1rem;
@@ -46,9 +47,10 @@ header {
 
 .content{
     box-sizing: border-box;
+    flex-grow: 1;
     width: 80%;
-    padding: 2rem;
-    margin: 0 auto;
+    padding: 1.5rem;
+    align-self: center;
 
     @include screen(900px, 85%);
 
@@ -58,4 +60,6 @@ header {
 footer {
     display: flex;
     justify-content: center;
+    padding: 1.5rem;
+    background-color: lightgray;
 }

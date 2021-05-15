@@ -1,0 +1,10 @@
+@import '../../../mixin';
+
+.login-form{
+    width: 600px;
+    text-align: center;
+
+    @include screen(900px, 85%);
+
+    @include screen(700px, 100%);
+}
