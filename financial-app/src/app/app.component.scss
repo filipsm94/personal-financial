@@ -10,7 +10,8 @@
 header {   
     display: flex;
     justify-content: space-between;
-    padding: 1.5rem;
+    align-items: center;
+    padding: 1rem;
     background-color: lightgray;
 
     nav {
@@ -76,12 +77,9 @@ footer {
 }
 
 .hamburger{
-	position:absolute;
     background-color:transparent;
 	left:0;
 	top:0;
-	height:30px;
-	width:30px;
 	padding: 5px;
 	-webkit-transform:translate3d(0, 0, 0);
 	transform:translate3d(0, 0, 0);
@@ -131,4 +129,33 @@ footer {
 	-webkit-transform:translateY(-200%) rotate(135deg) !important;
 	-ms-transform:translateY(-200%) rotate(135deg) !important;
 	transform:translateY(-200%) rotate(135deg) !important;
+}
+
+.list-menu{
+    list-style: none;
+    padding: 0;
+    
+    li{
+        padding: 1rem;
+        text-align: center;
+        cursor: pointer;
+        
+        &.active{
+            background-color: #333333;
+            color: rgb(255, 255, 255);
+
+            a, a:visited{
+                color: white;
+            }
+        }
+
+        a{
+            text-decoration: none;
+
+            &:visited{
+                color: #000;
+            }
+        }
+    }
+
 }
