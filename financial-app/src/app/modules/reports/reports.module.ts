@@ -7,6 +7,7 @@ import { DasboardComponent } from './components/dasboard/dasboard.component';
 import { UserComponent } from './components/user/user.component';
 import { RevenueAndExpenseComponent } from './components/revenue-and-expense/revenue-and-expense.component';
 import { Ng2GoogleChartsModule } from 'ng2-google-charts';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { Ng2GoogleChartsModule } from 'ng2-google-charts';
     CommonModule,
     ReportsRoutingModule,
     Ng2GoogleChartsModule,
+    ReactiveFormsModule
   ]
 })
 export class ReportsModule { }
