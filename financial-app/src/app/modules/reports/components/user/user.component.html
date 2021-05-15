@@ -1,26 +1,60 @@
-<form class="login-form">
+<form class="userinfo-form row" [formGroup]="userInfoForm">
     <h1>Agrega tu información</h1>
     <hr>
     <div class="col-12 col-md-6">
         <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">Nombre</label>
-            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+            <label for="name" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="name" formControlName="name" placeholder="Ingresa tu nombre">
+            <div *ngIf="name?.invalid && (name?.dirty || name?.touched)" class="alert-danger ps-3">
+                <div *ngIf="name?.errors?.required">
+                    El nombre es requerido.
+                </div>
+                <div *ngIf="name?.errors?.minlength">
+                    El nombre debe tener minimo 4 caracteres.
+                </div>
+            </div>
         </div>
         <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">Correo</label>
-            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+            <label for="correo" class="form-label">Correo</label>
+            <input type="email" class="form-control" id="correo" formControlName="correo" placeholder="Ingresa tu correo">
+            <div *ngIf="correo?.invalid && (correo?.dirty || correo?.touched)" class="alert-danger ps-3">
+                <div *ngIf="correo?.errors?.required">
+                    El correo es requerido.
+                </div>
+                <div *ngIf="correo?.errors?.minlength">
+                    El correo debe tener minimo 4 caracteres.
+                </div>
+            </div>
         </div>
     </div>
     <div class="col-12 col-md-6">
         <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">Celular</label>
-            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+            <label for="celular" class="form-label">Celular</label>
+            <input type="number" class="form-control" id="celular" formControlName="celular" placeholder="Ingresa tu celular">
+            <div *ngIf="celular?.invalid && (celular?.dirty || celular?.touched)" class="alert-danger ps-3">
+                <div *ngIf="celular?.errors?.required">
+                    El numero de celular es requerido.
+                </div>
+                <div *ngIf="celular?.errors?.minlength">
+                    El numero de celular debe tener minimo 7 caracteres.
+                </div>
+            </div>
         </div>
         <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">Genero</label>
-            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+            <label for="genero" class="form-label">Genero</label>
+            <input type="text" class="form-control" id="genero" formControlName="genero" placeholder="Ingresa tu genero">
+            <div *ngIf="genero?.invalid && (genero?.dirty || genero?.touched)" class="alert-danger ps-3">
+                <div *ngIf="genero?.errors?.required">
+                    El genero es requerido.
+                </div>
+                <div *ngIf="genero?.errors?.minlength">
+                    El genero debe tener minimo 4 caracteres.
+                </div>
+            </div>
         </div>
     </div>
     <hr>
-    <button type="submit" class="btn btn-primary col-md-8 col-sm-10 col-12">Ingresar</button>
+    <div class="text-center">
+        <button type="submit" class="btn btn-primary col-md-8 col-sm-10 col-12 ">Ingresar</button>
+    </div>
 </form>
