@@ -132,3 +132,32 @@ footer {
 	-ms-transform:translateY(-200%) rotate(135deg) !important;
 	transform:translateY(-200%) rotate(135deg) !important;
 }
+
+.list-menu{
+    list-style: none;
+    padding: 0;
+    
+    li{
+        padding: 1rem;
+        text-align: center;
+        cursor: pointer;
+        
+        &.active{
+            background-color: #333333;
+            color: rgb(255, 255, 255);
+
+            a, a:visited{
+                color: white;
+            }
+        }
+
+        a{
+            text-decoration: none;
+
+            &:visited{
+                color: #000;
+            }
+        }
+    }
+
+}
