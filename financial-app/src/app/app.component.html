@@ -1,8 +1,8 @@
 <mat-drawer-container hasBackdrop="true" autosize>
   <mat-drawer #drawer class="example-sidenav" mode="side">
-    <ul>
-      <li><a (click)="close()" [routerLink]="['/dashboard']">Principal</a></li>
-      <li><a (click)="close()" [routerLink]="['/dashboard/revenue-expense']">Ingresos y Gastos</a></li>
+    <ul class="list-menu" *ngIf="isLoggedIn$ | async">
+      <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a (click)="close()" [routerLink]="['/dashboard']">Principal</a></li>
+      <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a (click)="close()" [routerLink]="['/dashboard/revenue-expense']">Ingresos y Gastos</a></li>
       <li><a (click)="logout()">Cerrar Sesion</a></li>
     </ul>
   </mat-drawer>
@@ -15,15 +15,20 @@
           <div class="_layer -mid"></div>
           <div class="_layer -bottom"></div>
         </div>
-        <div [ngClass]="{'mountain': isLoggedIn$ | async}">
+        <div class="text-secondary" [ngClass]="{'mountain': isLoggedIn$ | async}">
           <i class="fas fa-mountain"></i>
         </div>
       </div>
-      <div>
-        Mis Finanzas Personales
+      <div >
+        <h1 class="text-secondary m-0">
+          Mis Finanzas Personales
+        </h1>
       </div>
-      <div>
-        Informacion Usuario
+      <div class="text-secondary text-center">
+        <div>
+          <i class="fas fa-user fa-3x"></i>
+        </div>
+        <p *ngIf="isLoggedIn$ | async" class="m-0">Informacion Usuario</p> 
       </div>
     </header>
 
