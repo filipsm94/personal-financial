@@ -12,7 +12,7 @@ header {
     justify-content: space-between;
     align-items: center;
     padding: 1rem;
-    background-color: lightgray;
+    background-color: #79D0F2;
 
     nav {
         padding: 1rem;
@@ -62,7 +62,7 @@ footer {
     display: flex;
     justify-content: center;
     padding: 1.5rem;
-    background-color: lightgray;
+    background-color: #79D0F2;
 }
 
 .menu{
@@ -141,7 +141,7 @@ footer {
         cursor: pointer;
         
         &.active{
-            background-color: #333333;
+            background-color: #8C6E5D;
             color: rgb(255, 255, 255);
 
             a, a:visited{
