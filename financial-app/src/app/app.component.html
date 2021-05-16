@@ -1,5 +1,5 @@
 <mat-drawer-container hasBackdrop="true" autosize>
-  <mat-drawer #drawer class="example-sidenav" mode="side">
+  <mat-drawer #drawer class="example-sidenav" mode="over">
     <ul class="list-menu" *ngIf="isLoggedIn$ | async">
       <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a (click)="close()" [routerLink]="['/dashboard']">Principal</a></li>
       <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a (click)="close()" [routerLink]="['/dashboard/revenue-expense']">Ingresos y Gastos</a></li>
@@ -15,7 +15,7 @@
           <div class="_layer -mid"></div>
           <div class="_layer -bottom"></div>
         </div>
-        <div class="text-black" [ngClass]="{'mountain': isLoggedIn$ | async}">
+        <div class="text-black d-none d-sm-block" [ngClass]="{'mountain': isLoggedIn$ | async}">
           <i class="fas fa-mountain"></i>
         </div>
       </div>
@@ -26,7 +26,7 @@
       </div>
       <div class="text-black text-center">
         <div>
-          <i class="fas fa-user fa-3x"></i>
+          <i class="fas fa-user fa-2x"></i>
         </div>
         <p *ngIf="isLoggedIn$ | async" class="m-0">Informacion Usuario</p> 
       </div>
@@ -35,7 +35,7 @@
     <section class="content">
       <router-outlet></router-outlet>
     </section>
-    <footer><i class="fas fa-cloud"></i> Desarrollado por Cesar Yate, Felipe Mesa</footer>
+    <footer>Desarrollado por Cesar Yate, Felipe Mesa</footer>
   </div>
 
 </mat-drawer-container>
