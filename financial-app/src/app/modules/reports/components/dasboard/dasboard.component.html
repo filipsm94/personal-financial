@@ -2,24 +2,51 @@
     <div class="col-sm-4">
         <div class="card">
             <div class="card-body">
-                <h3 class="card-title">Total ingresos</h3>
-                {{ totals.allRevenue | currency}}
+                <div class="row align-items-center">
+                    <div class="col-9">
+                        <h3 class="card-title">Total ingresos</h3>
+                        <p class="card-text">
+                            {{ totals.allRevenue | currency}}
+                        </p>
+                    </div>
+                    <div class="col-3">
+                        <i class="fas fa-shopping-basket fa-3x"></i>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
     <div class="col-sm-4">
         <div class="card">
             <div class="card-body">
-                <h3 class="card-title">Total gastos</h3>
-                {{ totals.allExpense | currency}}
+                <div class="row align-items-center">
+                    <div class="col-9">
+                        <h3 class="card-title">Total gastos</h3>
+                        <p class="card-text">
+                            {{ totals.allExpense | currency}}
+                        </p>
+                    </div>
+                    <div class="col-3">
+                        <i class="fas fa-tags fa-3x"></i>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
     <div class="col-sm-4">
         <div class="card">
             <div class="card-body">
-                <h3 class="card-title">Total disponible</h3>
-                {{ totals.allAvailable | currency}}
+                <div class="row align-items-center">
+                    <div class="col-9">
+                        <h3 class="card-title">Total disponible</h3>
+                        <p class="card-text">
+                            {{ totals.allAvailable | currency}}
+                        </p>
+                    </div>
+                    <div class="col-3">
+                        <i class="fas fa-desktop fa-3x"></i>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
