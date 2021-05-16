@@ -1,47 +1,81 @@
 <div class="row mb-3">
-    <div class="col card">
-        <h3>Total ingresos</h3>
-        {{ totals.allRevenue | currency}}
+    <div class="col-sm-4">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title">Total ingresos</h3>
+                {{ totals.allRevenue | currency}}
+            </div>
+        </div>
     </div>
-    <div class="col card">
-        <h3>Total gastos</h3>
-        {{ totals.allExpense | currency}}
+    <div class="col-sm-4">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title">Total gastos</h3>
+                {{ totals.allExpense | currency}}
+            </div>
+        </div>
     </div>
-    <div class="col card">
-        <h3>Total disponible</h3>
-        {{ totals.allAvailable | currency}}
-    </div>
-</div>
-
-<div class="row mb-3">
-    <div class="col-8 card">
-        <h3>Movimientos</h3>
-    </div>
-    <div class="col-4 card">
-        <h3>Tus Manejos</h3>
-        <google-chart [data]="pieChart"></google-chart>
-    </div>
-</div>
-
-<div class="row mb-3">
-    <div class="col card">
-        <h3>Resumen de ingresos y egresos</h3>
-        <table class="table">
-            <tbody>
-                <tr *ngFor="let item of movements">
-                    <th scope="row">{{ item.name }}</th>
-                    <td>{{ item.date | date }}</td>
-                    <td>{{ item.type }}</td>
-                    <td>{{ item.amount | currency }}</td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="col-sm-4">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title">Total disponible</h3>
+                {{ totals.allAvailable | currency}}
+            </div>
+        </div>
     </div>
 </div>
 
 <div class="row mb-3">
-    <div class="col card">
-        <h3>Balance Anual</h3>
-        <google-chart [data]="columnChart"></google-chart>
+    <div class="col-8">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title">Movimientos</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-4">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title">Tus Manejos</h3>
+                <google-chart [data]="pieChart"></google-chart>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mb-3">
+    <div class="col">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title mb-3">Resumen de ingresos y egresos</h3>
+                <table class="table table-striped">
+                    <thead>
+                        <th>Descripcion</th>
+                        <th>Fecha</th>
+                        <th>Tipo</th>
+                        <th>Valor</th>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of movements">
+                            <th scope="row">{{ item.name }}</th>
+                            <td>{{ item.date | date }}</td>
+                            <td>{{ item.type }}</td>
+                            <td>{{ item.amount | currency }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mb-3">
+    <div class="col">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title">Balance Anual</h3>
+                <google-chart [data]="columnChart"></google-chart>
+            </div>
+        </div>
     </div>
 </div>
