@@ -2,7 +2,8 @@
   <mat-drawer #drawer class="example-sidenav" mode="side">
     <ul class="list-menu" *ngIf="isLoggedIn$ | async">
       <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a (click)="close()" [routerLink]="['/dashboard']">Principal</a></li>
-      <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a (click)="close()" [routerLink]="['/dashboard/revenue-expense']">Ingresos y Gastos</a></li>
+      <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a (click)="close()" [routerLink]="['/dashboard/revenue']">Registrar Ingresos</a></li>
+      <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a (click)="close()" [routerLink]="['/dashboard/expense']">Registrar Gastos</a></li>
       <li><a (click)="logout()">Cerrar Sesion</a></li>
     </ul>
   </mat-drawer>
