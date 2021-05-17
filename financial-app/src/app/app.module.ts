@@ -10,6 +10,7 @@ import { PageNotFoundComponent } from './shared/components/page-not-found/page-n
 import { AuthApiService } from './shared/services/auth-api/auth-api.service';
 import { AuthService } from './shared/services/auth/auth.service';
 import { DashboardService } from './shared/services/dashboard/dashboard.service';
+import { RevenueExpenseService } from './shared/services/revenue-expense/revenue-expense.service';
 import { StorageService } from './shared/services/storage/storage.service';
 
 
@@ -29,6 +30,7 @@ import { StorageService } from './shared/services/storage/storage.service';
     AuthService,
     AuthApiService,
     DashboardService,
+    RevenueExpenseService,
     StorageService,
     AuthGuard
   ],

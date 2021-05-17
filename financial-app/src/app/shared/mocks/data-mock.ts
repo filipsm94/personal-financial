@@ -1,3 +1,5 @@
+import { TYPE_MOVEMENTS, TYPE_REGISTER_EXPENSE, TYPE_REGISTER_REVENUE } from "../enums/enums"
+
 export class DataMock {
 
     public static get GET_MOCK_LOGIN() {
@@ -18,22 +20,22 @@ export class DataMock {
             list_expense: [
                 {
                     amount: 4000000,
-                    type_expense: "SALARY",
-                    type: "REVENUE",
+                    type_expense: TYPE_REGISTER_REVENUE.SALARY,
+                    type: TYPE_MOVEMENTS.REVENUE,
                     name: "Salario",
                     date: "2021-05-25"
                 },
                 {
                     amount: 1400000,
-                    type_expense: "FOOT",
-                    type: "EXPENSE",
+                    type_expense: TYPE_REGISTER_EXPENSE.FOOT,
+                    type: TYPE_MOVEMENTS.EXPENSE,
                     name: "Mercado",
                     date: "2021-05-25"
                 },
                 {
                     amount: 800000,
-                    type_expense: "FUN",
-                    type: "EXPENSE",
+                    type_expense: TYPE_REGISTER_EXPENSE.FUN,
+                    type: TYPE_MOVEMENTS.EXPENSE,
                     name: "Bolos",
                     date: "2021-05-25"
                 }
@@ -53,7 +55,7 @@ export class DataMock {
                     month: "Marzo",
                     revenue: 4000000,
                     expense: 1500000
-                },{
+                }, {
                     month: "Abril",
                     revenue: 4000000,
                     expense: 2800000
@@ -71,5 +73,80 @@ export class DataMock {
             ]
         }
 
+    }
+
+    public static get GET_LIST_REVENUE() {
+        return [
+            {
+                amount: 4000000,
+                type_expense: TYPE_REGISTER_REVENUE.SALARY,
+                type: TYPE_MOVEMENTS.REVENUE,
+                name: "Salario",
+                date: "2021-05-25"
+            }
+        ]
+
+    }
+
+    public static get GET_LIST_EXPENSE() {
+        return [
+            {
+                amount: 40000,
+                type_expense: TYPE_REGISTER_EXPENSE.FOOT,
+                type: TYPE_MOVEMENTS.REVENUE,
+                name: "Comida en Burger king",
+                date: "2021-05-25"
+            },
+            {
+                amount: 100000,
+                type_expense: TYPE_REGISTER_EXPENSE.FUN,
+                type: TYPE_MOVEMENTS.REVENUE,
+                name: "Salida a bolos",
+                date: "2021-05-25"
+            },
+            {
+                amount: 3000000,
+                type_expense: TYPE_REGISTER_EXPENSE.EDUCATION,
+                type: TYPE_MOVEMENTS.REVENUE,
+                name: "Compra de libros",
+                date: "2021-05-25"
+            }
+        ]
+
+    }
+
+    public static get POST_SAVE_REVENUE() {
+        return {
+            list_revenues: [
+                {
+                    amount: 4000000,
+                    type_expense: TYPE_REGISTER_REVENUE.SALARY,
+                    type: TYPE_MOVEMENTS.REVENUE,
+                    name: "Salario",
+                    date: "2021-05-25"
+                },
+                {
+                    amount: 1500000,
+                    type_expense: TYPE_REGISTER_REVENUE.FREELANCE,
+                    type: TYPE_MOVEMENTS.REVENUE,
+                    name: "Freelance",
+                    date: "2021-05-25"
+                }
+            ]
+        }
+    }
+
+    public static get POST_SAVE_EXPENSE() {
+        return {
+            list_expenses: [
+                {
+                    amount: 40000,
+                    type_expense: TYPE_REGISTER_REVENUE.SALARY,
+                    type: TYPE_MOVEMENTS.REVENUE,
+                    name: "Salario",
+                    date: "2021-05-25"
+                }
+            ]
+        }
     }
 }

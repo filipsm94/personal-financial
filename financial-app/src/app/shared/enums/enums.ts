@@ -1,12 +1,31 @@
-enum TYPE_REGISTER {
-    SALARY='Salario',
-    REVENUE='Ingresos',
-    FOOT='Comida',
-    FUN='Diversión',
-    EDUCATION='Educación'
+export enum TYPE_REGISTER_EXPENSE {
+    FOOT='FOOT',
+    FUN='FUN',
+    EDUCATION='EDUCATION'
 }
 
-enum TYPE_MOVEMENTS {
-    REVENUE,
-    EXPENSE
+export enum TYPE_REGISTER_REVENUE {
+    SALARY='SALARY',
+    FREELANCE='FREELANCE',
+}
+
+export enum TYPE_MOVEMENTS {
+    REVENUE='REVENUE',
+    EXPENSE='EXPENSE'
+}
+
+export const OPTIONS_TYPE_REGISTER_EXPENSE = {
+    [TYPE_REGISTER_EXPENSE.FOOT]: "Comida",
+    [TYPE_REGISTER_EXPENSE.FUN]: "Diversión",
+    [TYPE_REGISTER_EXPENSE.EDUCATION]: "Educación",
+}
+
+export const OPTIONS_TYPE_REGISTER_REVENUE = {
+    [TYPE_REGISTER_REVENUE.SALARY]: "Salario",
+    [TYPE_REGISTER_REVENUE.FREELANCE]: "Trabajo extra",
+}
+
+export const OPTIONS_TYPE_MOVEMENTS = {
+    [TYPE_MOVEMENTS.REVENUE]: 'Ingreso',
+    [TYPE_MOVEMENTS.EXPENSE]: 'Gasto'
 }
