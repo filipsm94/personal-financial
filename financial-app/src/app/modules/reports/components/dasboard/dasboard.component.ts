@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GoogleChartInterface } from 'ng2-google-charts';
-import { OPTIONS_TYPE_MOVEMENTS } from 'src/app/shared/enums/enums';
+import { OPTIONS_TYPE_MOVEMENTS, TYPE_MOVEMENTS } from 'src/app/shared/enums/enums';
 import { IListExpense, IMonthlySummary } from 'src/app/shared/models/sales.model';
 import { DashboardService } from 'src/app/shared/services/dashboard/dashboard.service';
 
@@ -109,6 +109,10 @@ export class DasboardComponent implements OnInit {
 
   chargeEnum(data:string){
     return data;
+  }
+
+  getOptionMovement(label: TYPE_MOVEMENTS){
+    return this.optionMovement[label];
   }
 
 }

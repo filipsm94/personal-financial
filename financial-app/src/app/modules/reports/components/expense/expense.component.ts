@@ -12,7 +12,7 @@ import { RevenueExpenseService } from 'src/app/shared/services/revenue-expense/r
 export class ExpenseComponent implements OnInit {
 
   private infoExpense: any;
-  public movements: any;
+  public movements: any = [];
   public optionMovement = OPTIONS_TYPE_REGISTER_EXPENSE;
   public expenseForm: FormGroup;
   public hasError: boolean = false;
@@ -33,10 +33,10 @@ export class ExpenseComponent implements OnInit {
         Validators.required,
       ])
     });
-    this.movements = this.revenueService.getListExpense();
   }
-
-  ngOnInit() {
+  
+  async ngOnInit() {
+    this.movements = await this.revenueService.getListExpense();
   }
 
   async save() {
@@ -55,5 +55,9 @@ export class ExpenseComponent implements OnInit {
 
   goToDashboard(): void {
     this.router.navigate(['/dashboard']);
+  }
+  
+  getOptionMovement(label: TYPE_REGISTER_EXPENSE){
+    return this.optionMovement[label];
   }
 }

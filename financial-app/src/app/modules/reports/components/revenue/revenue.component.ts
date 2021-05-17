@@ -13,7 +13,7 @@ export class RevenueComponent implements OnInit {
 
   private infoRevenue: any;
   public movements: any;
-  public optionMovement;
+  public optionMovement = OPTIONS_TYPE_REGISTER_REVENUE;
   public revenueForm: FormGroup;
   public hasError: boolean = false;
   public options = Object.values(TYPE_REGISTER_REVENUE);
@@ -22,7 +22,6 @@ export class RevenueComponent implements OnInit {
     private revenueService: RevenueExpenseService,
     private router: Router,
     ) {
-    this.optionMovement = OPTIONS_TYPE_REGISTER_REVENUE
     this.revenueForm = new FormGroup({
       typeRevenue: new FormControl(null, [
         Validators.required,
@@ -56,5 +55,9 @@ export class RevenueComponent implements OnInit {
 
   goToDashboard(): void {
     this.router.navigate(['/dashboard']);
+  }
+
+  getOptionMovement(label: TYPE_REGISTER_REVENUE){
+    return this.optionMovement[label];
   }
 }

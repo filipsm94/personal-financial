@@ -39,18 +39,23 @@
     </div>
 </form>
 
-<div class="row mb-3">
-    <div class="col card">
-        <h3>Resumen de ingresos</h3>
-        <table class="table">
-            <tbody>
-                <tr *ngFor="let item of movements">
-                    <th scope="row">{{ item.name }}</th>
-                    <td>{{ item.date | date }}</td>
-                    <td>{{ optionMovement[item.type_expense] }}</td>
-                    <td>{{ item.amount | currency }}</td>
-                </tr>
-            </tbody>
-        </table>
+<div class="row my-3">
+    <div class="col">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title">Resumen de ingresos</h3>
+                <table class="table">
+                    <tbody>
+                        <tr *ngFor="let item of movements">
+                            <th scope="row">{{ item.name }}</th>
+                            <td>{{ item.date | date }}</td>
+                            <td>{{ getOptionMovement(item.type_expense) }}</td>
+                            <td>{{ item.amount | currency }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
     </div>
 </div>
