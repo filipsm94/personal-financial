@@ -1,0 +1,56 @@
+<form class="form-inline" [formGroup]="expenseForm">
+    <h2>Registrar gasto</h2>
+    <div class="row">
+        <div class="col">
+            <div class="form-group">
+                <label for="typeRevenue">
+                    Tipo de gasto
+                </label>
+                <select name="typeRevenue" id="typeRevenue" formControlName="typeRevenue" class="form-control">
+                    <option value="">Seleccione...</option>
+                    <option [value]="item" *ngFor="let item of options">{{optionMovement[item]}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group">
+                <label for="amount">
+                    Monto
+                </label>
+                <input id="amount" class="form-control" type="text" formControlName="amount">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group">
+            <label for="observations">
+                Observaciones
+            </label>
+            <textarea name="observations" id="observations" class="form-control" cols="50" rows="3"></textarea>
+        </div>
+    </div>
+    <div class="alert-danger ps-3" *ngIf="hasError">
+        Error en el guardado de los datos
+    </div>
+    <hr>
+    <div class="group_buttons">
+        <button type="submit" class="btn btn-primary" (click)="save()">Guardar gasto</button>
+        <button type="submit" class="btn btn-secondary" (click)="cancel()">Cancelar</button>
+    </div>
+</form>
+
+<div class="row mb-3">
+    <div class="col card">
+        <h3>Resumen de ingresos</h3>
+        <table class="table">
+            <tbody>
+                <tr *ngFor="let item of movements">
+                    <th scope="row">{{ item.name }}</th>
+                    <td>{{ item.date | date }}</td>
+                    <td>{{ getOptionMovement(item.type_expense) }}</td>
+                    <td>{{ item.amount | currency }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

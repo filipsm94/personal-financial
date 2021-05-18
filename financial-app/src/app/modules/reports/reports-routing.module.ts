@@ -1,21 +1,26 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DasboardComponent } from './components/dasboard/dasboard.component';
-import { RevenueAndExpenseComponent } from './components/revenue-and-expense/revenue-and-expense.component';
+import { RevenueComponent } from './components/revenue/revenue.component';
+import { ExpenseComponent } from './components/expense/expense.component';
 import { UserComponent } from './components/user/user.component';
 
 const routes: Routes = [
   {
-    path:'',
+    path: '',
     component: DasboardComponent
   },
   {
-    path:'user',
+    path: 'user',
     component: UserComponent
   },
   {
-    path:'revenue-expense',
-    component: RevenueAndExpenseComponent
+    path: 'revenue',
+    component: RevenueComponent
+  },
+  {
+    path: 'expense',
+    component: ExpenseComponent
   },
 ];
 

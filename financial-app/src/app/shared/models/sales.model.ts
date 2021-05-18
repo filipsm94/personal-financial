@@ -5,7 +5,7 @@ export interface ISales {
     monthly_summary: IMonthlySummary[]
 }
 
-interface IListExpense {
+export interface IListExpense {
     amount: number
     type_expense: string
     type: string
@@ -13,7 +13,7 @@ interface IListExpense {
     date: string
 }
 
-interface IMonthlySummary {
+export interface IMonthlySummary {
     month: string
     revenue: number
     expense: number

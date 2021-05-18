@@ -5,7 +5,9 @@ import { ReportsRoutingModule } from './reports-routing.module';
 import { ReportsComponent } from './reports.component';
 import { DasboardComponent } from './components/dasboard/dasboard.component';
 import { UserComponent } from './components/user/user.component';
-import { RevenueAndExpenseComponent } from './components/revenue-and-expense/revenue-and-expense.component';
+import { RevenueComponent } from './components/revenue/revenue.component';
+import { ExpenseComponent } from './components/expense/expense.component';
+import { Ng2GoogleChartsModule } from 'ng2-google-charts';
 import { ReactiveFormsModule } from '@angular/forms';
 
 
@@ -14,11 +16,13 @@ import { ReactiveFormsModule } from '@angular/forms';
     ReportsComponent,
     DasboardComponent,
     UserComponent,
-    RevenueAndExpenseComponent
+    RevenueComponent,
+    ExpenseComponent
   ],
   imports: [
     CommonModule,
     ReportsRoutingModule,
+    Ng2GoogleChartsModule,
     ReactiveFormsModule
   ]
 })
