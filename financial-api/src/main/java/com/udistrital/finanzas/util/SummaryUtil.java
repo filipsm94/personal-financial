@@ -8,5 +8,4 @@ package com.udistrital.finanzas.util;
  */
 public class SummaryUtil {
 
-
 }

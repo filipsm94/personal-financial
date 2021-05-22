@@ -38,45 +38,44 @@ public class SummaryController {
         List<ExpenseEntity> listExpense = expenseRepository.findIdByClientId(id);
         long totalRevenue =0;
         long totalExpense =0;
-        List<MonthlySummary> listMonthly = new ArrayList<>();
-        HashMap<Integer, SummaryAux> summaryMonth = new HashMap<Integer, SummaryAux>();
         Summary summary = new Summary();
+        List<MonthlySummary> listMonthly = new ArrayList<>();
+        HashMap<String, MonthlySummary> summaryMonth = new HashMap<String, MonthlySummary>();
 
         for(RevenueEntity r: listRevenue){
-            SummaryAux sum = summaryMonth.get(r.getDate().getMonth());
+            String month = convertMonth(r.getDate().getMonth());
+            MonthlySummary sum = summaryMonth.get(month);
             if(sum != null){
                 sum.setRevenue(sum.getRevenue() + r.getAmount());
             }else{
-                sum = new SummaryAux();
-                sum.setRevenue(0);
+                sum = new MonthlySummary();
+                sum.setRevenue(r.getAmount());
             }
-            summaryMonth.put(r.getDate().getMonth(),sum);
+            sum.setMonth(month);
+            summaryMonth.put(month,sum);
             totalRevenue = totalRevenue + r.getAmount();
         }
         for(ExpenseEntity e: listExpense){
-            SummaryAux sum = summaryMonth.get(e.getDate().getMonth());
+            String month = convertMonth(e.getDate().getMonth());
+            MonthlySummary sum = summaryMonth.get(month);
             if(sum != null){
                 sum.setExpense(sum.getExpense() + e.getAmount());
             }else{
-                sum = new SummaryAux();
-                sum.setExpense(0);
+                sum = new MonthlySummary();
+                sum.setExpense(e.getAmount());
             }
-            summaryMonth.put(e.getDate().getMonth(),sum);
+            sum.setMonth(month);
+            summaryMonth.put(month,sum);
             totalExpense = totalExpense + e.getAmount();
         }
 
 
         Iterator it = summaryMonth.entrySet().iterator();
         while (it.hasNext()) {
-            MonthlySummary monthlySummary = new MonthlySummary();
             Map.Entry pair = (Map.Entry)it.next();
-            int mes = Integer.parseInt(pair.getKey().toString());
-            SummaryAux valor= (SummaryAux) pair.getValue();
-            monthlySummary.setRevenue(valor.getRevenue());
-            monthlySummary.setExpense(valor.getExpense());
-            monthlySummary.setMonth(""+mes);
+            listMonthly.add((MonthlySummary) pair.getValue());
             it.remove();
-            listMonthly.add(monthlySummary);
+
         }
 
         summary.setTotalExpense(totalExpense);
@@ -85,5 +84,37 @@ public class SummaryController {
         summary.setListExpense(listExpense);
 
         return summary;
+    }
+
+    public String convertMonth(int month){
+        switch (month)
+        {
+            case 0:
+                return "Enero";
+            case 1:
+                return "Febrero";
+            case 2:
+                return "Marzo";
+            case 3:
+                return "Abril";
+            case 4:
+                return "Mayo";
+            case 5:
+                return "Junio";
+            case 6:
+                return "Julio";
+            case 7:
+                return "Agosto";
+            case 8:
+                return "Septiembre";
+            case 9:
+                return "Octubre";
+            case 10:
+                return "Noviembre";
+            case 11:
+                return "Diciembre";
+            default:
+                return "";
+        }
     }
 }
