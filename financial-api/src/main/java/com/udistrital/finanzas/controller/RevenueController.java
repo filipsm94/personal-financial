@@ -1,6 +1,6 @@
 package com.udistrital.finanzas.controller;
 
-import com.udistrital.finanzas.entity.RevenueEntity;
+import com.udistrital.finanzas.entity.RevenueExpenseEntity;
 import com.udistrital.finanzas.repository.RevenueRepository;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,12 +15,12 @@ public class RevenueController {
     }
 
     @GetMapping("/revenue/{id}")
-    List<RevenueEntity> one(@PathVariable Long id) {
+    List<RevenueExpenseEntity> one(@PathVariable Long id) {
         return repository.findIdByClientId(id);
     }
 
     @PostMapping("/revenue")
-    RevenueEntity addRevenue(@RequestBody RevenueEntity revenue) {
+    RevenueExpenseEntity addRevenue(@RequestBody RevenueExpenseEntity revenue) {
         return repository.save(revenue);
     }
 }

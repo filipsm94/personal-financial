@@ -7,7 +7,7 @@ import java.util.Date;
 
 @Entity
 @Data
-public class ExpenseEntity {
+public class RevenueExpenseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
@@ -16,12 +16,11 @@ public class ExpenseEntity {
     @Column
     String type;
     @Column
-    String typeExpense;
+    String typeRevenueExpense;
     @Column
     long amount;
     @Column
     Date date;
     @Column
     long clientId;
-
 }

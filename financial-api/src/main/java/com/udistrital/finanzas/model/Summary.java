@@ -1,7 +1,7 @@
 package com.udistrital.finanzas.model;
 
 
-import com.udistrital.finanzas.entity.ExpenseEntity;
+import com.udistrital.finanzas.entity.RevenueExpenseEntity;
 
 import java.util.List;
 
@@ -9,8 +9,16 @@ public class Summary {
 
     long totalRevenue;
     long totalExpense;
-    List<ExpenseEntity> listExpense;
+    List<RevenueExpenseEntity> listRevenueExpense;
     List<MonthlySummary> monthlySummary;
+
+    public List<RevenueExpenseEntity> getListRevenueExpense() {
+        return listRevenueExpense;
+    }
+
+    public void setListRevenueExpense(List<RevenueExpenseEntity> listRevenueExpense) {
+        this.listRevenueExpense = listRevenueExpense;
+    }
 
     public long getTotalRevenue() {
         return totalRevenue;
@@ -26,14 +34,6 @@ public class Summary {
 
     public void setTotalExpense(long totalExpense) {
         this.totalExpense = totalExpense;
-    }
-
-    public List<ExpenseEntity> getListExpense() {
-        return listExpense;
-    }
-
-    public void setListExpense(List<ExpenseEntity> listExpense) {
-        this.listExpense = listExpense;
     }
 
     public List<MonthlySummary> getMonthlySummary() {

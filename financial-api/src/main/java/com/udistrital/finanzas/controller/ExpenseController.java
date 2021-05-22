@@ -1,11 +1,11 @@
 package com.udistrital.finanzas.controller;
 
-import com.udistrital.finanzas.entity.ExpenseEntity;
+import com.udistrital.finanzas.entity.RevenueExpenseEntity;
 import com.udistrital.finanzas.repository.ExpenseRepository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
+
 
 @RestController
 public class ExpenseController {
@@ -17,12 +17,12 @@ public class ExpenseController {
     }
 
     @GetMapping("/expense/{id}")
-    List<ExpenseEntity> one(@PathVariable Long id) {
+    List<RevenueExpenseEntity> one(@PathVariable Long id) {
         return repository.findIdByClientId(id);
     }
 
     @PostMapping("/expense")
-    ExpenseEntity addUser(@RequestBody ExpenseEntity expense) {
+    RevenueExpenseEntity addUser(@RequestBody RevenueExpenseEntity expense) {
         return repository.save(expense);
     }
 }
