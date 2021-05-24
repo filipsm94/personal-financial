@@ -1,5 +1,6 @@
 package com.udistrital.finanzas.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -20,6 +21,7 @@ public class RevenueExpenseEntity {
     @Column
     long amount;
     @Column
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     Date date;
     @Column
     long clientId;
