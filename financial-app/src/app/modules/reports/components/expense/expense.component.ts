@@ -13,6 +13,7 @@ export class ExpenseComponent implements OnInit {
 
   private infoExpense: any;
   public movements: any = [];
+  public updateRecord: boolean = false;
   public optionMovement = OPTIONS_TYPE_REGISTER_EXPENSE;
   public expenseForm: FormGroup;
   public hasError = false;
@@ -49,24 +50,47 @@ export class ExpenseComponent implements OnInit {
     }
   }
 
+  async update() {
+    this.infoExpense = { ...this.expenseForm.value };
+    try {
+      await this.revenueService.saveExpense(this.infoExpense);
+      this.updateRecord = false;
+    } catch (error) {
+      this.hasError = true;
+    }
+  }
+
   cancel() {
-    this.goToDashboard();
+    if (this.updateRecord) {
+      this.updateRecord = false;
+    } else {
+      this.goToDashboard();
+    }
   }
 
   goToDashboard(): void {
     this.router.navigate(['/dashboard']);
   }
 
-  getOptionMovement(label: TYPE_REGISTER_EXPENSE){
+  getOptionMovement(label: TYPE_REGISTER_EXPENSE) {
     return this.optionMovement[label];
   }
 
-  editMovement(item:any){
-    console.log(item)
+  editMovement(item: any) {
+    this.expenseForm.controls['typeRevenue'].setValue(item.typeRevenueExpense);
+    this.expenseForm.controls['observations'].setValue(item.name);
+    this.expenseForm.controls['amount'].setValue(item.amount);
+    this.updateRecord = true;
   }
 
-  deleteMovement(item:any){
-    console.log(item)
+  async deleteMovement(item: any) {
+    this.infoExpense = { 'id':item.id };
+    try {
+      await this.revenueService.saveExpense(this.infoExpense);
+      this.updateRecord = false;
+    } catch (error) {
+      this.hasError = true;
+    }
   }
 
 }

@@ -13,6 +13,7 @@ export class RevenueComponent implements OnInit {
 
   private infoRevenue: any;
   public movements: any;
+  public updateRecord: boolean = false;
   public optionMovement = OPTIONS_TYPE_REGISTER_REVENUE;
   public revenueForm: FormGroup;
   public hasError = false;
@@ -49,6 +50,16 @@ export class RevenueComponent implements OnInit {
     }
   }
 
+  async update() {
+    this.infoRevenue = { ...this.revenueForm.value };
+    try {
+      await this.revenueService.saveRevenue(this.infoRevenue);
+      this.updateRecord = false;
+    } catch (error) {
+      this.hasError = true;
+    }
+  }
+
   cancel() {
     this.goToDashboard();
   }
@@ -62,11 +73,21 @@ export class RevenueComponent implements OnInit {
   }
 
   editMovement(item:any){
-    console.log(item)
+    this.revenueForm.controls['typeRevenue'].setValue(item.typeRevenueExpense);
+    this.revenueForm.controls['observations'].setValue(item.name);
+    this.revenueForm.controls['amount'].setValue(item.amount);
+    this.updateRecord = true;
   }
 
-  deleteMovement(item:any){
-    console.log(item)
+  async deleteMovement(item: any) {
+    this.infoRevenue = { 'id':item.id };
+    try {
+      await this.revenueService.saveRevenue(this.infoRevenue);
+      this.updateRecord = false;
+    } catch (error) {
+      this.hasError = true;
+    }
   }
 
 }
+

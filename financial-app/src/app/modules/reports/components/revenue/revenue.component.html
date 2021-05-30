@@ -34,7 +34,8 @@
     </div>
     <hr>
     <div class="group_buttons">
-        <button type="submit" class="btn btn-primary" (click)="save()">Guardar</button>
+        <button type="submit" class="btn btn-primary" (click)="save()" *ngIf="!updateRecord">Guardar</button>
+        <button type="submit" class="btn btn-warning" (click)="update()" *ngIf="updateRecord">Actualizar registro</button>
         <button type="submit" class="btn btn-secondary" (click)="cancel()">Cancelar</button>
     </div>
 </form>
@@ -49,10 +50,10 @@
                         <tr *ngFor="let item of movements">
                             <th scope="row">{{ item.name }}</th>
                             <td>{{ item.date | date }}</td>
-                            <td>{{ getOptionMovement(item.type_expense) }}</td>
+                            <td>{{ getOptionMovement(item.typeRevenueExpense) }}</td>
                             <td>{{ item.amount | currency }}</td>
-                            <td><i class="fas fa-edit" (click)="editMovement(item)">&nbsp;</i></td>
-                            <td><i class="fas fa-trash-alt" (click)="deleteMovement(item)">&nbsp;</i></td>
+                            <td><i class="fas fa-edit pointer" (click)="editMovement(item)">&nbsp;</i></td>
+                            <td><i class="fas fa-trash-alt pointer" (click)="deleteMovement(item)">&nbsp;</i></td>
                         </tr>
                     </tbody>
                 </table>
