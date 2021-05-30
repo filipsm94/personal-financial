@@ -37,7 +37,7 @@ export class RevenueComponent implements OnInit {
   }
 
   async ngOnInit() {
-    this.movements = await this.revenueService.getListRevenue();
+    this.movements = await this.revenueService.getListRevenue('');
   }
 
   async save() {

@@ -50,12 +50,12 @@ export class RevenueService implements IRevenueService {
     ).toPromise();
   }
 
-  public getListRevenue(): Promise<any> {
+  public getListRevenue(idRevenue: string): Promise<any> {
     if (!environment.production) {
       return Promise.resolve(DataMock.GET_LIST_REVENUE);
     }
     return this.httpClient.get(
-      `${this.revenueUrl}`,
+      `${this.revenueUrl}${idRevenue}`,
       { observe: 'response' }
     ).pipe(
       map((response) => {
@@ -67,9 +67,9 @@ export class RevenueService implements IRevenueService {
     ).toPromise();
   }
 
-  public deleteRevenue(id: string): Promise<any> {
+  public deleteRevenue(idRevenue: string): Promise<any> {
     return this.httpClient.delete(
-      `${this.revenueUrl}${id}`,
+      `${this.revenueUrl}${idRevenue}`,
       { observe: 'response' }
     ).pipe(
       map((response) => {

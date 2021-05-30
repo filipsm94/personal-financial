@@ -7,6 +7,6 @@ export interface IExpenseService {
 
   getListExpense(idExpense: string): Promise<any>;
 
-  deleteExpense(idExpense:string): Promise<any>;
+  deleteExpense(idExpense: string): Promise<any>;
 
 }
