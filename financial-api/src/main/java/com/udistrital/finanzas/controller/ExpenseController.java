@@ -20,19 +20,29 @@ public class ExpenseController {
     }
 
     @GetMapping("/expense/{id}")
-    List<RevenueExpenseEntity> one(@PathVariable Long id) {
+    List<RevenueExpenseEntity> getExpense(@PathVariable Long id) {
         return repository.findIdByClientIdAndType(id, "EXPENSE");
     }
 
     @PostMapping("/expense")
-    RevenueExpenseEntity addUser(@RequestBody RevenueExpenseEntity expense) {
+    RevenueExpenseEntity postExpense(@RequestBody RevenueExpenseEntity expense) {
         expense.setType("EXPENSE");
-        return repository.save(expense
-        );
+        return repository.save(expense);
+    }
+
+    @DeleteMapping("/expense/{id}")
+    void deleteExpense(@PathVariable Long id){
+        repository.deleteById(id);
+    }
+
+    @PutMapping("/expense")
+    RevenueExpenseEntity putExpense(@RequestBody RevenueExpenseEntity expense) {
+        expense.setType("EXPENSE");
+        return repository.save(expense);
     }
 
     @GetMapping("/expense/{id}/{dateI}/{dateF}")
-    List<RevenueExpenseEntity> one1(@PathVariable Long id, @PathVariable String dateI, @PathVariable String dateF, @RequestParam(required = false) String typeRevenueExpense) {
+    List<RevenueExpenseEntity> reportExpense(@PathVariable Long id, @PathVariable String dateI, @PathVariable String dateF, @RequestParam(required = false) String typeRevenueExpense) {
         try {
             Date dI = new SimpleDateFormat("yyyy-MM-dd").parse(dateI);
             Date dF = new SimpleDateFormat("yyyy-MM-dd").parse(dateF);
