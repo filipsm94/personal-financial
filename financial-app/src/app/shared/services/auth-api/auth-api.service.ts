@@ -24,10 +24,11 @@ export class AuthApiService implements IAuthApiService {
         `${UrlConstans.apiUrl}${UrlConstans.user}${username}`,
         {observe: 'response'}
       ).pipe(
-      map((response) => {
-        const uuid = response.headers.get('X-UUID-TOKEN'); // para el jwt
-        if (uuid){
-          this.storageService.setToken(uuid);
+      map((response:any) => {
+        const result = response.body; // para el jwt
+        if (result.jwt){
+          this.storageService.setToken(result.jwt);
+          delete result.jwt
         }
         return response.body;
       }),
