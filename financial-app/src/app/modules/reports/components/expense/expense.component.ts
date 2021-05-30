@@ -28,10 +28,10 @@ export class ExpenseComponent implements OnInit {
     private storageService: StorageService
   ) {
     this.expenseForm = new FormGroup({
-      typeRevenue: new FormControl(null, [
+      typeRevenueExpense: new FormControl(null, [
         Validators.required,
         Validators.minLength(4)]),
-      observations: new FormControl(null, [
+      name: new FormControl(null, [
         Validators.maxLength(100)
       ]),
       amount: new FormControl(null, [
@@ -81,8 +81,8 @@ export class ExpenseComponent implements OnInit {
   }
 
   editMovement(item: any) {
-    this.expenseForm.controls['typeRevenue'].setValue(item.typeRevenueExpense);
-    this.expenseForm.controls['observations'].setValue(item.name);
+    this.expenseForm.controls['typeRevenueExpense'].setValue(item.typeRevenueExpense);
+    this.expenseForm.controls['name'].setValue(item.name);
     this.expenseForm.controls['amount'].setValue(item.amount);
     this.updateRecord = true;
   }
