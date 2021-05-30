@@ -3,22 +3,20 @@ import { ILogin } from '../../models/login.model';
 import { IStorageService } from './storage.service.type';
 
 @Injectable()
-export class StorageService implements IStorageService {
+export class StorageServiceStub implements IStorageService {
 
   setToken(tkn: string): void {
-    sessionStorage.setItem('tkn', tkn);
   }
 
   getToken(): string {
-    return sessionStorage.getItem('tkn') ?? '';
+    return '';
   }
 
   setUser(user: ILogin): void {
-    sessionStorage.setItem('user', JSON.stringify(user));
   }
+
   getUser(): ILogin {
-    const user = sessionStorage.getItem('tkn') ?? '';
-    return JSON.parse(user);
+    return JSON.parse('');
   }
 
   clearSessionInfo(): void {

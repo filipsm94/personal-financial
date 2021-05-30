@@ -15,7 +15,7 @@ export class RevenueComponent implements OnInit {
   public movements: any;
   public optionMovement = OPTIONS_TYPE_REGISTER_REVENUE;
   public revenueForm: FormGroup;
-  public hasError: boolean = false;
+  public hasError = false;
   public options = Object.values(TYPE_REGISTER_REVENUE);
 
   constructor(
@@ -34,7 +34,7 @@ export class RevenueComponent implements OnInit {
       ])
     });
   }
-  
+
   async ngOnInit() {
     this.movements = await this.revenueService.getListRevenue();
   }

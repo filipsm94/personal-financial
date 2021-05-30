@@ -33,7 +33,7 @@ export class RevenueService implements IRevenueService {
     ).toPromise();
   }
 
-  getListRevenue():Promise<any>{
+  getListRevenue(): Promise<any>{
     if (!environment.production) {
       return Promise.resolve(DataMock.GET_LIST_REVENUE);
     }

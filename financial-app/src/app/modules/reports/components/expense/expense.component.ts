@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { OPTIONS_TYPE_REGISTER_EXPENSE, TYPE_REGISTER_EXPENSE } from 'src/app/shared/enums/enums';
-import { RevenueExpenseService } from 'src/app/shared/services/revenue-expense/revenue-expense.service';
+import { ExpenseService } from 'src/app/shared/services/expense/expense.service';
 
 @Component({
   selector: 'app-revenue-and-expense',
@@ -15,11 +15,11 @@ export class ExpenseComponent implements OnInit {
   public movements: any = [];
   public optionMovement = OPTIONS_TYPE_REGISTER_EXPENSE;
   public expenseForm: FormGroup;
-  public hasError: boolean = false;
+  public hasError = false;
   public options = Object.values(TYPE_REGISTER_EXPENSE);
 
   constructor(
-    private revenueService: RevenueExpenseService,
+    private revenueService: ExpenseService,
     private router: Router
   ) {
     this.expenseForm = new FormGroup({
@@ -34,7 +34,7 @@ export class ExpenseComponent implements OnInit {
       ])
     });
   }
-  
+
   async ngOnInit() {
     this.movements = await this.revenueService.getListExpense();
   }
@@ -56,7 +56,7 @@ export class ExpenseComponent implements OnInit {
   goToDashboard(): void {
     this.router.navigate(['/dashboard']);
   }
-  
+
   getOptionMovement(label: TYPE_REGISTER_EXPENSE){
     return this.optionMovement[label];
   }

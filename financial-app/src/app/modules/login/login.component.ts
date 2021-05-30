@@ -7,7 +7,7 @@ import { AuthService } from 'src/app/shared/services/auth/auth.service';
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
-  host: {'class': 'ds-fx-ct'}
+  host: {class: 'ds-fx-ct'}
 })
 export class LoginComponent implements OnInit {
 

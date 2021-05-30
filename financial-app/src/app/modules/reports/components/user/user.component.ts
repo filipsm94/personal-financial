@@ -5,7 +5,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   selector: 'app-user',
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.scss'],
-  host: {'class': 'ds-fx-ct'}
+  host: {class: 'ds-fx-ct'}
 })
 export class UserComponent implements OnInit {
   public userInfoForm: FormGroup;

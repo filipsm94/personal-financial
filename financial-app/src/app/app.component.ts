@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { Observable, of } from 'rxjs';
 import { AuthService } from './shared/services/auth/auth.service';
@@ -8,7 +8,7 @@ import { AuthService } from './shared/services/auth/auth.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   @ViewChild('drawer') drawer: MatSidenav | undefined;
 
   public isLoggedIn$: Observable<boolean> = of(false);

@@ -9,14 +9,14 @@ export interface listRevenueExpense {
 }
 
 export interface IMontly {
-    month: string
-    revenue: number
-    expense: number
+    month: string;
+    revenue: number;
+    expense: number;
 }
 
 export interface ISummary {
-    totalRevenue: number
-    totalExpense: number
-    listRevenueExpense : listRevenueExpense[]
-    monthlySummary : IMontly[]
+    totalRevenue: number;
+    totalExpense: number;
+    listRevenueExpense: listRevenueExpense[];
+    monthlySummary: IMontly[];
 }

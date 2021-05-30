@@ -1,20 +1,18 @@
 import { TYPE_MOVEMENTS, TYPE_REGISTER_EXPENSE, TYPE_REGISTER_REVENUE } from "../enums/enums"
 import { IListExpenses } from "../models/add_expense.model"
 import { IListRevenue } from "../models/add_revenue.model"
-import { ISummary } from "../models/sales.model"
+import { ILogin } from '../models/login.model';
+import { ISummary } from '../models/sales.model';
 
 export class DataMock {
 
-    public static get GET_MOCK_LOGIN() {
+    public static get GET_MOCK_LOGIN(): ILogin {
         return {
-            login: {
-                authenticated: true,
-                clientId: "XXX222XXX",
-                name: "Felipe Mesa",
-                email: "felipe@mesa.com"
-            }
+            clientId: 'XXX222XXX',
+            name: 'Felipe Mesa',
+            email: 'felipe@mesa.com'
         }
-    }
+    };
 
     public static get GET_MOCK_DASHBOARD() : ISummary {
         return {

@@ -19,12 +19,23 @@ public class RevenueController {
     }
 
     @GetMapping("/revenue/{id}")
-    List<RevenueExpenseEntity> one(@PathVariable Long id) {
+    List<RevenueExpenseEntity> getRevenue(@PathVariable Long id) {
         return repository.findIdByClientIdAndType(id, "REVENUE");
     }
 
     @PostMapping("/revenue")
     RevenueExpenseEntity addRevenue(@RequestBody RevenueExpenseEntity revenue) {
+        revenue.setType("REVENUE");
+        return repository.save(revenue);
+    }
+
+    @DeleteMapping("/revenue/{id}")
+    void deleteRevenue(@PathVariable Long id){
+        repository.deleteById(id);
+    }
+
+    @PutMapping("/revenue")
+    RevenueExpenseEntity putRevenue(@RequestBody RevenueExpenseEntity revenue) {
         revenue.setType("REVENUE");
         return repository.save(revenue);
     }
