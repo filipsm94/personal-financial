@@ -1,20 +1,19 @@
-package com.udistrital.finanzas.entity;
+package com.udistrital.finanzas.dto;
 
-import lombok.Data;
+import org.jetbrains.annotations.Contract;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.Id;
 
-@Entity
-@Data
-public class UserEntity {
-    @Id
+public class UserEntityDto extends Object {
+
     long clientId;
-    @Column
     String name;
-    @Column
     String email;
+    String jwt;
+
+    public UserEntityDto() {
+    }
 
     public long getClientId() {
         return clientId;
@@ -38,5 +37,13 @@ public class UserEntity {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getJwt() {
+        return jwt;
+    }
+
+    public void setJwt(String jwt) {
+        this.jwt = jwt;
     }
 }
