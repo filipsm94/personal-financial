@@ -7,6 +7,7 @@ import { UrlConstans } from '../../constants/url-constant.model';
 import { DataMock } from '../../mocks/data-mock';
 import { StorageService } from '../storage/storage.service';
 import { IRevenueService } from './revenue.service.type';
+import { IListRevenue } from '../../models/add_revenue.model'
 
 
 @Injectable()
@@ -19,7 +20,7 @@ export class RevenueService implements IRevenueService {
     private storageService: StorageService
   ) { }
 
-  public saveRevenue(infoFormRevenue: any): Promise<any> {
+  public saveRevenue(infoFormRevenue: IListRevenue): Promise<any> {
     if (!environment.production) {
       return Promise.resolve(DataMock.POST_SAVE_REVENUE);
     }
@@ -42,7 +43,7 @@ export class RevenueService implements IRevenueService {
     ).toPromise();
   }
 
-  public updateRevenue(updateRevenue: any): Promise<any> {
+  public updateRevenue(updateRevenue: IListRevenue): Promise<any> {
     return this.httpClient.put(
       `${this.revenueUrl}`,
       updateRevenue,
