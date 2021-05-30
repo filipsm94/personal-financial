@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { OPTIONS_TYPE_REGISTER_REVENUE, TYPE_REGISTER_REVENUE } from 'src/app/shared/enums/enums';
+import { IListRevenue } from 'src/app/shared/models/add_revenue.model';
 import { RevenueService } from 'src/app/shared/services/revenue/revenue.service';
 import { StorageService } from 'src/app/shared/services/storage/storage.service';
 
@@ -12,9 +13,9 @@ import { StorageService } from 'src/app/shared/services/storage/storage.service'
 })
 export class RevenueComponent implements OnInit {
 
-  idClient = this.storageService.getUser().clientId;
+  private idClient = this.storageService.getUser().clientId;
 
-  private infoRevenue: any;
+  private infoRevenue: IListRevenue;
   public movements: any;
   public updateRecord: boolean = false;
   public optionMovement = OPTIONS_TYPE_REGISTER_REVENUE;
@@ -26,12 +27,18 @@ export class RevenueComponent implements OnInit {
     private revenueService: RevenueService,
     private router: Router,
     private storageService: StorageService
-    ) {
+  ) {
+    this.infoRevenue = {
+      amount: 0,
+      typeRevenueExpense: '',
+      name: '',
+      date: ''
+    }
     this.revenueForm = new FormGroup({
-      typeRevenue: new FormControl(null, [
+      typeRevenueExpense: new FormControl(null, [
         Validators.required,
         Validators.minLength(4)]),
-      observations: new FormControl(null, [
+      name: new FormControl(null, [
         Validators.maxLength(100)
       ]),
       amount: new FormControl(null, [
@@ -45,7 +52,12 @@ export class RevenueComponent implements OnInit {
   }
 
   async save() {
-    this.infoRevenue = { ...this.revenueForm.value };
+
+    this.infoRevenue = {
+      ...this.revenueForm.value,
+      date: this.getFullDate(),
+      clientId: this.idClient
+    };
     try {
       await this.revenueService.saveRevenue(this.infoRevenue);
       this.goToDashboard();
@@ -56,6 +68,11 @@ export class RevenueComponent implements OnInit {
 
   async update() {
     this.infoRevenue = { ...this.revenueForm.value };
+    this.infoRevenue = {
+      ...this.revenueForm.value,
+      date: this.getFullDate(),
+      clientId: this.idClient
+    };
     try {
       await this.revenueService.updateRevenue(this.infoRevenue);
       this.updateRecord = false;
@@ -72,21 +89,28 @@ export class RevenueComponent implements OnInit {
     this.router.navigate(['/dashboard']);
   }
 
-  getOptionMovement(label: TYPE_REGISTER_REVENUE){
+  getOptionMovement(label: TYPE_REGISTER_REVENUE) {
     return this.optionMovement[label];
   }
 
-  editMovement(item:any){
+  editMovement(item: any) {
     this.revenueForm.controls['typeRevenue'].setValue(item.typeRevenueExpense);
     this.revenueForm.controls['observations'].setValue(item.name);
     this.revenueForm.controls['amount'].setValue(item.amount);
     this.updateRecord = true;
   }
 
+  private getFullDate(): string {
+    const date = new Date()
+    const day = date.getDate()
+    const month = date.getMonth() + 1
+    const year = date.getFullYear();
+    return `${year}-${month}-${day}`;
+  }
+
   async deleteMovement(item: any) {
-    this.infoRevenue = { 'id':item.id };
     try {
-      await this.revenueService.deleteRevenue(this.infoRevenue);
+      await this.revenueService.deleteRevenue(item.id);
       this.updateRecord = false;
     } catch (error) {
       this.hasError = true;

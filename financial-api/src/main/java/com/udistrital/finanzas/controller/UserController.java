@@ -23,7 +23,7 @@ public class UserController {
     }
 
     @GetMapping("/user/{id}")
-    Optional<UserEntityDto> one(@PathVariable Long id) {
+    Optional<UserEntityDto> getUser(@PathVariable Long id) {
         Optional<UserEntity> ue = repository.findById(id);
         System.out.println(ue);
 
@@ -40,7 +40,7 @@ public class UserController {
     }
 
     @PostMapping("/user")
-    UserEntity addUser(@RequestBody UserEntity user) {
+    UserEntity postUser(@RequestHeader(value="Authorization") String authorization,@RequestBody UserEntity user) {
         return repository.save(user);
     }
 

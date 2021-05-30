@@ -3,10 +3,10 @@
     <div class="row">
         <div class="col">
             <div class="form-group">
-                <label for="typeRevenue">
+                <label for="typeRevenueExpense">
                     Tipo de ingreso
                 </label>
-                <select name="typeRevenue" id="typeRevenue" formControlName="typeRevenue" class="form-control">
+                <select name="typeRevenueExpense" id="typeRevenueExpense" formControlName="typeRevenueExpense" class="form-control">
                     <option value="">Seleccione...</option>
                     <option [value]="item" *ngFor="let item of options">{{optionMovement[item]}}</option>
                 </select>
@@ -23,10 +23,10 @@
     </div>
     <div class="row">
         <div class="form-group">
-            <label for="observations">
+            <label for="name">
                 Observaciones
             </label>
-            <textarea name="observations" id="observations" class="form-control" cols="50" rows="3"></textarea>
+            <textarea name="name" id="name" formControlName="name" class="form-control" cols="50" rows="3"></textarea>
         </div>
     </div>
     <div class="alert-danger ps-3" *ngIf="hasError">
