@@ -5,8 +5,8 @@ export interface IRevenueService {
 
   updateRevenue(updateRevenue: any): Promise<any>;
 
-  getListRevenue(idExpense: string): Promise<any>;
+  getListRevenue(idRevenue: string): Promise<any>;
 
-  deleteRevenue(id: string): Promise<any>;
+  deleteRevenue(idRevenue: string): Promise<any>;
 
 }

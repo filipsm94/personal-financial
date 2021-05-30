@@ -11,6 +11,7 @@ import java.util.List;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
+@RequestMapping("finanzas")
 public class RevenueController {
     private final RevenueExpenseRepository repository;
 

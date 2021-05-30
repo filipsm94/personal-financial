@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
+@RequestMapping("finanzas")
 public class UserController {
 
     private final UserRepository repository;
