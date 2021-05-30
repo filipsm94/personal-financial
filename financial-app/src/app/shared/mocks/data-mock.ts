@@ -1,4 +1,7 @@
 import { TYPE_MOVEMENTS, TYPE_REGISTER_EXPENSE, TYPE_REGISTER_REVENUE } from "../enums/enums"
+import { IListExpenses } from "../models/add_expense.model"
+import { IListRevenue } from "../models/add_revenue.model"
+import { ISummary } from "../models/sales.model"
 
 export class DataMock {
 
@@ -13,7 +16,7 @@ export class DataMock {
         }
     }
 
-    public static get GET_MOCK_DASHBOARD() {
+    public static get GET_MOCK_DASHBOARD() : ISummary {
         return {
             totalRevenue: 5000000,
             totalExpense: 2300000,
@@ -23,21 +26,24 @@ export class DataMock {
                     typeRevenueExpense: TYPE_REGISTER_REVENUE.SALARY,
                     type: TYPE_MOVEMENTS.REVENUE,
                     name: "Salario",
-                    date: "2021-05-25"
+                    date: "2021-05-25",
+                    id: 1
                 },
                 {
                     amount: 1400000,
                     typeRevenueExpense: TYPE_REGISTER_EXPENSE.FOOT,
                     type: TYPE_MOVEMENTS.EXPENSE,
                     name: "Mercado",
-                    date: "2021-05-25"
+                    date: "2021-05-25",
+                    id: 2
                 },
                 {
                     amount: 800000,
                     typeRevenueExpense: TYPE_REGISTER_EXPENSE.FUN,
                     type: TYPE_MOVEMENTS.EXPENSE,
                     name: "Bolos",
-                    date: "2021-05-25"
+                    date: "2021-05-25",
+                    id: 3
                 }
             ],
             monthlySummary: [
@@ -75,7 +81,7 @@ export class DataMock {
 
     }
 
-    public static get GET_LIST_REVENUE() {
+    public static get GET_LIST_REVENUE(): IListRevenue[] {
         return [
             {
                 amount: 4000000,
@@ -89,7 +95,7 @@ export class DataMock {
 
     }
 
-    public static get GET_LIST_EXPENSE() {
+    public static get GET_LIST_EXPENSE(): IListExpenses[] {
         return [
             {
                 amount: 40000,
@@ -119,7 +125,7 @@ export class DataMock {
 
     }
 
-    public static get POST_SAVE_REVENUE() {
+    public static get POST_SAVE_REVENUE(): IListRevenue[] {
         return [
             {
                 amount: 4000000,
@@ -138,7 +144,7 @@ export class DataMock {
         ]
     }
 
-    public static get POST_SAVE_EXPENSE() {
+    public static get POST_SAVE_EXPENSE(): IListExpenses[] {
         return [
             {
                 amount: 40000,

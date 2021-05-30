@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { OPTIONS_TYPE_REGISTER_REVENUE, TYPE_REGISTER_REVENUE } from 'src/app/shared/enums/enums';
-import { RevenueExpenseService } from 'src/app/shared/services/revenue-expense/revenue-expense.service';
+import { RevenueService } from 'src/app/shared/services/revenue-expense/revenue.service';
 
 @Component({
   selector: 'app-revenue',
@@ -19,7 +19,7 @@ export class RevenueComponent implements OnInit {
   public options = Object.values(TYPE_REGISTER_REVENUE);
 
   constructor(
-    private revenueService: RevenueExpenseService,
+    private revenueService: RevenueService,
     private router: Router,
     ) {
     this.revenueForm = new FormGroup({
@@ -60,4 +60,13 @@ export class RevenueComponent implements OnInit {
   getOptionMovement(label: TYPE_REGISTER_REVENUE){
     return this.optionMovement[label];
   }
+
+  editMovement(item:any){
+    console.log(item)
+  }
+
+  deleteMovement(item:any){
+    console.log(item)
+  }
+
 }

@@ -5,7 +5,7 @@ export interface listRevenueExpense {
     typeRevenueExpense: string
     amount: number
     date: string
-    clientId: number
+    clientId?: number
 }
 
 export interface IMontly {
