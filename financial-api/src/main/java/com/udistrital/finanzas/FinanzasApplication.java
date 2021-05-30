@@ -31,11 +31,17 @@ public class FinanzasApplication {
 
 		@Override
 		protected void configure(HttpSecurity http) throws Exception {
-			http.csrf().disable()
+			http
 					.addFilterAfter(new JWTAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class)
 					.authorizeRequests()
-					.antMatchers(HttpMethod.GET, "/user/{id}").permitAll()
-					.anyRequest().authenticated();
+					.antMatchers(HttpMethod.GET, "/finanzas/user/{id}").permitAll()
+					.antMatchers("/finanzas/**")
+					.authenticated().anyRequest().permitAll();
+
+			http.csrf().disable();
+			http.headers().frameOptions().disable();
+			http.cors();
+
 		}
 	}
 
