@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GoogleChartInterface } from 'ng2-google-charts';
 import { OPTIONS_TYPE_MOVEMENTS, TYPE_MOVEMENTS } from 'src/app/shared/enums/enums';
-import { IListExpenses } from 'src/app/shared/models/add_expense.model';
 import { IMontly, ISummary, listRevenueExpense } from 'src/app/shared/models/sales.model';
 import { DashboardService } from 'src/app/shared/services/dashboard/dashboard.service';
 import { StorageService } from 'src/app/shared/services/storage/storage.service';

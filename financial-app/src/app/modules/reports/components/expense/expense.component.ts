@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { OPTIONS_TYPE_REGISTER_EXPENSE, TYPE_REGISTER_EXPENSE } from 'src/app/shared/enums/enums';
 import { ExpenseService } from 'src/app/shared/services/expense/expense.service';
+import { StorageService } from 'src/app/shared/services/storage/storage.service';
 
 @Component({
   selector: 'app-revenue-and-expense',
@@ -10,6 +11,8 @@ import { ExpenseService } from 'src/app/shared/services/expense/expense.service'
   styleUrls: ['./expense.component.scss']
 })
 export class ExpenseComponent implements OnInit {
+
+  idClient = this.storageService.getUser().clientId;
 
   private infoExpense: any;
   public movements: any = [];
@@ -21,7 +24,8 @@ export class ExpenseComponent implements OnInit {
 
   constructor(
     private revenueService: ExpenseService,
-    private router: Router
+    private router: Router,
+    private storageService: StorageService
   ) {
     this.expenseForm = new FormGroup({
       typeRevenue: new FormControl(null, [
@@ -37,7 +41,7 @@ export class ExpenseComponent implements OnInit {
   }
 
   async ngOnInit() {
-    this.movements = await this.revenueService.getListExpense();
+    this.movements = await this.revenueService.getListExpense(this.idClient);
   }
 
   async save() {
@@ -53,7 +57,7 @@ export class ExpenseComponent implements OnInit {
   async update() {
     this.infoExpense = { ...this.expenseForm.value };
     try {
-      await this.revenueService.saveExpense(this.infoExpense);
+      await this.revenueService.updateExpense(this.infoExpense);
       this.updateRecord = false;
     } catch (error) {
       this.hasError = true;
@@ -84,9 +88,9 @@ export class ExpenseComponent implements OnInit {
   }
 
   async deleteMovement(item: any) {
-    this.infoExpense = { 'id':item.id };
+    this.infoExpense = { 'id': item.id };
     try {
-      await this.revenueService.saveExpense(this.infoExpense);
+      await this.revenueService.deleteExpense(this.infoExpense);
       this.updateRecord = false;
     } catch (error) {
       this.hasError = true;

@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { OPTIONS_TYPE_REGISTER_REVENUE, TYPE_REGISTER_REVENUE } from 'src/app/shared/enums/enums';
 import { RevenueService } from 'src/app/shared/services/revenue/revenue.service';
+import { StorageService } from 'src/app/shared/services/storage/storage.service';
 
 @Component({
   selector: 'app-revenue',
@@ -10,6 +11,8 @@ import { RevenueService } from 'src/app/shared/services/revenue/revenue.service'
   styleUrls: ['./revenue.component.scss']
 })
 export class RevenueComponent implements OnInit {
+
+  idClient = this.storageService.getUser().clientId;
 
   private infoRevenue: any;
   public movements: any;
@@ -22,6 +25,7 @@ export class RevenueComponent implements OnInit {
   constructor(
     private revenueService: RevenueService,
     private router: Router,
+    private storageService: StorageService
     ) {
     this.revenueForm = new FormGroup({
       typeRevenue: new FormControl(null, [
@@ -37,7 +41,7 @@ export class RevenueComponent implements OnInit {
   }
 
   async ngOnInit() {
-    this.movements = await this.revenueService.getListRevenue();
+    this.movements = await this.revenueService.getListRevenue(this.idClient);
   }
 
   async save() {
@@ -53,7 +57,7 @@ export class RevenueComponent implements OnInit {
   async update() {
     this.infoRevenue = { ...this.revenueForm.value };
     try {
-      await this.revenueService.saveRevenue(this.infoRevenue);
+      await this.revenueService.updateRevenue(this.infoRevenue);
       this.updateRecord = false;
     } catch (error) {
       this.hasError = true;
@@ -82,7 +86,7 @@ export class RevenueComponent implements OnInit {
   async deleteMovement(item: any) {
     this.infoRevenue = { 'id':item.id };
     try {
-      await this.revenueService.saveRevenue(this.infoRevenue);
+      await this.revenueService.deleteRevenue(this.infoRevenue);
       this.updateRecord = false;
     } catch (error) {
       this.hasError = true;

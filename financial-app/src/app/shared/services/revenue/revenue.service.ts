@@ -50,12 +50,12 @@ export class RevenueService implements IRevenueService {
     ).toPromise();
   }
 
-  public getListRevenue(): Promise<any> {
+  public getListRevenue(idExpense: string): Promise<any> {
     if (!environment.production) {
       return Promise.resolve(DataMock.GET_LIST_REVENUE);
     }
     return this.httpClient.get(
-      `${this.revenueUrl}`,
+      `${this.revenueUrl}${idExpense}`,
       { observe: 'response' }
     ).pipe(
       map((response) => {
