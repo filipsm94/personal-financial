@@ -1,6 +1,6 @@
 export interface IUserRegister {
     clientId: string
-    date_register: string
+    dateRegister: string
     name: string
     email: string
 }

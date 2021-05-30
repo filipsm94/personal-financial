@@ -1,20 +1,22 @@
-export interface ISales {
-    total_revenue: number
-    total_expense: number
-    list_expense: IListExpense[]
-    monthly_summary: IMonthlySummary[]
-}
-
-export interface IListExpense {
-    amount: number
-    type_expense: string
-    type: string
+export interface listRevenueExpense {
+    id: number
     name: string
+    type: string
+    typeRevenueExpense: string
+    amount: number
     date: string
+    clientId: number
 }
 
-export interface IMonthlySummary {
+export interface IMontly {
     month: string
     revenue: number
     expense: number
+}
+
+export interface ISummary {
+    totalRevenue: number
+    totalExpense: number
+    listRevenueExpense : listRevenueExpense[]
+    monthlySummary : IMontly[]
 }

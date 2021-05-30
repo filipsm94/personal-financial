@@ -2,10 +2,10 @@ export interface IAddRevenue {
     list_revenues: IListRevenue[]
 }
 
-interface IListRevenue {
+export interface IListRevenue {
     amount: number
-    type_expense: string
-    type: string
+    typeRevenueExpense: string
     name: string
     date: string
+    clientId: string
 }

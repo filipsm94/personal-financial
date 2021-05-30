@@ -1,24 +1,25 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
-import { RevenueExpenseService } from './revenue-expense.service';
-import { StorageService } from '../storage/storage.service';
 
-describe('RevenueExpenseService', () => {
-  let service: RevenueExpenseService;
+import { StorageService } from '../storage/storage.service';
+import { RevenueService } from './revenue.service';
+
+describe('RevenueService', () => {
+  let service: RevenueService;
   let httpMock: HttpTestingController;
   let storageService: StorageService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
-        RevenueExpenseService,
+        RevenueService,
       ],
       imports: [
         HttpClientTestingModule
       ]
     });
-    service = TestBed.inject(RevenueExpenseService);
+    service = TestBed.inject(RevenueService);
     httpMock = TestBed.inject(HttpTestingController);
     storageService = TestBed.inject(StorageService);
   });

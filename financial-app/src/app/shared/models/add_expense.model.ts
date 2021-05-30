@@ -2,10 +2,10 @@ export interface IAddExpense {
     list_expenses: IListExpenses[]
 }
 
-interface IListExpenses {
+export interface IListExpenses {
     amount: number
-    type_expense: string
-    type: string
+    typeRevenueExpense: string
     name: string
     date: string
+    clientId: string
 }
