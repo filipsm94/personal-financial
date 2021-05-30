@@ -1,16 +1,16 @@
-import { ILogin } from "../../models/login.model";
+import { ILogin } from '../../models/login.model';
 
 export interface IStorageService {
 
-  setUser(obj:ILogin):void;
+  setUser(obj: ILogin): void;
 
-  setToken(obj:string):void;
-  
-  getUser():ILogin;
+  setToken(obj: string): void;
 
-  getToken():string;
+  getUser(): ILogin;
 
-  clearSessionInfo():void;
+  getToken(): string;
+
+  clearSessionInfo(): void;
 
 
 }

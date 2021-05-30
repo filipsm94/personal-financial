@@ -1,4 +1,4 @@
-import { TYPE_MOVEMENTS, TYPE_REGISTER_EXPENSE, TYPE_REGISTER_REVENUE } from "../enums/enums"
+import { TYPE_MOVEMENTS, TYPE_REGISTER_EXPENSE, TYPE_REGISTER_REVENUE } from '../enums/enums';
 
 export class DataMock {
 
@@ -6,72 +6,72 @@ export class DataMock {
         return {
             login: {
                 authenticated: true,
-                clientId: "XXX222XXX",
-                name: "Felipe Mesa",
-                email: "felipe@mesa.com"
+                clientId: 'XXX222XXX',
+                name: 'Felipe Mesa',
+                email: 'felipe@mesa.com'
             }
-        }
+        };
     }
 
     public static get GET_MOCK_DASHBOARD() {
         return {
-            total_revenue: 5000000,
-            total_expense: 2300000,
-            list_expense: [
+            totalRevenue: 5000000,
+            totalExpense: 2300000,
+            listRevenueExpense: [
                 {
                     amount: 4000000,
                     typeRevenueExpense: TYPE_REGISTER_REVENUE.SALARY,
                     type: TYPE_MOVEMENTS.REVENUE,
-                    name: "Salario",
-                    date: "2021-05-25"
+                    name: 'Salario',
+                    date: '2021-05-25'
                 },
                 {
                     amount: 1400000,
                     typeRevenueExpense: TYPE_REGISTER_EXPENSE.FOOT,
                     type: TYPE_MOVEMENTS.EXPENSE,
-                    name: "Mercado",
-                    date: "2021-05-25"
+                    name: 'Mercado',
+                    date: '2021-05-25'
                 },
                 {
                     amount: 800000,
                     typeRevenueExpense: TYPE_REGISTER_EXPENSE.FUN,
                     type: TYPE_MOVEMENTS.EXPENSE,
-                    name: "Bolos",
-                    date: "2021-05-25"
+                    name: 'Bolos',
+                    date: '2021-05-25'
                 }
             ],
-            monthly_summary: [
+            monthlySummary: [
                 {
-                    month: "Enero",
+                    month: 'Enero',
                     revenue: 4000000,
                     expense: 2800000
                 },
                 {
-                    month: "Febrero",
+                    month: 'Febrero',
                     revenue: 4000000,
                     expense: 3200000
                 },
                 {
-                    month: "Marzo",
+                    month: 'Marzo',
                     revenue: 4000000,
                     expense: 1500000
                 }, {
-                    month: "Abril",
+                    month: 'Abril',
                     revenue: 4000000,
                     expense: 2800000
                 },
                 {
-                    month: "Mayo",
+                    month: 'Mayo',
                     revenue: 4000000,
                     expense: 3200000
                 },
                 {
-                    month: "Junio",
+                    month: 'Junio',
                     revenue: 4000000,
                     expense: 1500000
                 }
             ]
-        }
+        };
 
     }
 
@@ -81,11 +81,11 @@ export class DataMock {
                 amount: 4000000,
                 typeRevenueExpense: TYPE_REGISTER_REVENUE.SALARY,
                 type: TYPE_MOVEMENTS.REVENUE,
-                name: "Salario",
-                date: "2021-05-25",
-                clientId: "1234"
+                name: 'Salario',
+                date: '2021-05-25',
+                clientId: '1234'
             }
-        ]
+        ];
 
     }
 
@@ -95,62 +95,58 @@ export class DataMock {
                 amount: 40000,
                 typeRevenueExpense: TYPE_REGISTER_EXPENSE.FOOT,
                 type: TYPE_MOVEMENTS.REVENUE,
-                name: "Comida en Burger king",
-                date: "2021-05-25",
-                clientId: "1234"
+                name: 'Comida en Burger king',
+                date: '2021-05-25',
+                clientId: '1234'
             },
             {
                 amount: 100000,
                 typeRevenueExpense: TYPE_REGISTER_EXPENSE.FUN,
                 type: TYPE_MOVEMENTS.REVENUE,
-                name: "Salida a bolos",
-                date: "2021-05-25",
-                clientId: "1234"
+                name: 'Salida a bolos',
+                date: '2021-05-25',
+                clientId: '1234'
             },
             {
                 amount: 3000000,
                 typeRevenueExpense: TYPE_REGISTER_EXPENSE.EDUCATION,
                 type: TYPE_MOVEMENTS.REVENUE,
-                name: "Compra de libros",
-                date: "2021-05-25",
-                clientId: "1234"
+                name: 'Compra de libros',
+                date: '2021-05-25',
+                clientId: '1234'
             }
-        ]
+        ];
 
     }
 
     public static get POST_SAVE_REVENUE() {
-        return {
-            list_revenues: [
-                {
-                    amount: 4000000,
-                    typeRevenueExpense: TYPE_REGISTER_REVENUE.SALARY,
-                    type: TYPE_MOVEMENTS.REVENUE,
-                    name: "Salario",
-                    date: "2021-05-25"
-                },
-                {
-                    amount: 1500000,
-                    typeRevenueExpense: TYPE_REGISTER_REVENUE.FREELANCE,
-                    type: TYPE_MOVEMENTS.REVENUE,
-                    name: "Freelance",
-                    date: "2021-05-25"
-                }
-            ]
-        }
+        return [
+            {
+                amount: 4000000,
+                typeRevenueExpense: TYPE_REGISTER_REVENUE.SALARY,
+                type: TYPE_MOVEMENTS.REVENUE,
+                name: 'Salario',
+                date: '2021-05-25'
+            },
+            {
+                amount: 1500000,
+                typeRevenueExpense: TYPE_REGISTER_REVENUE.FREELANCE,
+                type: TYPE_MOVEMENTS.REVENUE,
+                name: 'Freelance',
+                date: '2021-05-25'
+            }
+        ];
     }
 
     public static get POST_SAVE_EXPENSE() {
-        return {
-            list_expenses: [
-                {
-                    amount: 40000,
-                    typeRevenueExpense: TYPE_REGISTER_REVENUE.SALARY,
-                    type: TYPE_MOVEMENTS.REVENUE,
-                    name: "Salario",
-                    date: "2021-05-25"
-                }
-            ]
-        }
+        return [
+            {
+                amount: 40000,
+                typeRevenueExpense: TYPE_REGISTER_REVENUE.SALARY,
+                type: TYPE_MOVEMENTS.REVENUE,
+                name: 'Salario',
+                date: '2021-05-25'
+            }
+        ];
     }
 }

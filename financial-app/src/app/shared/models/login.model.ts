@@ -1,5 +1,5 @@
 export interface ILogin {
-    clientId: string
-    name?: string
-    email?: string
+    clientId: string;
+    name?: string;
+    email?: string;
 }

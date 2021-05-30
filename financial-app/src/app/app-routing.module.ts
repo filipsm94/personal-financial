@@ -5,9 +5,9 @@ import { PageNotFoundComponent } from './shared/components/page-not-found/page-n
 
 const routes: Routes = [
   {
-    path:'',
-    pathMatch:'full',
-    redirectTo:'login'
+    path: '',
+    pathMatch: 'full',
+    redirectTo: 'login'
   },
   {
     path: 'login',
@@ -19,7 +19,7 @@ const routes: Routes = [
     loadChildren: () => import('./modules/reports/reports.module').then(m => m.ReportsModule)
   },
   {
-    path:'**',
+    path: '**',
     component: PageNotFoundComponent,
   }
 ];
