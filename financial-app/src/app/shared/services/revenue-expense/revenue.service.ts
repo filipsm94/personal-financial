@@ -5,10 +5,11 @@ import { catchError, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { UrlConstans } from '../../constants/url-constant.model';
 import { DataMock } from '../../mocks/data-mock';
-import { IRevenueExpenseService } from './revenue-expense.service.type';
+import { IRevenueService } from './revenue.service.type';
+
 
 @Injectable()
-export class RevenueExpenseService implements IRevenueExpenseService {
+export class RevenueService implements IRevenueService {
 
   constructor(
     private httpClient: HttpClient,
@@ -32,25 +33,6 @@ export class RevenueExpenseService implements IRevenueExpenseService {
     ).toPromise();
   }
 
-  saveExpense(infoFormExpense: any): Promise<any> {
-    if (!environment.production) {
-      return Promise.resolve(DataMock.POST_SAVE_EXPENSE);
-    }
-    return this.httpClient.post(
-      `${UrlConstans.apiUrl}6b254644-d547-4b14-948a-a18333d2ac23`,
-      infoFormExpense,
-      { observe: 'response' }
-    ).pipe(
-      map((response) => {
-        return response;
-      }),
-      catchError((error) => {
-        return throwError(error);
-      })
-    ).toPromise();
-
-  }
-
   getListRevenue():Promise<any>{
     if (!environment.production) {
       return Promise.resolve(DataMock.GET_LIST_REVENUE);
@@ -68,20 +50,4 @@ export class RevenueExpenseService implements IRevenueExpenseService {
     ).toPromise();
   }
 
-  getListExpense():Promise<any>{
-    if (!environment.production) {
-      return Promise.resolve(DataMock.GET_LIST_EXPENSE);
-    }
-    return this.httpClient.post(
-      `${UrlConstans.apiUrl}6b254644-d547-4b14-948a-a18333d2ac23`,
-      { observe: 'response' }
-    ).pipe(
-      map((response) => {
-        return response;
-      }),
-      catchError((error) => {
-        return throwError(error);
-      })
-    ).toPromise();
-  }
 }

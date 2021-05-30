@@ -18,12 +18,12 @@ export class DashboardService implements IDashboardService {
     if (!environment.production) {
       return Promise.resolve(DataMock.GET_MOCK_DASHBOARD);
     }
-    return this.httpClient.post(
+    return this.httpClient.get(
       `${UrlConstans.apiUrl}6b254644-d547-4b14-948a-a18333d2ac23`,
       { observe: 'response' }
     ).pipe(
       map((response) => {
-        return response;
+        return response.body;
       }),
       catchError((error) => {
         return throwError(error);
