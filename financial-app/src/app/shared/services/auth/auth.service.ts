@@ -27,11 +27,11 @@ export class AuthService implements IAuthService{
 
   public loginUser(infoLogin: string): Promise<ILogin> {
     return this.authApiService.loginUser(infoLogin).then((response) => {
-      if(response){
-        this.storageService.setUser(response)
+      if (response){
+        this.storageService.setUser(response);
       }else{
-        this.storageService.setUser({clientId: infoLogin})
-        this.router.navigate(['/dashboard/user']);    
+        this.storageService.setUser({clientId: infoLogin});
+        this.router.navigate(['/dashboard/user']);
       }
       return response;
     }).catch((error) => {

@@ -15,7 +15,7 @@ export class ExpenseComponent implements OnInit {
   public movements: any = [];
   public optionMovement = OPTIONS_TYPE_REGISTER_EXPENSE;
   public expenseForm: FormGroup;
-  public hasError: boolean = false;
+  public hasError = false;
   public options = Object.values(TYPE_REGISTER_EXPENSE);
 
   constructor(
@@ -34,7 +34,7 @@ export class ExpenseComponent implements OnInit {
       ])
     });
   }
-  
+
   async ngOnInit() {
     this.movements = await this.revenueService.getListExpense();
   }
@@ -56,7 +56,7 @@ export class ExpenseComponent implements OnInit {
   goToDashboard(): void {
     this.router.navigate(['/dashboard']);
   }
-  
+
   getOptionMovement(label: TYPE_REGISTER_EXPENSE){
     return this.optionMovement[label];
   }

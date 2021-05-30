@@ -4,7 +4,7 @@ import { IStorageService } from './storage.service.type';
 
 @Injectable()
 export class StorageService implements IStorageService {
-  
+
   setToken(tkn: string): void {
     sessionStorage.setItem('tkn', tkn);
   }
@@ -22,7 +22,7 @@ export class StorageService implements IStorageService {
   }
 
   clearSessionInfo(): void {
-    sessionStorage.clear()
+    sessionStorage.clear();
   }
-  
+
 }

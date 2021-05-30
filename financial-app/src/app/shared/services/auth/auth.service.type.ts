@@ -1,4 +1,4 @@
-import { ILogin } from "../../models/login.model";
+import { ILogin } from '../../models/login.model';
 
 export interface IAuthService {
 
@@ -7,5 +7,5 @@ export interface IAuthService {
     isLoggedIn(): boolean ;
     logoutUser(): void;
     saveUser(user: any): void ;
-  
+
 }

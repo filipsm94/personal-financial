@@ -17,7 +17,7 @@ export class AuthApiService implements IAuthApiService {
     ) { }
 
   loginUser(username: string): Promise<any> {
-    if(!environment.production){
+    if (!environment.production){
       return Promise.resolve(DataMock.GET_MOCK_LOGIN);
     }
     return this.httpClient.get(

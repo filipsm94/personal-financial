@@ -4,7 +4,7 @@ import { IStorageService } from './storage.service.type';
 
 @Injectable()
 export class StorageServiceStub implements IStorageService {
-  
+
   setToken(tkn: string): void {
   }
 
@@ -14,13 +14,13 @@ export class StorageServiceStub implements IStorageService {
 
   setUser(user: ILogin): void {
   }
-  
+
   getUser(): ILogin {
     return JSON.parse('');
   }
 
   clearSessionInfo(): void {
-    sessionStorage.clear()
+    sessionStorage.clear();
   }
-  
+
 }
