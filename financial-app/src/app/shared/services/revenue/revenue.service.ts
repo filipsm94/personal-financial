@@ -1,10 +1,11 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { UrlConstans } from '../../constants/url-constant.model';
 import { DataMock } from '../../mocks/data-mock';
+import { StorageService } from '../storage/storage.service';
 import { IRevenueService } from './revenue.service.type';
 
 
@@ -15,6 +16,7 @@ export class RevenueService implements IRevenueService {
 
   constructor(
     private httpClient: HttpClient,
+    private storageService: StorageService
   ) { }
 
   public saveRevenue(infoFormRevenue: any): Promise<any> {
@@ -24,7 +26,12 @@ export class RevenueService implements IRevenueService {
     return this.httpClient.post(
       `${this.revenueUrl}`,
       infoFormRevenue,
-      { observe: 'response' }
+      {
+        headers: new HttpHeaders({
+          'Authorization': this.storageService.getToken()
+        }),
+        observe: 'response'
+      }
     ).pipe(
       map((response) => {
         return response;
@@ -39,7 +46,12 @@ export class RevenueService implements IRevenueService {
     return this.httpClient.put(
       `${this.revenueUrl}`,
       updateRevenue,
-      { observe: 'response' }
+      {
+        headers: new HttpHeaders({
+          'Authorization': this.storageService.getToken()
+        }),
+        observe: 'response'
+      }
     ).pipe(
       map((response) => {
         return response;
@@ -56,7 +68,12 @@ export class RevenueService implements IRevenueService {
     }
     return this.httpClient.get(
       `${this.revenueUrl}${idRevenue}`,
-      { observe: 'response' }
+      {
+        headers: new HttpHeaders({
+          'Authorization': this.storageService.getToken()
+        }),
+        observe: 'response'
+      }
     ).pipe(
       map((response) => {
         return response;
@@ -70,7 +87,12 @@ export class RevenueService implements IRevenueService {
   public deleteRevenue(idRevenue: string): Promise<any> {
     return this.httpClient.delete(
       `${this.revenueUrl}${idRevenue}`,
-      { observe: 'response' }
+      {
+        headers: new HttpHeaders({
+          'Authorization': this.storageService.getToken()
+        }),
+        observe: 'response'
+      }
     ).pipe(
       map((response) => {
         return response;

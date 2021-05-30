@@ -1,10 +1,11 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { UrlConstans } from '../../constants/url-constant.model';
 import { DataMock } from '../../mocks/data-mock';
+import { StorageService } from '../storage/storage.service';
 import { IExpenseService } from './expense.service.type';
 
 
@@ -15,6 +16,7 @@ export class ExpenseService implements IExpenseService {
 
   constructor(
     private httpClient: HttpClient,
+    private storageService: StorageService
   ) { }
 
   updateExpense(infoFormExpense: any): Promise<any> {
@@ -24,7 +26,12 @@ export class ExpenseService implements IExpenseService {
     return this.httpClient.put(
       `${this.expenseUrl}`,
       infoFormExpense,
-      { observe: 'response' }
+      {
+        headers: new HttpHeaders({
+          'Authorization': this.storageService.getToken()
+        }),
+        observe: 'response'
+      }
     ).pipe(
       map((response) => {
         return response;
@@ -38,7 +45,12 @@ export class ExpenseService implements IExpenseService {
   deleteExpense(idExpense: string): Promise<any> {
     return this.httpClient.delete(
       `${this.expenseUrl}${idExpense}`,
-      { observe: 'response' }
+      {
+        headers: new HttpHeaders({
+          'Authorization': this.storageService.getToken()
+        }),
+        observe: 'response'
+      }
     ).pipe(
       map((response) => {
         return response;
@@ -56,7 +68,12 @@ export class ExpenseService implements IExpenseService {
     return this.httpClient.post(
       `${this.expenseUrl}`,
       infoFormExpense,
-      { observe: 'response' }
+      {
+        headers: new HttpHeaders({
+          'Authorization': this.storageService.getToken()
+        }),
+        observe: 'response'
+      }
     ).pipe(
       map((response) => {
         return response;
@@ -74,7 +91,12 @@ export class ExpenseService implements IExpenseService {
     }
     return this.httpClient.get(
       `${this.expenseUrl}${idExpense}`,
-      { observe: 'response' }
+      {
+        headers: new HttpHeaders({
+          'Authorization': this.storageService.getToken()
+        }),
+        observe: 'response'
+      }
     ).pipe(
       map((response) => {
         return response;
