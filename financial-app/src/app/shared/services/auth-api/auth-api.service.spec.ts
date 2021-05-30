@@ -1,12 +1,10 @@
-import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { provideMockStore } from '@ngrx/store/testing';
-
-import { AuthApiService } from './auth-api.service';
+import { TestBed } from '@angular/core/testing';
+import { UrlConstans } from '../../constants/url-constant.model';
 import { StorageService } from '../storage/storage.service';
 import { StorageServiceStub } from '../storage/storage.service.stub';
-import { AuthRequestModel } from '../../models/user.model';
-import { UrlConstans } from '../../constans/url-constant.model';
+import { AuthApiService } from './auth-api.service';
+
 
 describe('AuthApiService', () => {
   let service: AuthApiService;
@@ -33,9 +31,8 @@ describe('AuthApiService', () => {
   });
 
   it('should be loginUser', () => {
-    const mockRequest: AuthRequestModel = {
-      username: 'felipe',
-      password: '123'
+    const mockRequest = {
+      username: 'felipe'
     };
     const responseMock = {
       data: {
@@ -43,9 +40,9 @@ describe('AuthApiService', () => {
       },
       notification: {}
     };
-    spyOn(storageService, 'setUuid');
-    service.loginUser(mockRequest).then((response) => {
-      expect(storageService.setUuid).toHaveBeenCalled();
+    spyOn(storageService, 'setToken');
+    service.loginUser(mockRequest.username).then((response) => {
+      expect(storageService.setToken).toHaveBeenCalled();
     });
     const request = httpMock.expectOne(`${UrlConstans.apiUrl}6b254644-d547-4b14-948a-a18333d2ac23`);
     expect(request.request.method).toBe('POST');
@@ -57,9 +54,8 @@ describe('AuthApiService', () => {
   });
 
   it('should be loginUser', () => {
-    const mockRequest: AuthRequestModel = {
-      username: 'felipe',
-      password: '123'
+    const mockRequest = {
+      username: 'felipe'
     };
     const responseMock = {
       data: {
@@ -67,8 +63,8 @@ describe('AuthApiService', () => {
       },
       notification: {}
     };
-    spyOn(storageService, 'setUuid');
-    service.loginUser(mockRequest).then((response) => {
+    spyOn(storageService, 'setToken');
+    service.loginUser(mockRequest.username).then((response) => {
     }).catch((error) => {
       expect(error).toBeDefined();
     });

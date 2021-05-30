@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { OPTIONS_TYPE_REGISTER_EXPENSE, TYPE_REGISTER_EXPENSE } from 'src/app/shared/enums/enums';
-import { RevenueExpenseService } from 'src/app/shared/services/revenue-expense/revenue-expense.service';
+import { ExpenseService } from 'src/app/shared/services/expense/expense.service';
 
 @Component({
   selector: 'app-revenue-and-expense',
@@ -19,7 +19,7 @@ export class ExpenseComponent implements OnInit {
   public options = Object.values(TYPE_REGISTER_EXPENSE);
 
   constructor(
-    private revenueService: RevenueExpenseService,
+    private revenueService: ExpenseService,
     private router: Router
   ) {
     this.expenseForm = new FormGroup({
