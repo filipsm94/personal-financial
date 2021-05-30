@@ -34,7 +34,7 @@ export class ExpenseService implements IExpenseService {
       }
     ).pipe(
       map((response) => {
-        return response;
+        return response.body;
       }),
       catchError((error) => {
         return throwError(error);
@@ -53,7 +53,7 @@ export class ExpenseService implements IExpenseService {
       }
     ).pipe(
       map((response) => {
-        return response;
+        return response.body;
       }),
       catchError((error) => {
         return throwError(error);
@@ -76,7 +76,7 @@ export class ExpenseService implements IExpenseService {
       }
     ).pipe(
       map((response) => {
-        return response;
+        return response.body;
       }),
       catchError((error) => {
         return throwError(error);
@@ -99,7 +99,7 @@ export class ExpenseService implements IExpenseService {
       }
     ).pipe(
       map((response) => {
-        return response;
+        return response.body;
       }),
       catchError((error) => {
         return throwError(error);

@@ -34,7 +34,7 @@ export class RevenueService implements IRevenueService {
       }
     ).pipe(
       map((response) => {
-        return response;
+        return response.body;
       }),
       catchError((error) => {
         return throwError(error);
@@ -54,7 +54,7 @@ export class RevenueService implements IRevenueService {
       }
     ).pipe(
       map((response) => {
-        return response;
+        return response.body;
       }),
       catchError((error) => {
         return throwError(error);
@@ -76,7 +76,7 @@ export class RevenueService implements IRevenueService {
       }
     ).pipe(
       map((response) => {
-        return response;
+        return response.body;
       }),
       catchError((error) => {
         return throwError(error);
@@ -95,7 +95,7 @@ export class RevenueService implements IRevenueService {
       }
     ).pipe(
       map((response) => {
-        return response;
+        return response.body;
       }),
       catchError((error) => {
         return throwError(error);
