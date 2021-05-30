@@ -15,9 +15,9 @@ export class DataMock {
 
     public static get GET_MOCK_DASHBOARD() {
         return {
-            total_revenue: 5000000,
-            total_expense: 2300000,
-            list_expense: [
+            totalRevenue: 5000000,
+            totalExpense: 2300000,
+            listRevenueExpense: [
                 {
                     amount: 4000000,
                     typeRevenueExpense: TYPE_REGISTER_REVENUE.SALARY,
@@ -40,7 +40,7 @@ export class DataMock {
                     date: "2021-05-25"
                 }
             ],
-            monthly_summary: [
+            monthlySummary: [
                 {
                     month: "Enero",
                     revenue: 4000000,
@@ -120,37 +120,33 @@ export class DataMock {
     }
 
     public static get POST_SAVE_REVENUE() {
-        return {
-            list_revenues: [
-                {
-                    amount: 4000000,
-                    typeRevenueExpense: TYPE_REGISTER_REVENUE.SALARY,
-                    type: TYPE_MOVEMENTS.REVENUE,
-                    name: "Salario",
-                    date: "2021-05-25"
-                },
-                {
-                    amount: 1500000,
-                    typeRevenueExpense: TYPE_REGISTER_REVENUE.FREELANCE,
-                    type: TYPE_MOVEMENTS.REVENUE,
-                    name: "Freelance",
-                    date: "2021-05-25"
-                }
-            ]
-        }
+        return [
+            {
+                amount: 4000000,
+                typeRevenueExpense: TYPE_REGISTER_REVENUE.SALARY,
+                type: TYPE_MOVEMENTS.REVENUE,
+                name: "Salario",
+                date: "2021-05-25"
+            },
+            {
+                amount: 1500000,
+                typeRevenueExpense: TYPE_REGISTER_REVENUE.FREELANCE,
+                type: TYPE_MOVEMENTS.REVENUE,
+                name: "Freelance",
+                date: "2021-05-25"
+            }
+        ]
     }
 
     public static get POST_SAVE_EXPENSE() {
-        return {
-            list_expenses: [
-                {
-                    amount: 40000,
-                    typeRevenueExpense: TYPE_REGISTER_REVENUE.SALARY,
-                    type: TYPE_MOVEMENTS.REVENUE,
-                    name: "Salario",
-                    date: "2021-05-25"
-                }
-            ]
-        }
+        return [
+            {
+                amount: 40000,
+                typeRevenueExpense: TYPE_REGISTER_REVENUE.SALARY,
+                type: TYPE_MOVEMENTS.REVENUE,
+                name: "Salario",
+                date: "2021-05-25"
+            }
+        ]
     }
 }
