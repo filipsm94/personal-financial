@@ -1,5 +1,5 @@
 export const UrlConstans = {
-    apiUrl: 'http://localhost:8080/',
+    apiUrl: 'http://localhost:8080/finanzas/',
     user: 'user/',
     expenses: 'expense/',
     revenue: 'revenue/',
