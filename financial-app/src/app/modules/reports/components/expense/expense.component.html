@@ -6,7 +6,7 @@
                 <label for="typeRevenue">
                     Tipo de gasto
                 </label>
-                <select name="typeRevenue" id="typeRevenue" formControlName="typeRevenue" class="form-control">
+                <select name="typeRevenue" id="typeRevenue" formControlName="typeRevenueExpense" class="form-control">
                     <option value="">Seleccione...</option>
                     <option [value]="item" *ngFor="let item of options">{{optionMovement[item]}}</option>
                 </select>
@@ -26,7 +26,7 @@
             <label for="observations">
                 Observaciones
             </label>
-            <textarea name="observations" id="observations" class="form-control" formControlName="observations" cols="50" rows="3"></textarea>
+            <textarea name="observations" id="observations" class="form-control" formControlName="name" cols="50" rows="3"></textarea>
         </div>
     </div>
     <div class="alert-danger ps-3" *ngIf="hasError">
