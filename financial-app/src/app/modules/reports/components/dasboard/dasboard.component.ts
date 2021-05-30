@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { GoogleChartInterface } from 'ng2-google-charts';
 import { OPTIONS_TYPE_MOVEMENTS, TYPE_MOVEMENTS } from 'src/app/shared/enums/enums';
-import { IListExpense, IMonthlySummary } from 'src/app/shared/models/sales.model';
+import { IListExpenses } from 'src/app/shared/models/add_expense.model';
+import { IMontly, ISummary, listRevenueExpense } from 'src/app/shared/models/sales.model';
 import { DashboardService } from 'src/app/shared/services/dashboard/dashboard.service';
+import { StorageService } from 'src/app/shared/services/storage/storage.service';
 
 @Component({
   selector: 'app-dasboard',
@@ -41,38 +43,40 @@ export class DasboardComponent implements OnInit {
 
   constructor(
     private authService: DashboardService,
+    private storageService: StorageService
   ) {
   }
 
   async ngOnInit() {
-    const saleData = await this.authService.initData();
-    this.movements = saleData.list_expense;
+    const idClient = this.storageService.getUser().clientId ?? '';
+    const saleData: ISummary = await this.authService.initData(idClient);
+    this.movements = saleData.listRevenueExpense;
     this.totals = {
-      allRevenue: saleData.total_revenue,
-      allExpense: saleData.total_expense,
-      allAvailable: (saleData.total_revenue - saleData.total_expense)
+      allRevenue: saleData.totalRevenue,
+      allExpense: saleData.totalExpense,
+      allAvailable: (saleData.totalRevenue - saleData.totalExpense)
     };
     this.chargePieData(saleData);
     this.chargeColumnData(saleData);
 
   }
 
-  chargePieData(saleData: any) {
+  chargePieData(saleData: ISummary) {
     this.pieChart.dataTable = [
       ['Movimiento', 'Monto']
     ];
     const movimientos: any = [];
-    saleData.list_expense.forEach((element: IListExpense) => {
+    saleData.listRevenueExpense.forEach((element: listRevenueExpense) => {
       for (let i = 0; i < movimientos.length; i++) {
-        if (movimientos[i][0] == element.type_expense) {
+        if (movimientos[i][0] == element.typeRevenueExpense) {
           movimientos[i][1] += element.amount;
         } else {
-          movimientos.push([element.type_expense, element.amount]);
+          movimientos.push([element.typeRevenueExpense, element.amount]);
           break;
         }
       }
       if (movimientos.length == 0) {
-        movimientos.push([element.type_expense, element.amount]);
+        movimientos.push([element.typeRevenueExpense, element.amount]);
       }
     });
 
@@ -81,13 +85,13 @@ export class DasboardComponent implements OnInit {
     });
   }
 
-  chargeColumnData(saleData: any){
+  chargeColumnData(saleData: ISummary){
     this.columnChart.dataTable = [
       ['Mes', 'Ingresos', 'Gastos']
     ];
 
     const movimientos: any = [];
-    saleData.monthly_summary.forEach((element: IMonthlySummary) => {
+    saleData.monthlySummary.forEach((element: IMontly) => {
       for (let i = 0; i < movimientos.length; i++) {
         if (movimientos[i][0] == element.month) {
           movimientos[i][1] += element.revenue;

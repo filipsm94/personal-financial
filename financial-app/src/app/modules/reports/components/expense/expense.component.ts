@@ -60,4 +60,13 @@ export class ExpenseComponent implements OnInit {
   getOptionMovement(label: TYPE_REGISTER_EXPENSE){
     return this.optionMovement[label];
   }
+
+  editMovement(item:any){
+    console.log(item)
+  }
+
+  deleteMovement(item:any){
+    console.log(item)
+  }
+
 }

@@ -16,7 +16,10 @@ public class SummaryUtil {
         HashMap<String, MonthlySummary> summaryMonth = new HashMap<String, MonthlySummary>();
 
         for (RevenueExpenseEntity r : listRevenueExpense) {
-            String month = convertMonth(r.getDate().getMonth());
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(r.getDate());
+            int mesActual = cal.get(Calendar.MONTH);
+            String month = convertMonth(mesActual);
             MonthlySummary sum = summaryMonth.get(month);
             if (sum != null) {
                 if (r.getType().equals("REVENUE")) {

@@ -17,7 +17,7 @@ export class StorageService implements IStorageService {
     sessionStorage.setItem('user', JSON.stringify(user));
   }
   getUser(): ILogin {
-    const user = sessionStorage.getItem('tkn') ?? '';
+    const user = sessionStorage.getItem('user') ?? '';
     return JSON.parse(user);
   }
 

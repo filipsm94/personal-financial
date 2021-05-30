@@ -1,11 +1,11 @@
 export interface listRevenueExpense {
-    id: number;
-    name: string;
-    type: string;
-    typeRevenueExpense: string;
-    amount: number;
-    date: string;
-    clientId: number;
+    id: number
+    name: string
+    type: string
+    typeRevenueExpense: string
+    amount: number
+    date: string
+    clientId?: number
 }
 
 export interface IMontly {
