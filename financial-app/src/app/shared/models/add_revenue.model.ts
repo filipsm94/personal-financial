@@ -3,6 +3,7 @@ export interface IAddRevenue {
 }
 
 export interface IListRevenue {
+    id?: number
     amount: number
     typeRevenueExpense: string
     type?: string
