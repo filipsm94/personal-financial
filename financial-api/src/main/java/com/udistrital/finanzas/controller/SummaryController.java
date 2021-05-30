@@ -3,8 +3,7 @@ package com.udistrital.finanzas.controller;
 import com.udistrital.finanzas.entity.RevenueExpenseEntity;
 import com.udistrital.finanzas.model.MonthlySummary;
 import com.udistrital.finanzas.model.Summary;
-import com.udistrital.finanzas.repository.ExpenseRepository;
-import com.udistrital.finanzas.repository.RevenueRepository;
+import com.udistrital.finanzas.repository.RevenueExpenseRepository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,13 +15,10 @@ import java.util.*;
 public class SummaryController {
 
 
-    private final RevenueRepository revenueRepository;
+    private final RevenueExpenseRepository revenueExpenseRepository;
 
-    private final ExpenseRepository expenseRepository;
-
-    SummaryController(RevenueRepository revenueRepository, ExpenseRepository expenseRepository) {
-        this.revenueRepository = revenueRepository;
-        this.expenseRepository = expenseRepository;
+    SummaryController(RevenueExpenseRepository revenueExpenseRepository) {
+        this.revenueExpenseRepository = revenueExpenseRepository;
 
     }
 
@@ -32,14 +28,14 @@ public class SummaryController {
     }
 
     private Summary summaryData(Long id) {
-        List<RevenueExpenseEntity> listRevenue = revenueRepository.findIdByClientId(id);
+        List<RevenueExpenseEntity> listRevenueExpense = revenueExpenseRepository.findIdByClientId(id);
         long totalRevenue = 0;
         long totalExpense = 0;
         Summary summary = new Summary();
         List<MonthlySummary> listMonthly = new ArrayList<>();
         HashMap<String, MonthlySummary> summaryMonth = new HashMap<String, MonthlySummary>();
 
-        for (RevenueExpenseEntity r : listRevenue) {
+        for (RevenueExpenseEntity r : listRevenueExpense) {
             String month = convertMonth(r.getDate().getMonth());
             MonthlySummary sum = summaryMonth.get(month);
             if (sum != null) {
@@ -76,7 +72,7 @@ public class SummaryController {
         summary.setTotalExpense(totalExpense);
         summary.setTotalRevenue(totalRevenue);
         summary.setMonthlySummary(listMonthly);
-        summary.setListRevenueExpense(listRevenue);
+        summary.setListRevenueExpense(listRevenueExpense);
 
         return summary;
     }
