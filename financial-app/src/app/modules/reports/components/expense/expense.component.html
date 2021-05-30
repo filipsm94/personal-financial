@@ -49,6 +49,8 @@
                     <td>{{ item.date | date }}</td>
                     <td>{{ getOptionMovement(item.type_expense) }}</td>
                     <td>{{ item.amount | currency }}</td>
+                    <td><i class="fas fa-edit" (click)="editMovement(item)">&nbsp;</i></td>
+                    <td><i class="fas fa-trash-alt" (click)="deleteMovement(item)">&nbsp;</i></td>
                 </tr>
             </tbody>
         </table>
