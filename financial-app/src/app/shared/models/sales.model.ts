@@ -7,7 +7,7 @@ export interface ISales {
 
 export interface IListExpense {
     amount: number
-    type_expense: string
+    typeRevenueExpense: string
     type: string
     name: string
     date: string
