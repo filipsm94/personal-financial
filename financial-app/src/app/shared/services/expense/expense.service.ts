@@ -11,16 +11,50 @@ import { IExpenseService } from './expense.service.type';
 @Injectable()
 export class ExpenseService implements IExpenseService {
 
+  private expenseUrl = `${UrlConstans.apiUrl}${UrlConstans.expenses}`;
+
   constructor(
     private httpClient: HttpClient,
   ) { }
+
+  updateExpense(infoFormExpense: any): Promise<any> {
+    if (!environment.production) {
+      return Promise.resolve(DataMock.POST_SAVE_EXPENSE);
+    }
+    return this.httpClient.put(
+      `${this.expenseUrl}`,
+      infoFormExpense,
+      { observe: 'response' }
+    ).pipe(
+      map((response) => {
+        return response;
+      }),
+      catchError((error) => {
+        return throwError(error);
+      })
+    ).toPromise();
+  }
+
+  deleteExpense(idExpense: string): Promise<any> {
+    return this.httpClient.delete(
+      `${this.expenseUrl}${idExpense}`,
+      { observe: 'response' }
+    ).pipe(
+      map((response) => {
+        return response;
+      }),
+      catchError((error) => {
+        return throwError(error);
+      })
+    ).toPromise();
+  }
 
   saveExpense(infoFormExpense: any): Promise<any> {
     if (!environment.production) {
       return Promise.resolve(DataMock.POST_SAVE_EXPENSE);
     }
     return this.httpClient.post(
-      `${UrlConstans.apiUrl}6b254644-d547-4b14-948a-a18333d2ac23`,
+      `${this.expenseUrl}`,
       infoFormExpense,
       { observe: 'response' }
     ).pipe(
@@ -34,12 +68,12 @@ export class ExpenseService implements IExpenseService {
 
   }
 
-  getListExpense(): Promise<any> {
+  getListExpense(idExpense: string): Promise<any> {
     if (!environment.production) {
       return Promise.resolve(DataMock.GET_LIST_EXPENSE);
     }
-    return this.httpClient.post(
-      `${UrlConstans.apiUrl}6b254644-d547-4b14-948a-a18333d2ac23`,
+    return this.httpClient.get(
+      `${this.expenseUrl}${idExpense}`,
       { observe: 'response' }
     ).pipe(
       map((response) => {

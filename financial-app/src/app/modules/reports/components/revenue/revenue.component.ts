@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { OPTIONS_TYPE_REGISTER_REVENUE, TYPE_REGISTER_REVENUE } from 'src/app/shared/enums/enums';
-import { RevenueService } from 'src/app/shared/services/revenue-expense/revenue.service';
+import { RevenueService } from 'src/app/shared/services/revenue/revenue.service';
 
 @Component({
   selector: 'app-revenue',
@@ -37,7 +37,7 @@ export class RevenueComponent implements OnInit {
   }
 
   async ngOnInit() {
-    this.movements = await this.revenueService.getListRevenue();
+    this.movements = await this.revenueService.getListRevenue('');
   }
 
   async save() {

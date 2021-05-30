@@ -37,7 +37,7 @@ export class ExpenseComponent implements OnInit {
   }
 
   async ngOnInit() {
-    this.movements = await this.revenueService.getListExpense();
+    this.movements = await this.revenueService.getListExpense('');
   }
 
   async save() {

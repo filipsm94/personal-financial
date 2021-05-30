@@ -11,9 +11,9 @@ import { AuthApiService } from './shared/services/auth-api/auth-api.service';
 import { AuthService } from './shared/services/auth/auth.service';
 import { DashboardService } from './shared/services/dashboard/dashboard.service';
 import { ExpenseService } from './shared/services/expense/expense.service';
-import { RevenueService } from './shared/services/revenue-expense/revenue.service';
-
+import { RevenueService } from './shared/services/revenue/revenue.service';
 import { StorageService } from './shared/services/storage/storage.service';
+
 
 
 @NgModule({

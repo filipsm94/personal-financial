@@ -11,16 +11,18 @@ import { IRevenueService } from './revenue.service.type';
 @Injectable()
 export class RevenueService implements IRevenueService {
 
+  private revenueUrl = `${UrlConstans.apiUrl}${UrlConstans.revenue}`;
+
   constructor(
     private httpClient: HttpClient,
   ) { }
 
-  saveRevenue(infoFormRevenue: any): Promise<any> {
+  public saveRevenue(infoFormRevenue: any): Promise<any> {
     if (!environment.production) {
       return Promise.resolve(DataMock.POST_SAVE_REVENUE);
     }
     return this.httpClient.post(
-      `${UrlConstans.apiUrl}6b254644-d547-4b14-948a-a18333d2ac23`,
+      `${this.revenueUrl}`,
       infoFormRevenue,
       { observe: 'response' }
     ).pipe(
@@ -33,12 +35,41 @@ export class RevenueService implements IRevenueService {
     ).toPromise();
   }
 
-  getListRevenue(): Promise<any>{
+  public updateRevenue(updateRevenue: any): Promise<any> {
+    return this.httpClient.put(
+      `${this.revenueUrl}`,
+      updateRevenue,
+      { observe: 'response' }
+    ).pipe(
+      map((response) => {
+        return response;
+      }),
+      catchError((error) => {
+        return throwError(error);
+      })
+    ).toPromise();
+  }
+
+  public getListRevenue(idRevenue: string): Promise<any> {
     if (!environment.production) {
       return Promise.resolve(DataMock.GET_LIST_REVENUE);
     }
-    return this.httpClient.post(
-      `${UrlConstans.apiUrl}6b254644-d547-4b14-948a-a18333d2ac23`,
+    return this.httpClient.get(
+      `${this.revenueUrl}${idRevenue}`,
+      { observe: 'response' }
+    ).pipe(
+      map((response) => {
+        return response;
+      }),
+      catchError((error) => {
+        return throwError(error);
+      })
+    ).toPromise();
+  }
+
+  public deleteRevenue(idRevenue: string): Promise<any> {
+    return this.httpClient.delete(
+      `${this.revenueUrl}${idRevenue}`,
       { observe: 'response' }
     ).pipe(
       map((response) => {
