@@ -12,6 +12,8 @@ import { StorageService } from 'src/app/shared/services/storage/storage.service'
 })
 export class RevenueComponent implements OnInit {
 
+  idClient = this.storageService.getUser().clientId;
+
   private infoRevenue: any;
   public movements: any;
   public updateRecord: boolean = false;
@@ -39,8 +41,7 @@ export class RevenueComponent implements OnInit {
   }
 
   async ngOnInit() {
-    const idClient = this.storageService.getUser().clientId ?? '';
-    this.movements = await this.revenueService.getListRevenue(idClient);
+    this.movements = await this.revenueService.getListRevenue(this.idClient);
   }
 
   async save() {
@@ -56,7 +57,7 @@ export class RevenueComponent implements OnInit {
   async update() {
     this.infoRevenue = { ...this.revenueForm.value };
     try {
-      await this.revenueService.saveRevenue(this.infoRevenue);
+      await this.revenueService.updateRevenue(this.infoRevenue);
       this.updateRecord = false;
     } catch (error) {
       this.hasError = true;
@@ -85,7 +86,7 @@ export class RevenueComponent implements OnInit {
   async deleteMovement(item: any) {
     this.infoRevenue = { 'id':item.id };
     try {
-      await this.revenueService.saveRevenue(this.infoRevenue);
+      await this.revenueService.deleteRevenue(this.infoRevenue);
       this.updateRecord = false;
     } catch (error) {
       this.hasError = true;

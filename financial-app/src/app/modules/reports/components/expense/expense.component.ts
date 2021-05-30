@@ -12,6 +12,8 @@ import { StorageService } from 'src/app/shared/services/storage/storage.service'
 })
 export class ExpenseComponent implements OnInit {
 
+  idClient = this.storageService.getUser().clientId;
+
   private infoExpense: any;
   public movements: any = [];
   public updateRecord: boolean = false;
@@ -26,10 +28,10 @@ export class ExpenseComponent implements OnInit {
     private storageService: StorageService
   ) {
     this.expenseForm = new FormGroup({
-      typeRevenue: new FormControl(null, [
+      typeRevenueExpense: new FormControl(null, [
         Validators.required,
         Validators.minLength(4)]),
-      observations: new FormControl(null, [
+      name: new FormControl(null, [
         Validators.maxLength(100)
       ]),
       amount: new FormControl(null, [
@@ -39,8 +41,7 @@ export class ExpenseComponent implements OnInit {
   }
 
   async ngOnInit() {
-    const idClient = this.storageService.getUser().clientId ?? '';
-    this.movements = await this.revenueService.getListExpense(idClient);
+    this.movements = await this.revenueService.getListExpense(this.idClient);
   }
 
   async save() {
@@ -56,7 +57,7 @@ export class ExpenseComponent implements OnInit {
   async update() {
     this.infoExpense = { ...this.expenseForm.value };
     try {
-      await this.revenueService.saveExpense(this.infoExpense);
+      await this.revenueService.updateExpense(this.infoExpense);
       this.updateRecord = false;
     } catch (error) {
       this.hasError = true;
@@ -80,16 +81,16 @@ export class ExpenseComponent implements OnInit {
   }
 
   editMovement(item: any) {
-    this.expenseForm.controls['typeRevenue'].setValue(item.typeRevenueExpense);
-    this.expenseForm.controls['observations'].setValue(item.name);
+    this.expenseForm.controls['typeRevenueExpense'].setValue(item.typeRevenueExpense);
+    this.expenseForm.controls['name'].setValue(item.name);
     this.expenseForm.controls['amount'].setValue(item.amount);
     this.updateRecord = true;
   }
 
   async deleteMovement(item: any) {
-    this.infoExpense = { 'id':item.id };
+    this.infoExpense = { 'id': item.id };
     try {
-      await this.revenueService.saveExpense(this.infoExpense);
+      await this.revenueService.deleteExpense(this.infoExpense);
       this.updateRecord = false;
     } catch (error) {
       this.hasError = true;
