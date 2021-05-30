@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { ILogin } from '../../models/login.model';
 import { AuthApiService } from '../auth-api/auth-api.service';
 import { StorageService } from '../storage/storage.service';
 import { IAuthService } from './auth.service.type';
@@ -24,10 +25,15 @@ export class AuthService implements IAuthService{
     this._isLoggedIn.next(value);
   }
 
-  public loginUser(infoLogin: any): Promise<any> {
+  public loginUser(infoLogin: string): Promise<ILogin> {
     return this.authApiService.loginUser(infoLogin).then((response) => {
-      this.storageService.setUser(response.login)
-      return response.user;
+      if(response){
+        this.storageService.setUser(response)
+      }else{
+        this.storageService.setUser({clientId: infoLogin})
+        this.router.navigate(['/dashboard/user']);    
+      }
+      return response;
     }).catch((error) => {
       throw Error(error);
     });

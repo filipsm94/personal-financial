@@ -16,19 +16,18 @@ export class AuthApiService implements IAuthApiService {
     private storageService: StorageService
     ) { }
 
-  loginUser(infoLogin: any): Promise<any> {
+  loginUser(username: string): Promise<any> {
     if(!environment.production){
       return Promise.resolve(DataMock.GET_MOCK_LOGIN);
     }
-    return this.httpClient.post(
-        `${UrlConstans.apiUrl}6b254644-d547-4b14-948a-a18333d2ac23`,
-        infoLogin,
+    return this.httpClient.get(
+        `${UrlConstans.apiUrl}${UrlConstans.user}${username}`,
         {observe: 'response'}
       ).pipe(
       map((response) => {
-        const uuid = response.headers.get('X-UUID-USER');
+        const uuid = response.headers.get('X-UUID-TOKEN'); // para el jwt
         if (uuid){
-          this.storageService.setUser(uuid);
+          this.storageService.setToken(uuid);
         }
         return response.body;
       }),
