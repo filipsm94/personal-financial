@@ -5,6 +5,7 @@ import { catchError, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { UrlConstans } from '../../constants/url-constant.model';
 import { DataMock } from '../../mocks/data-mock';
+import { IListExpenses } from '../../models/add_expense.model';
 import { StorageService } from '../storage/storage.service';
 import { IExpenseService } from './expense.service.type';
 
@@ -19,7 +20,7 @@ export class ExpenseService implements IExpenseService {
     private storageService: StorageService
   ) { }
 
-  updateExpense(infoFormExpense: any): Promise<any> {
+  updateExpense(infoFormExpense: IListExpenses): Promise<any> {
     if (!environment.production) {
       return Promise.resolve(DataMock.POST_SAVE_EXPENSE);
     }
@@ -61,7 +62,7 @@ export class ExpenseService implements IExpenseService {
     ).toPromise();
   }
 
-  saveExpense(infoFormExpense: any): Promise<any> {
+  saveExpense(infoFormExpense: IListExpenses): Promise<any> {
     if (!environment.production) {
       return Promise.resolve(DataMock.POST_SAVE_EXPENSE);
     }
