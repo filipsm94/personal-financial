@@ -12,6 +12,8 @@ import { StorageService } from 'src/app/shared/services/storage/storage.service'
 })
 export class ExpenseComponent implements OnInit {
 
+  idClient = this.storageService.getUser().clientId;
+
   private infoExpense: any;
   public movements: any = [];
   public updateRecord: boolean = false;
@@ -39,8 +41,7 @@ export class ExpenseComponent implements OnInit {
   }
 
   async ngOnInit() {
-    const idClient = this.storageService.getUser().clientId ?? '';
-    this.movements = await this.revenueService.getListExpense(idClient);
+    this.movements = await this.revenueService.getListExpense(this.idClient);
   }
 
   async save() {
@@ -56,7 +57,7 @@ export class ExpenseComponent implements OnInit {
   async update() {
     this.infoExpense = { ...this.expenseForm.value };
     try {
-      await this.revenueService.saveExpense(this.infoExpense);
+      await this.revenueService.updateExpense(this.infoExpense);
       this.updateRecord = false;
     } catch (error) {
       this.hasError = true;
@@ -87,9 +88,9 @@ export class ExpenseComponent implements OnInit {
   }
 
   async deleteMovement(item: any) {
-    this.infoExpense = { 'id':item.id };
+    this.infoExpense = { 'id': item.id };
     try {
-      await this.revenueService.saveExpense(this.infoExpense);
+      await this.revenueService.deleteExpense(this.infoExpense);
       this.updateRecord = false;
     } catch (error) {
       this.hasError = true;
