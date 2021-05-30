@@ -6,10 +6,22 @@ import { IListRevenue } from 'src/app/shared/models/add_revenue.model';
 import { RevenueService } from 'src/app/shared/services/revenue/revenue.service';
 import { StorageService } from 'src/app/shared/services/storage/storage.service';
 
+export const MY_FORMATS = {
+  parse: {
+    dateInput: 'LL',
+  },
+  display: {
+    dateInput: 'LL',
+    monthYearLabel: 'MMM YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'MMMM YYYY',
+  },
+};
+
 @Component({
   selector: 'app-revenue',
   templateUrl: './revenue.component.html',
-  styleUrls: ['./revenue.component.scss']
+  styleUrls: ['./revenue.component.scss'],
 })
 export class RevenueComponent implements OnInit {
 
@@ -43,7 +55,8 @@ export class RevenueComponent implements OnInit {
       ]),
       amount: new FormControl(null, [
         Validators.required,
-      ])
+      ]),
+      date: new FormControl(null)
     });
   }
 
@@ -52,10 +65,9 @@ export class RevenueComponent implements OnInit {
   }
 
   async save() {
-
     this.infoRevenue = {
       ...this.revenueForm.value,
-      date: this.getFullDate(),
+      date: this.getFullDate(this.revenueForm.value.date),
       clientId: this.idClient
     };
     try {
@@ -100,8 +112,8 @@ export class RevenueComponent implements OnInit {
     this.updateRecord = true;
   }
 
-  private getFullDate(): string {
-    const date = new Date()
+  private getFullDate(data?: string): string {
+    const date = data ? new Date(data) : new Date();
     const day = date.getDate()
     const month = date.getMonth() + 1
     const year = date.getFullYear();
