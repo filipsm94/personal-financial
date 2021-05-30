@@ -2,20 +2,20 @@ package com.udistrital.finanzas.conf;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import springfox.documentation.builders.ParameterBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.schema.ModelRef;
+import springfox.documentation.service.Parameter;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-import java.util.Arrays;
-import java.util.Collections;
+import java.util.ArrayList;
+import java.util.List;
 
 @Configuration
 @EnableSwagger2
@@ -26,8 +26,18 @@ public class SwaggerConfig {
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.udistrital.finanzas.controller"))
                 .paths(PathSelectors.any())
-                .build()
+                .build().globalOperationParameters(operationParameters())
                 ;
+    }
+
+    private List<Parameter> operationParameters() {
+        List<Parameter> headers = new ArrayList<>();
+        headers.add(new ParameterBuilder().name("Authorization")
+                .description("token")
+                .modelRef(new ModelRef("string")).parameterType("header")
+                .required(false).build());
+
+        return headers;
     }
 
     @Bean

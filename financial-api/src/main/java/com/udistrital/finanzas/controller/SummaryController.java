@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST,RequestMethod.OPTIONS})
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("finanzas")
 public class SummaryController {
@@ -20,7 +20,7 @@ public class SummaryController {
     }
 
     @GetMapping("/summary/{id}")
-    Summary one(@PathVariable Long id) {
+    Summary getSummary(@RequestHeader(value="Authorization") String authorization,@PathVariable Long id) {
         List<RevenueExpenseEntity> listRevenueExpense = revenueExpenseRepository.findIdByClientId(id);
         return SummaryUtil.convertData(listRevenueExpense);
     }

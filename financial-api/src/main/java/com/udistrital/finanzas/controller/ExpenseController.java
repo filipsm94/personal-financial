@@ -21,29 +21,29 @@ public class ExpenseController {
     }
 
     @GetMapping("/expense/{id}")
-    List<RevenueExpenseEntity> getExpense(@PathVariable Long id) {
+    List<RevenueExpenseEntity> getExpense(@RequestHeader(value="Authorization") String authorization,@PathVariable Long id) {
         return repository.findIdByClientIdAndType(id, "EXPENSE");
     }
 
     @PostMapping("/expense")
-    RevenueExpenseEntity postExpense(@RequestBody RevenueExpenseEntity expense) {
+    RevenueExpenseEntity postExpense(@RequestHeader(value="Authorization") String authorization,@RequestBody RevenueExpenseEntity expense) {
         expense.setType("EXPENSE");
         return repository.save(expense);
     }
 
     @DeleteMapping("/expense/{id}")
-    void deleteExpense(@PathVariable Long id){
+    void deleteExpense(@RequestHeader(value="Authorization") String authorization,@PathVariable Long id){
         repository.deleteById(id);
     }
 
     @PutMapping("/expense")
-    RevenueExpenseEntity putExpense(@RequestBody RevenueExpenseEntity expense) {
+    RevenueExpenseEntity putExpense(@RequestHeader(value="Authorization") String authorization,@RequestBody RevenueExpenseEntity expense) {
         expense.setType("EXPENSE");
         return repository.save(expense);
     }
 
     @GetMapping("/expense/{id}/{dateI}/{dateF}")
-    List<RevenueExpenseEntity> reportExpense(@PathVariable Long id, @PathVariable String dateI, @PathVariable String dateF, @RequestParam(required = false) String typeRevenueExpense) {
+    List<RevenueExpenseEntity> reportExpense(@RequestHeader(value="Authorization") String authorization,@PathVariable Long id, @PathVariable String dateI, @PathVariable String dateF, @RequestParam(required = false) String typeRevenueExpense) {
         try {
             Date dI = new SimpleDateFormat("yyyy-MM-dd").parse(dateI);
             Date dF = new SimpleDateFormat("yyyy-MM-dd").parse(dateF);
