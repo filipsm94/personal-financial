@@ -30,4 +30,20 @@ public class ExpenseController {
         return repository.save(expense
         );
     }
+
+    @GetMapping("/expense/{id}/{dateI}/{dateF}")
+    List<RevenueExpenseEntity> one1(@PathVariable Long id, @PathVariable String dateI, @PathVariable String dateF, @RequestParam(required = false) String typeRevenueExpense) {
+        try {
+            Date dI = new SimpleDateFormat("yyyy-MM-dd").parse(dateI);
+            Date dF = new SimpleDateFormat("yyyy-MM-dd").parse(dateF);
+            if (typeRevenueExpense != null && !typeRevenueExpense.equals("")) {
+                return repository.findIdByDateBetweenAndClientIdAndTypeAndTypeRevenueExpense(dI, dF, id, "EXPENSE", typeRevenueExpense);
+            } else {
+                return repository.findIdByDateBetweenAndClientIdAndType(dI, dF, id, "EXPENSE");
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }
