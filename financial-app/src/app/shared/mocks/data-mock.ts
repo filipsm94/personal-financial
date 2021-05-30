@@ -20,21 +20,21 @@ export class DataMock {
             list_expense: [
                 {
                     amount: 4000000,
-                    type_expense: TYPE_REGISTER_REVENUE.SALARY,
+                    typeRevenueExpense: TYPE_REGISTER_REVENUE.SALARY,
                     type: TYPE_MOVEMENTS.REVENUE,
                     name: "Salario",
                     date: "2021-05-25"
                 },
                 {
                     amount: 1400000,
-                    type_expense: TYPE_REGISTER_EXPENSE.FOOT,
+                    typeRevenueExpense: TYPE_REGISTER_EXPENSE.FOOT,
                     type: TYPE_MOVEMENTS.EXPENSE,
                     name: "Mercado",
                     date: "2021-05-25"
                 },
                 {
                     amount: 800000,
-                    type_expense: TYPE_REGISTER_EXPENSE.FUN,
+                    typeRevenueExpense: TYPE_REGISTER_EXPENSE.FUN,
                     type: TYPE_MOVEMENTS.EXPENSE,
                     name: "Bolos",
                     date: "2021-05-25"
@@ -79,10 +79,11 @@ export class DataMock {
         return [
             {
                 amount: 4000000,
-                type_expense: TYPE_REGISTER_REVENUE.SALARY,
+                typeRevenueExpense: TYPE_REGISTER_REVENUE.SALARY,
                 type: TYPE_MOVEMENTS.REVENUE,
                 name: "Salario",
-                date: "2021-05-25"
+                date: "2021-05-25",
+                clientId: "1234"
             }
         ]
 
@@ -92,24 +93,27 @@ export class DataMock {
         return [
             {
                 amount: 40000,
-                type_expense: TYPE_REGISTER_EXPENSE.FOOT,
+                typeRevenueExpense: TYPE_REGISTER_EXPENSE.FOOT,
                 type: TYPE_MOVEMENTS.REVENUE,
                 name: "Comida en Burger king",
-                date: "2021-05-25"
+                date: "2021-05-25",
+                clientId: "1234"
             },
             {
                 amount: 100000,
-                type_expense: TYPE_REGISTER_EXPENSE.FUN,
+                typeRevenueExpense: TYPE_REGISTER_EXPENSE.FUN,
                 type: TYPE_MOVEMENTS.REVENUE,
                 name: "Salida a bolos",
-                date: "2021-05-25"
+                date: "2021-05-25",
+                clientId: "1234"
             },
             {
                 amount: 3000000,
-                type_expense: TYPE_REGISTER_EXPENSE.EDUCATION,
+                typeRevenueExpense: TYPE_REGISTER_EXPENSE.EDUCATION,
                 type: TYPE_MOVEMENTS.REVENUE,
                 name: "Compra de libros",
-                date: "2021-05-25"
+                date: "2021-05-25",
+                clientId: "1234"
             }
         ]
 
@@ -120,14 +124,14 @@ export class DataMock {
             list_revenues: [
                 {
                     amount: 4000000,
-                    type_expense: TYPE_REGISTER_REVENUE.SALARY,
+                    typeRevenueExpense: TYPE_REGISTER_REVENUE.SALARY,
                     type: TYPE_MOVEMENTS.REVENUE,
                     name: "Salario",
                     date: "2021-05-25"
                 },
                 {
                     amount: 1500000,
-                    type_expense: TYPE_REGISTER_REVENUE.FREELANCE,
+                    typeRevenueExpense: TYPE_REGISTER_REVENUE.FREELANCE,
                     type: TYPE_MOVEMENTS.REVENUE,
                     name: "Freelance",
                     date: "2021-05-25"
@@ -141,7 +145,7 @@ export class DataMock {
             list_expenses: [
                 {
                     amount: 40000,
-                    type_expense: TYPE_REGISTER_REVENUE.SALARY,
+                    typeRevenueExpense: TYPE_REGISTER_REVENUE.SALARY,
                     type: TYPE_MOVEMENTS.REVENUE,
                     name: "Salario",
                     date: "2021-05-25"
