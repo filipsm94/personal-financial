@@ -21,7 +21,7 @@ public class RevenueExpenseEntity {
     @Column
     long amount;
     @Column
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern="yyyy-MM-dd")
     Date date;
     @Column
     long clientId;

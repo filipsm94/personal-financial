@@ -9,7 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 public class ExpenseController {
 
@@ -22,22 +22,6 @@ public class ExpenseController {
     @GetMapping("/expense/{id}")
     List<RevenueExpenseEntity> one(@PathVariable Long id) {
         return repository.findIdByClientIdAndType(id, "EXPENSE");
-    }
-
-    @GetMapping("/expense/{id}/{dateI}/{dateF}")
-    List<RevenueExpenseEntity> one1(@PathVariable Long id, @PathVariable String dateI, @PathVariable String dateF,@RequestParam(required = false) String typeRevenueExpense) {
-        try {
-            Date dI = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(dateI + " 00:00:00");
-            Date dF = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(dateF + " 00:00:00");
-            if(typeRevenueExpense !=null && typeRevenueExpense.equals("")){
-                return repository.findIdByDateBetweenAndClientIdAndTypeAndTypeRevenueExpense(dI, dF, id, "EXPENSE", typeRevenueExpense);
-            }else{
-                return repository.findIdByDateBetweenAndClientIdAndType(dI, dF, id, "EXPENSE");
-            }
-        } catch (ParseException e) {
-            e.printStackTrace();
-            return null;
-        }
     }
 
     @PostMapping("/expense")
