@@ -14,12 +14,12 @@ export class DashboardService implements IDashboardService {
     private httpClient: HttpClient,
   ) { }
 
-  initData(): Promise<any> {
+  initData(idCLient: string): Promise<any> {
     if (!environment.production) {
       return Promise.resolve(DataMock.GET_MOCK_DASHBOARD);
     }
     return this.httpClient.get(
-      `${UrlConstans.apiUrl}6b254644-d547-4b14-948a-a18333d2ac23`,
+      `${UrlConstans.apiUrl}${UrlConstans.summary}${idCLient}`,
       { observe: 'response' }
     ).pipe(
       map((response) => {

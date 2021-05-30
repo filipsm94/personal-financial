@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { GoogleChartInterface } from 'ng2-google-charts';
 import { OPTIONS_TYPE_MOVEMENTS, TYPE_MOVEMENTS } from 'src/app/shared/enums/enums';
-import { IListExpense, IMonthlySummary } from 'src/app/shared/models/sales.model';
+import { IListExpenses } from 'src/app/shared/models/add_expense.model';
+import { IMontly } from 'src/app/shared/models/sales.model';
 import { DashboardService } from 'src/app/shared/services/dashboard/dashboard.service';
+import { StorageService } from 'src/app/shared/services/storage/storage.service';
 
 @Component({
   selector: 'app-dasboard',
@@ -41,11 +43,13 @@ export class DasboardComponent implements OnInit {
 
   constructor(
     private authService: DashboardService,
+    private storageService: StorageService
   ) {
   }
 
   async ngOnInit() {
-    const saleData = await this.authService.initData();
+    const idClient = this.storageService.getUser().clientId ?? '';
+    const saleData = await this.authService.initData(idClient);
     this.movements = saleData.list_expense;
     this.totals = {
       allRevenue: saleData.total_revenue,
@@ -62,17 +66,17 @@ export class DasboardComponent implements OnInit {
       ['Movimiento', 'Monto']
     ];
     const movimientos: any = [];
-    saleData.list_expense.forEach((element: IListExpense) => {
+    saleData.list_expense.forEach((element: IListExpenses) => {
       for (let i = 0; i < movimientos.length; i++) {
-        if (movimientos[i][0] == element.type_expense) {
+        if (movimientos[i][0] == element.typeRevenueExpense) {
           movimientos[i][1] += element.amount;
         } else {
-          movimientos.push([element.type_expense, element.amount]);
+          movimientos.push([element.typeRevenueExpense, element.amount]);
           break;
         }
       }
       if (movimientos.length == 0) {
-        movimientos.push([element.type_expense, element.amount]);
+        movimientos.push([element.typeRevenueExpense, element.amount]);
       }
     });
 
@@ -87,7 +91,7 @@ export class DasboardComponent implements OnInit {
     ];
 
     const movimientos: any = [];
-    saleData.monthly_summary.forEach((element: IMonthlySummary) => {
+    saleData.monthly_summary.forEach((element: IMontly) => {
       for (let i = 0; i < movimientos.length; i++) {
         if (movimientos[i][0] == element.month) {
           movimientos[i][1] += element.revenue;
