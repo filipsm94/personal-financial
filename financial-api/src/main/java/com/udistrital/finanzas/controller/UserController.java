@@ -1,10 +1,15 @@
 package com.udistrital.finanzas.controller;
 
+import com.udistrital.finanzas.dto.UserEntityDto;
 import com.udistrital.finanzas.entity.UserEntity;
 import com.udistrital.finanzas.repository.UserRepository;
+import com.udistrital.finanzas.util.SecurityUtil;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -17,12 +22,26 @@ public class UserController {
     }
 
     @GetMapping("/user/{id}")
-    Optional<UserEntity> one(@PathVariable Long id) {
-        return repository.findById(id);
+    Optional<UserEntityDto> one(@PathVariable Long id) {
+        Optional<UserEntity> ue = repository.findById(id);
+        System.out.println(ue);
+
+        String token = SecurityUtil.getToken(ue.get().getName());
+        System.out.println(token);
+        UserEntityDto ued = new UserEntityDto();
+        ued.setClientId(ue.get().getClientId());
+        ued.setName(ue.get().getName());
+        ued.setEmail(ue.get().getEmail());
+        ued.setJwt(token);
+        Optional<UserEntityDto> nameOptional = Optional.of(ued);
+
+        return nameOptional;
     }
 
     @PostMapping("/user")
     UserEntity addUser(@RequestBody UserEntity user) {
         return repository.save(user);
     }
+
+
 }
