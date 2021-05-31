@@ -1,48 +1,95 @@
-<form class="form-inline" [formGroup]="expenseForm">
-    <h2>Registrar gasto</h2>
-    <div class="row">
-        <div class="col">
-            <div class="form-group">
-                <label for="typeRevenue">
-                    Tipo de gasto
-                </label>
-                <select name="typeRevenue" id="typeRevenue" formControlName="typeRevenueExpense" class="form-control">
-                    <option value="">Seleccione...</option>
-                    <option [value]="item" *ngFor="let item of options">{{optionMovement[item]}}</option>
-                </select>
+<div class="row mb-3" *ngIf="!applyFilter">
+    <form class="form-inline" [formGroup]="expenseForm">
+        <h2>Registrar gasto</h2>
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label for="typeRevenue">
+                        Tipo de gasto
+                    </label>
+                    <select name="typeRevenue" id="typeRevenue" formControlName="typeRevenueExpense"
+                        class="form-control">
+                        <option value="">Seleccione...</option>
+                        <option [value]="item" *ngFor="let item of options">{{optionMovement[item]}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label for="amount">
+                        Monto
+                    </label>
+                    <input id="amount" class="form-control" type="text" formControlName="amount">
+                </div>
             </div>
         </div>
-        <div class="col">
+        <div class="row">
             <div class="form-group">
-                <label for="amount">
-                    Monto
+                <label for="observations">
+                    Observaciones
                 </label>
-                <input id="amount" class="form-control" type="text" formControlName="amount">
+                <textarea name="observations" id="observations" class="form-control" formControlName="name" cols="50"
+                    rows="3"></textarea>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="form-group">
-            <label for="observations">
-                Observaciones
-            </label>
-            <textarea name="observations" id="observations" class="form-control" formControlName="name" cols="50" rows="3"></textarea>
+        <div class="alert-danger ps-3" *ngIf="hasError">
+            Error en el guardado de los datos
         </div>
-    </div>
-    <div class="alert-danger ps-3" *ngIf="hasError">
-        Error en el guardado de los datos
-    </div>
-    <hr>
-    <div class="group_buttons">
-        <button type="submit" class="btn btn-primary" (click)="save()" *ngIf="!updateRecord">Guardar gasto</button>
-        <button type="submit" class="btn btn-warning" (click)="update()" *ngIf="updateRecord">Actualizar registro</button>
-        <button type="submit" class="btn btn-secondary" (click)="cancel()">Cancelar</button>
-    </div>
-</form>
+        <hr>
+        <div class="group_buttons">
+            <button type="submit" class="btn btn-primary" (click)="save()" *ngIf="!updateRecord">Guardar gasto</button>
+            <button type="submit" class="btn btn-warning" (click)="update()" *ngIf="updateRecord">Actualizar
+                registro</button>
+            <button type="submit" class="btn btn-secondary" (click)="cancel()">Cancelar</button>
+        </div>
+        <div class="group_buttons">
+            <i class="fas fa-filter" (click)="filter()"></i>
+        </div>
+    </form>
+</div>
 
+<div class="row mb-3" *ngIf="applyFilter">
+    <div class="group_buttons">
+        <button type="submit" class="btn btn-secondary" (click)="cancelFilter()"><i class="fas fa-window-close"></i></button>
+    </div>
+    <form class="form-inline" [formGroup]="filterForm">
+        <h2>filtro de movimientos</h2>
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Escoje un rango de fechas</mat-label>
+                        <mat-date-range-input [rangePicker]="picker">
+                          <input matStartDate placeholder="Inicio de fecha" formControlName="dateInit">
+                          <input matEndDate placeholder="Fin de fecha" formControlName="dateEnd">
+                        </mat-date-range-input>
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-date-range-picker #picker></mat-date-range-picker>
+                      </mat-form-field>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label for="typeRevenue">
+                        Tipo de gasto
+                    </label>
+                    <select name="typeRevenue" id="typeRevenue" formControlName="typeRevenueExpense"
+                        class="form-control">
+                        <option value="">Seleccione...</option>
+                        <option [value]="item" *ngFor="let item of options">{{optionMovement[item]}}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="group_buttons">
+            <button type="submit" class="btn btn-primary" (click)="searchFilter()"><i class="fas fa-search"></i></button>
+        </div>
+    </form>
+</div>
 <div class="row mb-3">
     <div class="col card">
-        <h3>Resumen de ingresos</h3>
+        <h3>Resumen de gastos</h3>
         <table class="table">
             <tbody>
                 <tr *ngFor="let item of movements">

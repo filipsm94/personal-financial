@@ -5,6 +5,18 @@ import { OPTIONS_TYPE_REGISTER_EXPENSE, TYPE_REGISTER_EXPENSE } from 'src/app/sh
 import { ExpenseService } from 'src/app/shared/services/expense/expense.service';
 import { StorageService } from 'src/app/shared/services/storage/storage.service';
 
+export const MY_FORMATS = {
+  parse: {
+    dateInput: 'LL',
+  },
+  display: {
+    dateInput: 'LL',
+    monthYearLabel: 'MMM YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'MMMM YYYY',
+  },
+};
+
 @Component({
   selector: 'app-revenue-and-expense',
   templateUrl: './expense.component.html',
@@ -15,10 +27,13 @@ export class ExpenseComponent implements OnInit {
   idClient = this.storageService.getUser().clientId;
 
   private infoExpense: any;
+  private filterExpense: any;
   public movements: any = [];
   public updateRecord: boolean = false;
+  public applyFilter: boolean = false;
   public optionMovement = OPTIONS_TYPE_REGISTER_EXPENSE;
   public expenseForm: FormGroup;
+  public filterForm: FormGroup;
   public hasError = false;
   public options = Object.values(TYPE_REGISTER_EXPENSE);
 
@@ -37,6 +52,12 @@ export class ExpenseComponent implements OnInit {
       amount: new FormControl(null, [
         Validators.required,
       ])
+    });
+
+    this.filterForm = new FormGroup({
+      typeRevenueExpense: new FormControl(null),
+      dateInit: new FormControl(null),
+      dateEnd: new FormControl(null)
     });
   }
 
@@ -95,6 +116,36 @@ export class ExpenseComponent implements OnInit {
     } catch (error) {
       this.hasError = true;
     }
+  }
+
+  filter(){
+    this.applyFilter = true;
+  }
+
+  cancelFilter(){
+    this.applyFilter = false;
+  }
+
+  async searchFilter(){
+    console.log(this.filterForm)
+    let dateInit = this.getFullDate(this.filterForm.value.dateInit);
+    let dateEnd = this.getFullDate(this.filterForm.value.dateEnd);
+    let url = `${this.idClient}/${dateInit}/${dateEnd}?typeRevenueExpense=${this.filterForm.value.typeRevenueExpense}`;
+    
+    try {
+      this.movements = await this.revenueService.filterExpense(url);
+      this.applyFilter = false;
+    } catch (error) {
+      this.hasError = true;
+    }
+  }
+
+  private getFullDate(data?: string): string {
+    const date = data ? new Date(data) : new Date();
+    const day = date.getDate()
+    const month = date.getMonth() + 1
+    const year = date.getFullYear();
+    return `${year}-${month}-${day}`;
   }
 
 }
