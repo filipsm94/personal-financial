@@ -89,6 +89,8 @@ export class ExpenseComponent implements OnInit {
     try {
       await this.revenueService.updateExpense(this.infoExpense);
       this.updateRecord = false;
+      alert('Se actualizo correctamente');
+      this.ngOnInit();
     } catch (error) {
       this.hasError = true;
     }

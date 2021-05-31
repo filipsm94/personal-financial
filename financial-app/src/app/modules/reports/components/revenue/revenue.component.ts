@@ -76,6 +76,8 @@ export class RevenueComponent implements OnInit {
     try {
       await this.revenueService.updateRevenue(this.infoRevenue);
       this.updateRecord = false;
+      alert('Se actualizo correctamente');
+      this.ngOnInit();
     } catch (error) {
       this.hasError = true;
     }
