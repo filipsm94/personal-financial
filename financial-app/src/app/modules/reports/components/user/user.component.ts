@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { StorageService } from 'src/app/shared/services/storage/storage.service';
 import { UserService } from 'src/app/shared/services/user/user.service';
 
 @Component({
@@ -16,7 +17,8 @@ export class UserComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private storageService: StorageService
   ) {
     this.userInfoForm = new FormGroup({
       name: new FormControl(null, [
@@ -44,7 +46,8 @@ export class UserComponent implements OnInit {
 
   async sendInfoUser(){
     try {
-      await this.userService.saveUser({...this.userInfoForm.value});
+      const idClient = this.storageService.getUser().clientId??''
+      await this.userService.saveUser({...this.userInfoForm.value,clientId:idClient});
       this.goToDashboard();
     } catch (error) {
       alert("Hay un error, cierra sesión")
