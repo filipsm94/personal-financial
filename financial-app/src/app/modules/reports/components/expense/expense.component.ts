@@ -56,8 +56,12 @@ export class ExpenseComponent implements OnInit {
 
     this.filterForm = new FormGroup({
       typeRevenueExpense: new FormControl(null),
-      dateInit: new FormControl(null),
-      dateEnd: new FormControl(null)
+      dateInit: new FormControl(null, [
+        Validators.required,
+      ]),
+      dateEnd: new FormControl(null, [
+        Validators.required,
+      ])
     });
   }
 
@@ -130,7 +134,10 @@ export class ExpenseComponent implements OnInit {
     console.log(this.filterForm)
     let dateInit = this.getFullDate(this.filterForm.value.dateInit);
     let dateEnd = this.getFullDate(this.filterForm.value.dateEnd);
-    let url = `${this.idClient}/${dateInit}/${dateEnd}?typeRevenueExpense=${this.filterForm.value.typeRevenueExpense}`;
+    let url = `${this.idClient}/${dateInit}/${dateEnd}/`;
+    if(this.filterForm.value.typeRevenueExpense){
+      url += `?typeRevenueExpense=${this.filterForm.value.typeRevenueExpense}`;
+    }
     
     try {
       this.movements = await this.revenueService.filterExpense(url);
@@ -140,8 +147,8 @@ export class ExpenseComponent implements OnInit {
     }
   }
 
-  private getFullDate(data?: string): string {
-    const date = data ? new Date(data) : new Date();
+  private getFullDate(data: string): string {
+    const date = new Date(data);
     const day = date.getDate()
     const month = date.getMonth() + 1
     const year = date.getFullYear();
