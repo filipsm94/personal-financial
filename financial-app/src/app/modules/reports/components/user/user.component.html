@@ -15,13 +15,13 @@
             </div>
         </div>
         <div class="mb-3">
-            <label for="correo" class="form-label">Correo</label>
-            <input type="email" class="form-control" id="correo" formControlName="correo" placeholder="Ingresa tu correo">
-            <div *ngIf="correo?.invalid && (correo?.dirty || correo?.touched)" class="alert-danger ps-3">
-                <div *ngIf="correo?.errors?.required">
+            <label for="email" class="form-label">Correo</label>
+            <input type="email" class="form-control" id="email" formControlName="email" placeholder="Ingresa tu correo">
+            <div *ngIf="email?.invalid && (email?.dirty || email?.touched)" class="alert-danger ps-3">
+                <div *ngIf="email?.errors?.required">
                     El correo es requerido.
                 </div>
-                <div *ngIf="correo?.errors?.minlength">
+                <div *ngIf="email?.errors?.minlength">
                     El correo debe tener minimo 4 caracteres.
                 </div>
             </div>
@@ -55,6 +55,6 @@
     </div>
     <hr>
     <div class="text-center">
-        <button type="submit" class="btn btn-primary col-md-8 col-sm-10 col-12 ">Ingresar</button>
+        <button type="submit" class="btn btn-primary col-md-8 col-sm-10 col-12 " [disabled]="!userInfoForm.valid" (click)="sendInfoUser()">Ingresar</button>
     </div>
 </form>
