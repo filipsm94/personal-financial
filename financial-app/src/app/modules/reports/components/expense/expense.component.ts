@@ -31,6 +31,7 @@ export class ExpenseComponent implements OnInit {
   public movements: any = [];
   public updateRecord: boolean = false;
   public applyFilter: boolean = false;
+  public disabledFilter: boolean = true;
   public optionMovement = OPTIONS_TYPE_REGISTER_EXPENSE;
   public expenseForm: FormGroup;
   public filterForm: FormGroup;
@@ -55,7 +56,7 @@ export class ExpenseComponent implements OnInit {
     });
 
     this.filterForm = new FormGroup({
-      typeRevenueExpense: new FormControl(null),
+      typeRevenue: new FormControl(null),
       dateInit: new FormControl(null, [
         Validators.required,
       ]),
@@ -67,6 +68,12 @@ export class ExpenseComponent implements OnInit {
 
   async ngOnInit() {
     this.movements = await this.revenueService.getListExpense(this.idClient);
+  }
+
+  validFilter(){
+    if(this.filterForm.valid){
+      this.disabledFilter = false;
+    }
   }
 
   async save() {
@@ -131,12 +138,11 @@ export class ExpenseComponent implements OnInit {
   }
 
   async searchFilter(){
-    console.log(this.filterForm)
     let dateInit = this.getFullDate(this.filterForm.value.dateInit);
     let dateEnd = this.getFullDate(this.filterForm.value.dateEnd);
     let url = `${this.idClient}/${dateInit}/${dateEnd}/`;
-    if(this.filterForm.value.typeRevenueExpense){
-      url += `?typeRevenueExpense=${this.filterForm.value.typeRevenueExpense}`;
+    if(this.filterForm.value.typeRevenue){
+      url += `?typeRevenueExpense=${this.filterForm.value.typeRevenue}`;
     }
     
     try {
