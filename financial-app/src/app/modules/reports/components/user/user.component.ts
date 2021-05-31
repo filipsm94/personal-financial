@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UserService } from 'src/app/shared/services/user/user.service';
 
 @Component({
   selector: 'app-user',
@@ -13,12 +14,14 @@ export class UserComponent implements OnInit {
 
   public hasError = false;
 
-  constructor() {
+  constructor(
+    private userService: UserService
+  ) {
     this.userInfoForm = new FormGroup({
       name: new FormControl(null, [
         Validators.required,
         Validators.minLength(4)]),
-      correo: new FormControl(null, [
+      email: new FormControl(null, [
         Validators.required,
         Validators.minLength(4)]),
       celular: new FormControl(null, [
@@ -31,7 +34,7 @@ export class UserComponent implements OnInit {
   }
 
   get name(): any { return this.userInfoForm.get('name'); }
-  get correo(): any { return this.userInfoForm.get('correo'); }
+  get email(): any { return this.userInfoForm.get('email'); }
   get celular(): any { return this.userInfoForm.get('celular'); }
   get genero(): any { return this.userInfoForm.get('genero'); }
 
@@ -39,7 +42,7 @@ export class UserComponent implements OnInit {
   }
 
   async sendInfoUser(){
-    // await this.userService.setUserInfo({...this.loginForm.value});
+    await this.userService.saveUser({...this.userInfoForm.value});
   }
 
 }
