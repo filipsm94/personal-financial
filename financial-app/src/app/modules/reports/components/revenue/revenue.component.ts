@@ -6,18 +6,6 @@ import { IListRevenue } from 'src/app/shared/models/add_revenue.model';
 import { RevenueService } from 'src/app/shared/services/revenue/revenue.service';
 import { StorageService } from 'src/app/shared/services/storage/storage.service';
 
-export const MY_FORMATS = {
-  parse: {
-    dateInput: 'LL',
-  },
-  display: {
-    dateInput: 'LL',
-    monthYearLabel: 'MMM YYYY',
-    dateA11yLabel: 'LL',
-    monthYearA11yLabel: 'MMMM YYYY',
-  },
-};
-
 @Component({
   selector: 'app-revenue',
   templateUrl: './revenue.component.html',
