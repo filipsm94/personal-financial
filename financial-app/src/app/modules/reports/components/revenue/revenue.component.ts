@@ -112,6 +112,8 @@ export class RevenueComponent implements OnInit {
     try {
       await this.revenueService.deleteRevenue(item.id);
       this.updateRecord = false;
+      alert('Se eliminó correctamente');
+      this.ngOnInit();
     } catch (error) {
       this.hasError = true;
     }
