@@ -8,6 +8,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -38,7 +39,8 @@ public class ExpenseController {
 
     @PutMapping("/expense")
     RevenueExpenseEntity putExpense(@RequestHeader(value="Authorization") String authorization,@RequestBody RevenueExpenseEntity expense) {
-        expense.setType("EXPENSE");
+        Optional<RevenueExpenseEntity> optionalExpense = repository.findById(expense.getId());
+        expense = optionalExpense.get();
         return repository.save(expense);
     }
 
