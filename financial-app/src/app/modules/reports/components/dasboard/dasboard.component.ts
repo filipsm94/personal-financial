@@ -11,7 +11,8 @@ import { StorageService } from 'src/app/shared/services/storage/storage.service'
   styleUrls: ['./dasboard.component.scss']
 })
 export class DasboardComponent implements OnInit {
-  @ViewChild('mychart ', {static: false}) mychart: any;
+  @ViewChild('myPieChart', {static: false}) myPieChart: any;
+  @ViewChild('myColumnChart', {static: false}) myColumnChart: any;
 
   public totals = {
     allRevenue: 0,
@@ -83,7 +84,7 @@ export class DasboardComponent implements OnInit {
     movimientos.forEach((item: any) => {
       this.pieChart.dataTable.push(item);
     });
-    this.mychart.draw();
+    this.myPieChart.draw();
   }
 
   chargeColumnData(saleData: ISummary){
@@ -110,6 +111,8 @@ export class DasboardComponent implements OnInit {
     movimientos.forEach((item: any) => {
       this.columnChart.dataTable.push(item);
     });
+
+    this.myColumnChart.draw();
   }
 
   chargeEnum(data: string){
