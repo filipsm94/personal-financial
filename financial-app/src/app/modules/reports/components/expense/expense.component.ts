@@ -5,18 +5,6 @@ import { OPTIONS_TYPE_REGISTER_EXPENSE, TYPE_REGISTER_EXPENSE } from 'src/app/sh
 import { ExpenseService } from 'src/app/shared/services/expense/expense.service';
 import { StorageService } from 'src/app/shared/services/storage/storage.service';
 
-export const MY_FORMATS = {
-  parse: {
-    dateInput: 'LL',
-  },
-  display: {
-    dateInput: 'LL',
-    monthYearLabel: 'MMM YYYY',
-    dateA11yLabel: 'LL',
-    monthYearA11yLabel: 'MMMM YYYY',
-  },
-};
-
 @Component({
   selector: 'app-revenue-and-expense',
   templateUrl: './expense.component.html',
@@ -52,7 +40,8 @@ export class ExpenseComponent implements OnInit {
       ]),
       amount: new FormControl(null, [
         Validators.required,
-      ])
+      ]),
+      date: new FormControl(null)
     });
 
     this.filterForm = new FormGroup({
@@ -77,7 +66,12 @@ export class ExpenseComponent implements OnInit {
   }
 
   async save() {
-    this.infoExpense = { ...this.expenseForm.value };
+
+    this.infoExpense = {
+      ...this.expenseForm.value,
+      date: this.getFullDate(this.expenseForm.value.date),
+      clientId: this.idClient
+    };
     try {
       await this.revenueService.saveExpense(this.infoExpense);
       this.goToDashboard();
@@ -87,7 +81,11 @@ export class ExpenseComponent implements OnInit {
   }
 
   async update() {
-    this.infoExpense = { ...this.expenseForm.value };
+    this.infoExpense = {
+      ...this.expenseForm.value,
+      date: this.getFullDate(),
+      clientId: this.idClient
+    };
     try {
       await this.revenueService.updateExpense(this.infoExpense);
       this.updateRecord = false;
@@ -153,8 +151,8 @@ export class ExpenseComponent implements OnInit {
     }
   }
 
-  private getFullDate(data: string): string {
-    const date = new Date(data);
+  private getFullDate(data?: string): string {
+    const date = data ? new Date(data) : new Date();
     const day = date.getDate()
     const month = date.getMonth() + 1
     const year = date.getFullYear();
