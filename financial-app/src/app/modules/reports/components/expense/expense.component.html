@@ -72,8 +72,8 @@
                     <mat-form-field appearance="fill">
                         <mat-label>Escoje un rango de fechas</mat-label>
                         <mat-date-range-input [rangePicker]="picker">
-                          <input matStartDate placeholder="Inicio de fecha" formControlName="dateInit">
-                          <input matEndDate placeholder="Fin de fecha" formControlName="dateEnd">
+                          <input matStartDate placeholder="Inicio de fecha" (blur)="validFilter()" formControlName="dateInit">
+                          <input matEndDate placeholder="Fin de fecha" (blur)="validFilter()" formControlName="dateEnd">
                         </mat-date-range-input>
                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                         <mat-date-range-picker #picker></mat-date-range-picker>
@@ -85,20 +85,17 @@
                     <label for="typeRevenue">
                         Tipo de gasto
                     </label>
-                    <select name="typeRevenue" id="typeRevenue" formControlName="typeRevenueExpense"
-                        class="form-control">
-                        <option value="">Seleccione...</option>
-                        <option [value]="item" *ngFor="let item of options">{{optionMovement[item]}}</option>
-                    </select>
+                    <input id="typeRevenue" class="form-control" type="text" (blur)="validFilter()" formControlName="typeRevenue">
                 </div>
             </div>
         </div>
         <hr>
         <div class="group_buttons">
-            <button type="submit" class="btn btn-primary" (click)="searchFilter()"><i class="fas fa-search"></i></button>
+            <button type="submit" class="btn btn-primary" (click)="searchFilter()" [disabled]="disabledFilter"><i class="fas fa-search"></i></button>
         </div>
     </form>
 </div>
+
 <div class="row mb-3">
     <hr>
     <div class="group_buttons">
