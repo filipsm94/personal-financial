@@ -25,17 +25,23 @@ public class UserController {
     @GetMapping("/user/{id}")
     Optional<UserEntityDto> getUser(@PathVariable Long id) {
         Optional<UserEntity> ue = repository.findById(id);
-        System.out.println(ue);
-
-        String token = SecurityUtil.getToken(ue.get().getName());
-        System.out.println(token);
+        Optional<UserEntityDto> nameOptional ;
         UserEntityDto ued = new UserEntityDto();
-        ued.setClientId(ue.get().getClientId());
-        ued.setName(ue.get().getName());
-        ued.setEmail(ue.get().getEmail());
-        ued.setJwt(token);
-        Optional<UserEntityDto> nameOptional = Optional.of(ued);
-
+        try {
+            ue.get();
+            String token = SecurityUtil.getToken(ue.get().getName());
+            ued.setClientId(ue.get().getClientId());
+            ued.setName(ue.get().getName());
+            ued.setEmail(ue.get().getEmail());
+            ued.setJwt(token);
+        }catch (Exception e){
+            ued.setClientId(id);
+            ued.setName("");
+            ued.setEmail("");
+            String token = SecurityUtil.getToken(ued.getName());
+            ued.setJwt(token);
+        }
+        nameOptional = Optional.of(ued);
         return nameOptional;
     }
 
