@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { GoogleChartComponent, GoogleChartInterface } from 'ng2-google-charts';
+import { Component, OnInit } from '@angular/core';
+import { GoogleChartInterface } from 'ng2-google-charts';
 import { OPTIONS_TYPE_MOVEMENTS, TYPE_MOVEMENTS } from 'src/app/shared/enums/enums';
 import { IMontly, ISummary, listRevenueExpense } from 'src/app/shared/models/sales.model';
 import { DashboardService } from 'src/app/shared/services/dashboard/dashboard.service';
@@ -11,9 +11,6 @@ import { StorageService } from 'src/app/shared/services/storage/storage.service'
   styleUrls: ['./dasboard.component.scss']
 })
 export class DasboardComponent implements OnInit {
-  // @ViewChild('myPieChart', {static: false}) myPieChart: any;
-  // @ViewChild('myColumnChart', {static: false}) myColumnChart: any;
-
   public totals = {
     allRevenue: 0,
     allExpense: 0,
@@ -24,7 +21,8 @@ export class DasboardComponent implements OnInit {
   public pieChart: GoogleChartInterface = {
     chartType: 'PieChart',
     dataTable: [
-      ['Movimiento', 'Monto']
+      ['Movimiento', 'Monto'],
+      ['Estudio', 2],
     ],
     // firstRowIsData: true,
     options: { title: 'Tus manejos' },
@@ -32,12 +30,15 @@ export class DasboardComponent implements OnInit {
   public columnChart: GoogleChartInterface = {
     chartType: 'ColumnChart',
     dataTable: [
-      ['Movimiento', 'Monto']
+      ['Movimiento', 'Monto'],
+      ['Estudio', 2],
+      ['Estudio1', 2],
+      ['Estudio2', 2],
+      ['Estudio3', 2],
     ],
     // firstRowIsData: true,
     options: { title: 'Balance anual' },
   };
-  
 
   constructor(
     private authService: DashboardService,
@@ -60,7 +61,9 @@ export class DasboardComponent implements OnInit {
   }
 
   chargePieData(saleData: ISummary) {
-    
+    this.pieChart.dataTable = [
+      ['Movimiento', 'Monto']
+    ];
     const movimientos: any = [];
     saleData.listRevenueExpense.forEach((element: listRevenueExpense) => {
       for (let i = 0; i < movimientos.length; i++) {
@@ -76,23 +79,16 @@ export class DasboardComponent implements OnInit {
       }
     });
 
-    const aux = [
-      ['Movimiento', 'Monto']
-    ]
-
     movimientos.forEach((item: any) => {
-      aux.push(item);
+      this.pieChart.dataTable.push(item);
     });
-
-    this.pieChart = {
-      ...this.pieChart,
-      dataTable: aux
-    };
-
-    
   }
 
   chargeColumnData(saleData: ISummary){
+    this.columnChart.dataTable = [
+      ['Mes', 'Ingresos', 'Gastos']
+    ];
+
     const movimientos: any = [];
     saleData.monthlySummary.forEach((element: IMontly) => {
       for (let i = 0; i < movimientos.length; i++) {
@@ -109,20 +105,9 @@ export class DasboardComponent implements OnInit {
       }
     });
 
-    const aux = [
-      ['Mes', 'Ingresos', 'Gastos']
-    ];
-
     movimientos.forEach((item: any) => {
-      aux.push(item);
+      this.columnChart.dataTable.push(item);
     });
-
-    this.columnChart = {
-      ...this.columnChart,
-      dataTable: aux
-    };
-    // this.columnChart.dataTable= aux;
-    // this.columnChart.component?.draw(this.columnChart);
   }
 
   chargeEnum(data: string){
