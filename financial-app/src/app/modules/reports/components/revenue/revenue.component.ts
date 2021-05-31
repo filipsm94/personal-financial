@@ -18,8 +18,11 @@ export class RevenueComponent implements OnInit {
   private infoRevenue: IListRevenue;
   public movements: any;
   public updateRecord: boolean = false;
+  public applyFilter: boolean = false;
+  public disabledFilter: boolean = true;
   public optionMovement = OPTIONS_TYPE_REGISTER_REVENUE;
   public revenueForm: FormGroup;
+  public filterForm: FormGroup;
   public hasError = false;
   public options = Object.values(TYPE_REGISTER_REVENUE);
 
@@ -46,10 +49,26 @@ export class RevenueComponent implements OnInit {
       ]),
       date: new FormControl(null)
     });
+
+    this.filterForm = new FormGroup({
+      typeRevenue: new FormControl(null),
+      dateInit: new FormControl(null, [
+        Validators.required,
+      ]),
+      dateEnd: new FormControl(null, [
+        Validators.required,
+      ])
+    });
   }
 
   async ngOnInit() {
     this.movements = await this.revenueService.getListRevenue(this.idClient);
+  }
+
+  validFilter(){
+    if(this.filterForm.valid){
+      this.disabledFilter = false;
+    }
   }
 
   async save() {
@@ -112,6 +131,30 @@ export class RevenueComponent implements OnInit {
     try {
       await this.revenueService.deleteRevenue(item.id);
       this.updateRecord = false;
+    } catch (error) {
+      this.hasError = true;
+    }
+  }
+
+  filter(){
+    this.applyFilter = true;
+  }
+
+  cancelFilter(){
+    this.applyFilter = false;
+  }
+
+  async searchFilter(){
+    let dateInit = this.getFullDate(this.filterForm.value.dateInit);
+    let dateEnd = this.getFullDate(this.filterForm.value.dateEnd);
+    let url = `${this.idClient}/${dateInit}/${dateEnd}/`;
+    if(this.filterForm.value.typeRevenue){
+      url += `?typeRevenueExpense=${this.filterForm.value.typeRevenue}`;
+    }
+    
+    try {
+      this.movements = await this.revenueService.filterExpense(url);
+      this.applyFilter = false;
     } catch (error) {
       this.hasError = true;
     }

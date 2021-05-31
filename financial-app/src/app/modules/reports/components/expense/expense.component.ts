@@ -15,7 +15,6 @@ export class ExpenseComponent implements OnInit {
   idClient = this.storageService.getUser().clientId;
 
   private infoExpense: any;
-  private filterExpense: any;
   public movements: any = [];
   public updateRecord: boolean = false;
   public applyFilter: boolean = false;

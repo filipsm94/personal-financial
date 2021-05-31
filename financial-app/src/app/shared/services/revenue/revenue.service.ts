@@ -20,6 +20,28 @@ export class RevenueService implements IRevenueService {
     private storageService: StorageService
   ) { }
 
+  public filterExpense(filters: string): Promise<any> {
+    if (!environment.production) {
+      return Promise.resolve(DataMock.GET_LIST_REVENUE);
+    }
+    return this.httpClient.get(
+      `${this.revenueUrl}${filters}`,
+      {
+        headers: new HttpHeaders({
+          'Authorization': this.storageService.getToken()
+        }),
+        observe: 'response'
+      }
+    ).pipe(
+      map((response) => {
+        return response.body;
+      }),
+      catchError((error) => {
+        return throwError(error);
+      })
+    ).toPromise();
+  }
+
   public saveRevenue(infoFormRevenue: IListRevenue): Promise<any> {
     if (!environment.production) {
       return Promise.resolve(DataMock.POST_SAVE_REVENUE);
