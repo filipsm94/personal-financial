@@ -22,7 +22,9 @@ export class LoginComponent implements OnInit {
     this.loginForm = new FormGroup({
       username: new FormControl(null, [
         Validators.required,
-        Validators.minLength(4)]),
+        Validators.minLength(4),
+        Validators.pattern("^[a-z0-9]{4,15}$")],
+        ),
     });
     this.infoLogin = {
       username: ''

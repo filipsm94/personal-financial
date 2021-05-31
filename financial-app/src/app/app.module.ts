@@ -13,6 +13,7 @@ import { DashboardService } from './shared/services/dashboard/dashboard.service'
 import { ExpenseService } from './shared/services/expense/expense.service';
 import { RevenueService } from './shared/services/revenue/revenue.service';
 import { StorageService } from './shared/services/storage/storage.service';
+import { UserService } from './shared/services/user/user.service';
 
 
 
@@ -34,6 +35,7 @@ import { StorageService } from './shared/services/storage/storage.service';
     DashboardService,
     RevenueService,
     ExpenseService,
+    UserService,
     StorageService,
     AuthGuard
   ],
