@@ -94,8 +94,8 @@ export class RevenueComponent implements OnInit {
   }
 
   editMovement(item: any) {
-    this.revenueForm.controls['typeRevenue'].setValue(item.typeRevenueExpense);
-    this.revenueForm.controls['observations'].setValue(item.name);
+    this.revenueForm.controls['typeRevenueExpense'].setValue(item.typeRevenueExpense);
+    this.revenueForm.controls['name'].setValue(item.name);
     this.revenueForm.controls['amount'].setValue(item.amount);
     this.updateRecord = true;
   }
