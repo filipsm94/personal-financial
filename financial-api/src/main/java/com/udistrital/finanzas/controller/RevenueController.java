@@ -8,6 +8,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -37,7 +38,8 @@ public class RevenueController {
 
     @PutMapping("/revenue")
     RevenueExpenseEntity putRevenue(@RequestHeader(value="Authorization") String authorization,@RequestBody RevenueExpenseEntity revenue) {
-        revenue.setType("REVENUE");
+        Optional<RevenueExpenseEntity> optonialRevenue = repository.findById(revenue.getId());
+        revenue = optonialRevenue.get();
         return repository.save(revenue);
     }
 
