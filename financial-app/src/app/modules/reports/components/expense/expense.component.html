@@ -70,7 +70,11 @@
                     <label for="typeRevenue">
                         Tipo de gasto
                     </label>
-                    <input id="typeRevenue" class="form-control" type="text" (blur)="validFilter()" formControlName="typeRevenue">
+                    <select name="typeRevenue" id="typeRevenue"  (blur)="validFilter()" formControlName="typeRevenue"
+                        class="form-control">
+                        <option value="">Seleccione...</option>
+                        <option [value]="item" *ngFor="let item of options">{{optionMovement[item]}}</option>
+                    </select>
                 </div>
             </div>
         </div>

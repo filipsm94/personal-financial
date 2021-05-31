@@ -29,7 +29,7 @@ export class DataMock {
                 },
                 {
                     amount: 1400000,
-                    typeRevenueExpense: TYPE_REGISTER_EXPENSE.FOOT,
+                    typeRevenueExpense: TYPE_REGISTER_EXPENSE.FOOD,
                     type: TYPE_MOVEMENTS.EXPENSE,
                     name: "Mercado",
                     date: "2021-05-25",
@@ -97,7 +97,7 @@ export class DataMock {
         return [
             {
                 amount: 40000,
-                typeRevenueExpense: TYPE_REGISTER_EXPENSE.FOOT,
+                typeRevenueExpense: TYPE_REGISTER_EXPENSE.FOOD,
                 type: TYPE_MOVEMENTS.REVENUE,
                 name: "Comida en Burger king",
                 date: "2021-05-25",

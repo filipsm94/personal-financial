@@ -24,7 +24,7 @@
             },
             {
                 "amount": 120000,
-                "type_expense": "FOOT",
+                "type_expense": "FOOD",
                 "type": "EXPENSE",
                 "name": "Mercado",
                 "date": "2021-05-25"
@@ -77,7 +77,7 @@
         "list_expenses": [
             {
                 "amount": 40000,
-                "type_expense": "FOOT",
+                "type_expense": "FOOD",
                 "type": "REVENUE",
                 "name": "Salario",
                 "date": "2021-05-25"

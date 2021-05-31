@@ -1,5 +1,5 @@
 export enum TYPE_REGISTER_EXPENSE {
-    FOOT= 'FOOT',
+    FOOD= 'FOOD',
     FUN= 'FUN',
     EDUCATION= 'EDUCATION'
 }
@@ -15,7 +15,7 @@ export enum TYPE_MOVEMENTS {
 }
 
 export const OPTIONS_TYPE_REGISTER_EXPENSE = {
-    [TYPE_REGISTER_EXPENSE.FOOT]: 'Comida',
+    [TYPE_REGISTER_EXPENSE.FOOD]: 'Comida',
     [TYPE_REGISTER_EXPENSE.FUN]: 'Diversión',
     [TYPE_REGISTER_EXPENSE.EDUCATION]: 'Educación',
 };

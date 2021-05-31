@@ -21,9 +21,9 @@ export class ExpenseService implements IExpenseService {
   ) { }
 
   filterExpense(filters: string): Promise<any> {
-    /* if (!environment.production) {
+    if (!environment.production) {
       return Promise.resolve(DataMock.GET_LIST_EXPENSE);
-    } */
+    }
     return this.httpClient.get(
       `${this.expenseUrl}${filters}`,
       {
