@@ -27,7 +27,7 @@ export class AuthService implements IAuthService{
 
   public loginUser(infoLogin: string): Promise<ILogin> {
     return this.authApiService.loginUser(infoLogin).then((response) => {
-      if (response){
+      if (response && response.name !== ''){
         this.storageService.setUser(response);
       }else{
         this.storageService.setUser({clientId: infoLogin});
