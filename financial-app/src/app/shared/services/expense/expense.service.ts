@@ -20,6 +20,28 @@ export class ExpenseService implements IExpenseService {
     private storageService: StorageService
   ) { }
 
+  filterExpense(filters: string): Promise<any> {
+    if (!environment.production) {
+      return Promise.resolve(DataMock.GET_LIST_EXPENSE);
+    }
+    return this.httpClient.get(
+      `${this.expenseUrl}${filters}`,
+      {
+        headers: new HttpHeaders({
+          'Authorization': this.storageService.getToken()
+        }),
+        observe: 'response'
+      }
+    ).pipe(
+      map((response) => {
+        return response.body;
+      }),
+      catchError((error) => {
+        return throwError(error);
+      })
+    ).toPromise();
+  }
+
   updateExpense(infoFormExpense: IListExpenses): Promise<any> {
     if (!environment.production) {
       return Promise.resolve(DataMock.POST_SAVE_EXPENSE);
