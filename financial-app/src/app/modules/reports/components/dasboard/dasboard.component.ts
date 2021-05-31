@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { GoogleChartInterface } from 'ng2-google-charts';
+import { GoogleChartComponent, GoogleChartInterface } from 'ng2-google-charts';
 import { OPTIONS_TYPE_MOVEMENTS, TYPE_MOVEMENTS } from 'src/app/shared/enums/enums';
 import { IMontly, ISummary, listRevenueExpense } from 'src/app/shared/models/sales.model';
 import { DashboardService } from 'src/app/shared/services/dashboard/dashboard.service';
@@ -32,15 +32,12 @@ export class DasboardComponent implements OnInit {
   public columnChart: GoogleChartInterface = {
     chartType: 'ColumnChart',
     dataTable: [
-      ['Movimiento', 'Monto'],
-      ['Estudio', 2],
-      ['Estudio1', 2],
-      ['Estudio2', 2],
-      ['Estudio3', 2],
+      ['Movimiento', 'Monto']
     ],
     // firstRowIsData: true,
     options: { title: 'Balance anual' },
   };
+  
 
   constructor(
     private authService: DashboardService,
@@ -63,9 +60,7 @@ export class DasboardComponent implements OnInit {
   }
 
   chargePieData(saleData: ISummary) {
-    this.pieChart.dataTable = [
-      ['Movimiento', 'Monto']
-    ];
+    
     const movimientos: any = [];
     saleData.listRevenueExpense.forEach((element: listRevenueExpense) => {
       for (let i = 0; i < movimientos.length; i++) {
@@ -81,17 +76,18 @@ export class DasboardComponent implements OnInit {
       }
     });
 
+    const aux = [
+      ['Movimiento', 'Monto']
+    ]
+
     movimientos.forEach((item: any) => {
-      this.pieChart.dataTable.push(item);
+      aux.push(item);
     });
-    this.myPieChart.draw();
+
+    this.pieChart.dataTable = aux;
   }
 
   chargeColumnData(saleData: ISummary){
-    this.columnChart.dataTable = [
-      ['Mes', 'Ingresos', 'Gastos']
-    ];
-
     const movimientos: any = [];
     saleData.monthlySummary.forEach((element: IMontly) => {
       for (let i = 0; i < movimientos.length; i++) {
@@ -108,11 +104,15 @@ export class DasboardComponent implements OnInit {
       }
     });
 
+    const aux = [
+      ['Mes', 'Ingresos', 'Gastos']
+    ];
+
     movimientos.forEach((item: any) => {
-      this.columnChart.dataTable.push(item);
+      aux.push(item);
     });
 
-    this.myColumnChart.draw();
+    this.columnChart.dataTable= aux;
   }
 
   chargeEnum(data: string){
