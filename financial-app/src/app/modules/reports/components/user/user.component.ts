@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { UserService } from 'src/app/shared/services/user/user.service';
 
 @Component({
@@ -10,12 +11,12 @@ import { UserService } from 'src/app/shared/services/user/user.service';
 })
 export class UserComponent implements OnInit {
   public userInfoForm: FormGroup;
-  private infoLogin: any;
 
   public hasError = false;
 
   constructor(
-    private userService: UserService
+    private userService: UserService,
+    private router: Router
   ) {
     this.userInfoForm = new FormGroup({
       name: new FormControl(null, [
@@ -42,7 +43,18 @@ export class UserComponent implements OnInit {
   }
 
   async sendInfoUser(){
-    await this.userService.saveUser({...this.userInfoForm.value});
+    try {
+      await this.userService.saveUser({...this.userInfoForm.value});
+      this.goToDashboard();
+    } catch (error) {
+      alert("Hay un error, cierra sesión")
+    }
+
+  }
+
+
+  public goToDashboard(): void{
+    this.router.navigate(['/dashboard']);
   }
 
 }

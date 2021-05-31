@@ -53,7 +53,7 @@
     </div>
     <hr>
     <div class="group_buttons">
-        <button type="submit" class="btn btn-primary" (click)="save()" *ngIf="!updateRecord">Guardar</button>
+        <button type="submit" class="btn btn-primary" [disabled]="!revenueForm.valid" (click)="save()" *ngIf="!updateRecord">Guardar</button>
         <button type="submit" class="btn btn-warning" (click)="update()" *ngIf="updateRecord">Actualizar
             registro</button>
         <button type="submit" class="btn btn-secondary" (click)="cancel()">Cancelar</button>

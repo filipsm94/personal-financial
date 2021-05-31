@@ -14,5 +14,5 @@
         </div>
     </div>
     <hr>
-    <button type="submit" class="btn btn-primary col-md-8 col-sm-10 col-12" (click)="loggIn()">Ingresar</button>
+    <button type="submit" class="btn btn-primary col-md-8 col-sm-10 col-12" [disabled]="!loginForm.valid" (click)="loggIn()">Ingresar</button>
 </form>
