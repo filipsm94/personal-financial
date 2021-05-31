@@ -5,18 +5,6 @@ import { OPTIONS_TYPE_REGISTER_EXPENSE, TYPE_REGISTER_EXPENSE } from 'src/app/sh
 import { ExpenseService } from 'src/app/shared/services/expense/expense.service';
 import { StorageService } from 'src/app/shared/services/storage/storage.service';
 
-export const MY_FORMATS = {
-  parse: {
-    dateInput: 'LL',
-  },
-  display: {
-    dateInput: 'LL',
-    monthYearLabel: 'MMM YYYY',
-    dateA11yLabel: 'LL',
-    monthYearA11yLabel: 'MMMM YYYY',
-  },
-};
-
 @Component({
   selector: 'app-revenue-and-expense',
   templateUrl: './expense.component.html',
