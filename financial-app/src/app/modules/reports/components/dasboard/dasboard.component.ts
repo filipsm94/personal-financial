@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { GoogleChartInterface } from 'ng2-google-charts';
 import { OPTIONS_TYPE_MOVEMENTS, TYPE_MOVEMENTS } from 'src/app/shared/enums/enums';
 import { IMontly, ISummary, listRevenueExpense } from 'src/app/shared/models/sales.model';
@@ -11,6 +11,8 @@ import { StorageService } from 'src/app/shared/services/storage/storage.service'
   styleUrls: ['./dasboard.component.scss']
 })
 export class DasboardComponent implements OnInit {
+  @ViewChild('mychart ', {static: false}) mychart: any;
+
   public totals = {
     allRevenue: 0,
     allExpense: 0,
@@ -21,8 +23,7 @@ export class DasboardComponent implements OnInit {
   public pieChart: GoogleChartInterface = {
     chartType: 'PieChart',
     dataTable: [
-      ['Movimiento', 'Monto'],
-      ['Estudio', 2],
+      ['Movimiento', 'Monto']
     ],
     // firstRowIsData: true,
     options: { title: 'Tus manejos' },
@@ -82,6 +83,7 @@ export class DasboardComponent implements OnInit {
     movimientos.forEach((item: any) => {
       this.pieChart.dataTable.push(item);
     });
+    this.mychart.draw();
   }
 
   chargeColumnData(saleData: ISummary){
