@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
     this.infoLogin = {...this.loginForm.value};
     try {
       await this.authService.loginUser(this.infoLogin.username);
-      this.goToDashboard();
+      // this.goToDashboard();
     } catch (error) {
       this.hasError = true;
     }

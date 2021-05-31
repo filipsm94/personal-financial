@@ -29,6 +29,7 @@ export class AuthService implements IAuthService{
     return this.authApiService.loginUser(infoLogin).then((response) => {
       if (response && response.name !== ''){
         this.storageService.setUser(response);
+        this.router.navigate(['/dashboard']);
       }else{
         this.storageService.setUser({clientId: infoLogin});
         this.router.navigate(['/dashboard/user']);
