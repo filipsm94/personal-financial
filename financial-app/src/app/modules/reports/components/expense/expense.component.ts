@@ -123,9 +123,9 @@ export class ExpenseComponent implements OnInit {
   }
 
   async deleteMovement(item: any) {
-    this.infoExpense = { 'id': item.id };
+
     try {
-      await this.revenueService.deleteExpense(this.infoExpense);
+      await this.revenueService.deleteExpense(item.id);
       this.updateRecord = false;
       alert('Se eliminó correctamente');
       this.ngOnInit();
