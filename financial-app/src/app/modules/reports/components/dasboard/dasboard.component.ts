@@ -85,6 +85,7 @@ export class DasboardComponent implements OnInit {
   }
 
   chargeColumnData(saleData: ISummary){
+    this.columnChart = {...this.columnChart};
     this.columnChart.dataTable = [
       ['Mes', 'Ingresos', 'Gastos']
     ];
