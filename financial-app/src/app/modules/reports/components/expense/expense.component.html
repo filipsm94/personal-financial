@@ -1,5 +1,5 @@
 <div class="row mb-3" *ngIf="!applyFilter">
-    <form class="form-inline" [formGroup]="expenseForm">
+    <form class="form-inline" [formGroup]="expenseForm" novalidate>
         <h2>Registrar gasto</h2>
         <div class="row">
             <div class="col">
@@ -64,7 +64,7 @@
     <div class="group_buttons">
         <button class="btn btn-secondary" (click)="cancelFilter()"><i class="fas fa-window-close"></i></button>
     </div>
-    <form class="form-inline" [formGroup]="filterForm">
+    <form class="form-inline" [formGroup]="filterForm" novalidate>
         <h2>filtro de movimientos</h2>
         <div class="row">
             <div class="col">
