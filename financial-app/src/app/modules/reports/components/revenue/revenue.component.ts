@@ -41,7 +41,7 @@ export class RevenueComponent implements OnInit {
     this.revenueForm = new FormGroup({
       typeRevenueExpense: new FormControl(null, [
         Validators.required,
-        Validators.minLength(4)]),
+        Validators.minLength(2)]),
       name: new FormControl(null, [
         Validators.maxLength(100)
       ]),
