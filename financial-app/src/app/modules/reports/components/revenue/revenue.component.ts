@@ -110,7 +110,9 @@ export class RevenueComponent implements OnInit {
   }
 
   goToDashboard(): void {
-    this.router.navigate(['/dashboard']);
+    this.router.navigate(['/dashboard']).then(() => {
+      window.location.reload();
+    });
   }
 
   getOptionMovement(label: TYPE_REGISTER_REVENUE) {
