@@ -54,17 +54,17 @@
         </div>
         <hr>
         <div class="group_buttons">
-            <button type="submit" class="btn btn-primary" [disabled]="!revenueForm.valid" (click)="save()" *ngIf="!updateRecord">Guardar</button>
-            <button type="submit" class="btn btn-warning" (click)="update()" *ngIf="updateRecord">Actualizar
+            <button class="btn btn-primary" [disabled]="!revenueForm.valid" (click)="save()" *ngIf="!updateRecord">Guardar</button>
+            <button class="btn btn-warning" (click)="update()" *ngIf="updateRecord">Actualizar
                 registro</button>
-            <button type="submit" class="btn btn-secondary" (click)="cancel()">Cancelar</button>
+            <button class="btn btn-secondary" (click)="cancel()">Cancelar</button>
         </div>
     </form>
 </div>
 
 <div class="row mb-3" *ngIf="applyFilter">
     <div class="group_buttons">
-        <button type="submit" class="btn btn-secondary" (click)="cancelFilter()"><i class="fas fa-window-close"></i></button>
+        <button class="btn btn-secondary" (click)="cancelFilter()"><i class="fas fa-window-close"></i></button>
     </div>
     <form class="form-inline" [formGroup]="filterForm">
         <h2>filtro de movimientos</h2>
@@ -97,7 +97,7 @@
         </div>
         <hr>
         <div class="group_buttons">
-            <button type="submit" class="btn btn-primary" (click)="searchFilter()" [disabled]="disabledFilter"><i class="fas fa-search"></i></button>
+            <button class="btn btn-primary" (click)="searchFilter()" [disabled]="disabledFilter"><i class="fas fa-search"></i></button>
         </div>
     </form>
 </div>
