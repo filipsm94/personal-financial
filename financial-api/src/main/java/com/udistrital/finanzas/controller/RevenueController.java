@@ -38,8 +38,7 @@ public class RevenueController {
 
     @PutMapping("/revenue")
     RevenueExpenseEntity putRevenue(@RequestHeader(value="Authorization") String authorization,@RequestBody RevenueExpenseEntity revenue) {
-        Optional<RevenueExpenseEntity> optonialRevenue = repository.findById(revenue.getId());
-        revenue = optonialRevenue.get();
+        revenue.setType("REVENUE");
         return repository.save(revenue);
     }
 

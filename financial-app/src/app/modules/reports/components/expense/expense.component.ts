@@ -59,8 +59,8 @@ export class ExpenseComponent implements OnInit {
     this.movements = await this.revenueService.getListExpense(this.idClient);
   }
 
-  validFilter(){
-    if(this.filterForm.valid){
+  validFilter() {
+    if (this.filterForm.valid) {
       this.disabledFilter = false;
     }
   }
@@ -85,7 +85,7 @@ export class ExpenseComponent implements OnInit {
       ...this.expenseForm.value,
       date: this.getFullDate(),
       clientId: this.idClient,
-      id: this.idExpenseUpdated?? 0,
+      id: this.idExpenseUpdated ?? 0,
     };
     try {
       await this.revenueService.updateExpense(this.infoExpense);
@@ -107,7 +107,9 @@ export class ExpenseComponent implements OnInit {
   }
 
   goToDashboard(): void {
-    this.router.navigate(['/dashboard']);
+    this.router.navigate(['/dashboard']).then(() => {
+      window.location.reload();
+    });
   }
 
   getOptionMovement(label: TYPE_REGISTER_EXPENSE) {
@@ -134,22 +136,22 @@ export class ExpenseComponent implements OnInit {
     }
   }
 
-  filter(){
+  filter() {
     this.applyFilter = true;
   }
 
-  cancelFilter(){
+  cancelFilter() {
     this.applyFilter = false;
   }
 
-  async searchFilter(){
+  async searchFilter() {
     let dateInit = this.getFullDate(this.filterForm.value.dateInit);
     let dateEnd = this.getFullDate(this.filterForm.value.dateEnd);
     let url = `${this.idClient}/${dateInit}/${dateEnd}/`;
-    if(this.filterForm.value.typeRevenue){
+    if (this.filterForm.value.typeRevenue) {
       url += `?typeRevenueExpense=${this.filterForm.value.typeRevenue}`;
     }
-    
+
     try {
       this.movements = await this.revenueService.filterExpense(url);
       this.applyFilter = false;

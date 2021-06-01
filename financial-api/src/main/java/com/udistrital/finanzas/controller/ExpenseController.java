@@ -39,8 +39,7 @@ public class ExpenseController {
 
     @PutMapping("/expense")
     RevenueExpenseEntity putExpense(@RequestHeader(value="Authorization") String authorization,@RequestBody RevenueExpenseEntity expense) {
-        Optional<RevenueExpenseEntity> optionalExpense = repository.findById(expense.getId());
-        expense = optionalExpense.get();
+        expense.setType("EXPENSE");
         return repository.save(expense);
     }
 

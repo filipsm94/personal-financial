@@ -8,7 +8,7 @@ import { UserService } from 'src/app/shared/services/user/user.service';
   selector: 'app-user',
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.scss'],
-  host: {class: 'ds-fx-ct'}
+  host: { class: 'ds-fx-ct' }
 })
 export class UserComponent implements OnInit {
   public userInfoForm: FormGroup;
@@ -44,10 +44,10 @@ export class UserComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  async sendInfoUser(){
+  async sendInfoUser() {
     try {
-      const idClient = this.storageService.getUser().clientId??''
-      await this.userService.saveUser({...this.userInfoForm.value,clientId:idClient});
+      const idClient = this.storageService.getUser().clientId ?? ''
+      await this.userService.saveUser({ ...this.userInfoForm.value, clientId: idClient });
       this.goToDashboard();
     } catch (error) {
       alert("Hay un error, cierra sesión")
@@ -56,7 +56,7 @@ export class UserComponent implements OnInit {
   }
 
 
-  public goToDashboard(): void{
+  public goToDashboard(): void {
     this.router.navigate(['/dashboard']);
   }
 
