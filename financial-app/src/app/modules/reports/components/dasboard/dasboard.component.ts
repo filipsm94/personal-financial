@@ -21,7 +21,8 @@ export class DasboardComponent implements OnInit {
   public pieChart: GoogleChartInterface = {
     chartType: 'PieChart',
     dataTable: [
-      ['Movimiento', 'Monto']
+      ['Movimiento', 'Monto'],
+      ['Ingreso', '0']
     ],
     // firstRowIsData: true,
     options: { title: 'Tus manejos' },
@@ -29,7 +30,8 @@ export class DasboardComponent implements OnInit {
   public columnChart: GoogleChartInterface = {
     chartType: 'ColumnChart',
     dataTable: [
-      ['Movimiento', 'Monto']
+      ['Mes', 'Ingresos', 'Gastos'],
+      ['Enero', '0', '0'],
     ],
     // firstRowIsData: true,
     options: { title: 'Balance anual' },
@@ -56,7 +58,7 @@ export class DasboardComponent implements OnInit {
   }
 
   chargePieData(saleData: ISummary) {
-    // this.pieChart = {...this.pieChart};
+    this.pieChart = {...this.pieChart};
 
     this.pieChart.dataTable = [
       ['Movimiento', 'Monto']
@@ -83,7 +85,7 @@ export class DasboardComponent implements OnInit {
   }
 
   chargeColumnData(saleData: ISummary){
-    // this.columnChart = {...this.columnChart};
+    this.columnChart = {...this.columnChart};
     this.columnChart.dataTable = [
       ['Mes', 'Ingresos', 'Gastos']
     ];
