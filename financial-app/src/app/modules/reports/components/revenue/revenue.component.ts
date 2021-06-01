@@ -77,11 +77,9 @@ export class RevenueComponent implements OnInit {
       ...this.revenueForm.value,
       date: this.getFullDate(this.revenueForm.value.date),
       clientId: this.idClient,
-      id: this.idRevenueUpdated??0,
     };
     try {
       await this.revenueService.saveRevenue(this.infoRevenue);
-      this.idRevenueUpdated = null;
       this.goToDashboard();
     } catch (error) {
       this.hasError = true;
@@ -93,11 +91,13 @@ export class RevenueComponent implements OnInit {
     this.infoRevenue = {
       ...this.revenueForm.value,
       date: this.getFullDate(),
-      clientId: this.idClient
+      clientId: this.idClient,
+      id: this.idRevenueUpdated??0,
     };
     try {
       await this.revenueService.updateRevenue(this.infoRevenue);
       this.updateRecord = false;
+      this.idRevenueUpdated = null;
       alert('Se actualizo correctamente');
       this.ngOnInit();
     } catch (error) {
