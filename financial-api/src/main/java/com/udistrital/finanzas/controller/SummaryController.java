@@ -21,7 +21,7 @@ public class SummaryController {
 
     @GetMapping("/summary/{id}")
     Summary getSummary(@RequestHeader(value="Authorization") String authorization,@PathVariable Long id) {
-        List<RevenueExpenseEntity> listRevenueExpense = revenueExpenseRepository.findIdByClientId(id);
+        List<RevenueExpenseEntity> listRevenueExpense = revenueExpenseRepository.findIdByClientIdOrderByDateAsc(id);
         return SummaryUtil.convertData(listRevenueExpense);
     }
 }
