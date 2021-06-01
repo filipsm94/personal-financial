@@ -14,7 +14,7 @@ export class DataMock {
         }
     };
 
-    public static get GET_MOCK_DASHBOARD() : ISummary {
+    public static get GET_MOCK_DASHBOARD(): ISummary {
         return {
             totalRevenue: 5000000,
             totalExpense: 2300000,
@@ -28,18 +28,106 @@ export class DataMock {
                     id: 1
                 },
                 {
-                    amount: 1400000,
-                    typeRevenueExpense: TYPE_REGISTER_EXPENSE.FOOT,
-                    type: TYPE_MOVEMENTS.EXPENSE,
-                    name: "Mercado",
+                    amount: 1000000,
+                    typeRevenueExpense: TYPE_REGISTER_REVENUE.FREELANCE,
+                    type: TYPE_MOVEMENTS.REVENUE,
+                    name: "Trabajo extra",
                     date: "2021-05-25",
                     id: 2
                 },
                 {
-                    amount: 800000,
+                    amount: 300000,
+                    typeRevenueExpense: TYPE_REGISTER_EXPENSE.FOOD,
+                    type: TYPE_MOVEMENTS.EXPENSE,
+                    name: "Mercado",
+                    date: "2021-05-25",
+                    id: 3
+                },
+                {
+                    amount: 14000,
+                    typeRevenueExpense: TYPE_REGISTER_EXPENSE.FOOD,
+                    type: TYPE_MOVEMENTS.EXPENSE,
+                    name: "Comida de helado",
+                    date: "2021-05-25",
+                    id: 4
+                },
+                {
+                    amount: 54000,
+                    typeRevenueExpense: TYPE_REGISTER_EXPENSE.FOOD,
+                    type: TYPE_MOVEMENTS.EXPENSE,
+                    name: "Compra Burger king",
+                    date: "2021-05-25",
+                    id: 5
+                },
+                {
+                    amount: 39000,
+                    typeRevenueExpense: TYPE_REGISTER_EXPENSE.FOOD,
+                    type: TYPE_MOVEMENTS.EXPENSE,
+                    name: "Alitas colombianas",
+                    date: "2021-05-25",
+                    id: 2
+                },
+                {
+                    amount: 34000,
+                    typeRevenueExpense: TYPE_REGISTER_EXPENSE.FOOD,
+                    type: TYPE_MOVEMENTS.EXPENSE,
+                    name: "Compra de almuerzo",
+                    date: "2021-05-25",
+                    id: 2
+                },
+                {
+                    amount: 80000,
                     typeRevenueExpense: TYPE_REGISTER_EXPENSE.FUN,
                     type: TYPE_MOVEMENTS.EXPENSE,
                     name: "Bolos",
+                    date: "2021-05-25",
+                    id: 3
+                },
+                {
+                    amount: 120000,
+                    typeRevenueExpense: TYPE_REGISTER_EXPENSE.FUN,
+                    type: TYPE_MOVEMENTS.EXPENSE,
+                    name: "Salitre magico",
+                    date: "2021-05-25",
+                    id: 3
+                },
+                {
+                    amount: 60000,
+                    typeRevenueExpense: TYPE_REGISTER_EXPENSE.FUN,
+                    type: TYPE_MOVEMENTS.EXPENSE,
+                    name: "Acampar",
+                    date: "2021-05-25",
+                    id: 3
+                },
+                {
+                    amount: 200000,
+                    typeRevenueExpense: TYPE_REGISTER_EXPENSE.FUN,
+                    type: TYPE_MOVEMENTS.EXPENSE,
+                    name: "Salida a bailar",
+                    date: "2021-05-25",
+                    id: 3
+                },
+                {
+                    amount: 1000,
+                    typeRevenueExpense: TYPE_REGISTER_EXPENSE.EDUCATION,
+                    type: TYPE_MOVEMENTS.EXPENSE,
+                    name: "Fotocopias",
+                    date: "2021-05-25",
+                    id: 3
+                },
+                {
+                    amount: 140000,
+                    typeRevenueExpense: TYPE_REGISTER_EXPENSE.EDUCATION,
+                    type: TYPE_MOVEMENTS.EXPENSE,
+                    name: "Matricula",
+                    date: "2021-05-25",
+                    id: 3
+                },
+                {
+                    amount: 3000000,
+                    typeRevenueExpense: TYPE_REGISTER_EXPENSE.EDUCATION,
+                    type: TYPE_MOVEMENTS.EXPENSE,
+                    name: "Semestre",
                     date: "2021-05-25",
                     id: 3
                 }
@@ -97,7 +185,7 @@ export class DataMock {
         return [
             {
                 amount: 40000,
-                typeRevenueExpense: TYPE_REGISTER_EXPENSE.FOOT,
+                typeRevenueExpense: TYPE_REGISTER_EXPENSE.FOOD,
                 type: TYPE_MOVEMENTS.REVENUE,
                 name: "Comida en Burger king",
                 date: "2021-05-25",

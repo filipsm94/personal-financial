@@ -6,7 +6,7 @@ export interface IExpenseService {
   updateExpense(infoFormExpense: any): Promise<any>;
 
   getListExpense(idExpense: string): Promise<any>;
-  
+
   filterExpense(filters: string): Promise<any>;
 
   deleteExpense(idExpense: string): Promise<any>;

@@ -20,10 +20,10 @@ export class ExpenseService implements IExpenseService {
     private storageService: StorageService
   ) { }
 
-  filterExpense(filters: string): Promise<any> {
-    /* if (!environment.production) {
+  public filterExpense(filters: string): Promise<any> {
+    if (!environment.production) {
       return Promise.resolve(DataMock.GET_LIST_EXPENSE);
-    } */
+    }
     return this.httpClient.get(
       `${this.expenseUrl}${filters}`,
       {
@@ -42,7 +42,7 @@ export class ExpenseService implements IExpenseService {
     ).toPromise();
   }
 
-  updateExpense(infoFormExpense: IListExpenses): Promise<any> {
+  public updateExpense(infoFormExpense: IListExpenses): Promise<any> {
     if (!environment.production) {
       return Promise.resolve(DataMock.POST_SAVE_EXPENSE);
     }
@@ -65,7 +65,7 @@ export class ExpenseService implements IExpenseService {
     ).toPromise();
   }
 
-  deleteExpense(idExpense: string): Promise<any> {
+  public deleteExpense(idExpense: string): Promise<any> {
     return this.httpClient.delete(
       `${this.expenseUrl}${idExpense}`,
       {
@@ -84,7 +84,7 @@ export class ExpenseService implements IExpenseService {
     ).toPromise();
   }
 
-  saveExpense(infoFormExpense: IListExpenses): Promise<any> {
+  public saveExpense(infoFormExpense: IListExpenses): Promise<any> {
     if (!environment.production) {
       return Promise.resolve(DataMock.POST_SAVE_EXPENSE);
     }
@@ -108,7 +108,7 @@ export class ExpenseService implements IExpenseService {
 
   }
 
-  getListExpense(idExpense: string): Promise<any> {
+  public getListExpense(idExpense: string): Promise<any> {
     if (!environment.production) {
       return Promise.resolve(DataMock.GET_LIST_EXPENSE);
     }

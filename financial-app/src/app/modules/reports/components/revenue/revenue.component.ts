@@ -16,10 +16,14 @@ export class RevenueComponent implements OnInit {
   private idClient = this.storageService.getUser().clientId;
 
   private infoRevenue: IListRevenue;
+  private idRevenueUpdated = null;
   public movements: any;
   public updateRecord: boolean = false;
+  public applyFilter: boolean = false;
+  public disabledFilter: boolean = true;
   public optionMovement = OPTIONS_TYPE_REGISTER_REVENUE;
   public revenueForm: FormGroup;
+  public filterForm: FormGroup;
   public hasError = false;
   public options = Object.values(TYPE_REGISTER_REVENUE);
 
@@ -37,7 +41,7 @@ export class RevenueComponent implements OnInit {
     this.revenueForm = new FormGroup({
       typeRevenueExpense: new FormControl(null, [
         Validators.required,
-        Validators.minLength(4)]),
+        Validators.minLength(2)]),
       name: new FormControl(null, [
         Validators.maxLength(100)
       ]),
@@ -46,17 +50,33 @@ export class RevenueComponent implements OnInit {
       ]),
       date: new FormControl(null)
     });
+
+    this.filterForm = new FormGroup({
+      typeRevenue: new FormControl(null),
+      dateInit: new FormControl(null, [
+        Validators.required,
+      ]),
+      dateEnd: new FormControl(null, [
+        Validators.required,
+      ])
+    });
   }
 
   async ngOnInit() {
     this.movements = await this.revenueService.getListRevenue(this.idClient);
   }
 
+  validFilter() {
+    if (this.filterForm.valid) {
+      this.disabledFilter = false;
+    }
+  }
+
   async save() {
     this.infoRevenue = {
       ...this.revenueForm.value,
       date: this.getFullDate(this.revenueForm.value.date),
-      clientId: this.idClient
+      clientId: this.idClient,
     };
     try {
       await this.revenueService.saveRevenue(this.infoRevenue);
@@ -71,11 +91,15 @@ export class RevenueComponent implements OnInit {
     this.infoRevenue = {
       ...this.revenueForm.value,
       date: this.getFullDate(),
-      clientId: this.idClient
+      clientId: this.idClient,
+      id: this.idRevenueUpdated ?? 0,
     };
     try {
       await this.revenueService.updateRevenue(this.infoRevenue);
       this.updateRecord = false;
+      this.idRevenueUpdated = null;
+      alert('Se actualizo correctamente');
+      this.ngOnInit();
     } catch (error) {
       this.hasError = true;
     }
@@ -86,7 +110,9 @@ export class RevenueComponent implements OnInit {
   }
 
   goToDashboard(): void {
-    this.router.navigate(['/dashboard']);
+    this.router.navigate(['/dashboard']).then(() => {
+      window.location.reload();
+    });
   }
 
   getOptionMovement(label: TYPE_REGISTER_REVENUE) {
@@ -94,9 +120,10 @@ export class RevenueComponent implements OnInit {
   }
 
   editMovement(item: any) {
-    this.revenueForm.controls['typeRevenue'].setValue(item.typeRevenueExpense);
-    this.revenueForm.controls['observations'].setValue(item.name);
+    this.revenueForm.controls['typeRevenueExpense'].setValue(item.typeRevenueExpense);
+    this.revenueForm.controls['name'].setValue(item.name);
     this.revenueForm.controls['amount'].setValue(item.amount);
+    this.idRevenueUpdated = item.id;
     this.updateRecord = true;
   }
 
@@ -112,6 +139,32 @@ export class RevenueComponent implements OnInit {
     try {
       await this.revenueService.deleteRevenue(item.id);
       this.updateRecord = false;
+      alert('Se eliminó correctamente');
+      this.ngOnInit();
+    } catch (error) {
+      this.hasError = true;
+    }
+  }
+
+  filter() {
+    this.applyFilter = true;
+  }
+
+  cancelFilter() {
+    this.applyFilter = false;
+  }
+
+  async searchFilter() {
+    let dateInit = this.getFullDate(this.filterForm.value.dateInit);
+    let dateEnd = this.getFullDate(this.filterForm.value.dateEnd);
+    let url = `${this.idClient}/${dateInit}/${dateEnd}/`;
+    if (this.filterForm.value.typeRevenue) {
+      url += `?typeRevenueExpense=${this.filterForm.value.typeRevenue}`;
+    }
+
+    try {
+      this.movements = await this.revenueService.filterExpense(url);
+      this.applyFilter = false;
     } catch (error) {
       this.hasError = true;
     }

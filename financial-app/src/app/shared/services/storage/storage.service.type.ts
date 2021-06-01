@@ -12,5 +12,4 @@ export interface IStorageService {
 
   clearSessionInfo(): void;
 
-
 }

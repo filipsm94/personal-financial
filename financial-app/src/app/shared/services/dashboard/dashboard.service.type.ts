@@ -1,4 +1,4 @@
 
 export interface IDashboardService {
-  initData(idCLient:string): Promise<any>;
+  initData(idCLient: string): Promise<any>;
 }

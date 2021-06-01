@@ -7,7 +7,7 @@ import { StorageService } from '../storage/storage.service';
 import { IAuthService } from './auth.service.type';
 
 @Injectable()
-export class AuthService implements IAuthService{
+export class AuthService implements IAuthService {
 
   private readonly _isLoggedIn = new BehaviorSubject(false);
 
@@ -17,21 +17,21 @@ export class AuthService implements IAuthService{
     private router: Router
   ) { }
 
-  get isLogged(): Observable<boolean>{
+  get isLogged(): Observable<boolean> {
     return this._isLoggedIn;
   }
 
-  public setLogged(value: boolean): void{
+  public setLogged(value: boolean): void {
     this._isLoggedIn.next(value);
   }
 
   public loginUser(infoLogin: string): Promise<ILogin> {
     return this.authApiService.loginUser(infoLogin).then((response) => {
-      if (response && response.name !== ''){
+      if (response && response.name !== '') {
         this.storageService.setUser(response);
         this.router.navigate(['/dashboard']);
-      }else{
-        this.storageService.setUser({clientId: infoLogin});
+      } else {
+        this.storageService.setUser({ clientId: infoLogin });
         this.router.navigate(['/dashboard/user']);
       }
       return response;
@@ -41,14 +41,14 @@ export class AuthService implements IAuthService{
   }
 
   public isLoggedIn(): boolean {
-    if (this.storageService.getUser()){
+    if (this.storageService.getUser()) {
       this.setLogged(true);
       return true;
     }
     return false;
   }
 
-  public logoutUser(): void{
+  public logoutUser(): void {
     this.storageService.clearSessionInfo();
     this.setLogged(false);
     this.router.navigate(['/login']);

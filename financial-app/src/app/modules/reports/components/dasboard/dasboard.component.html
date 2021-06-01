@@ -57,6 +57,7 @@
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">Movimientos</h4>
+                <google-chart #myLineChart [data]="lineChart"></google-chart>
             </div>
         </div>
     </div>
@@ -64,7 +65,7 @@
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">Tus Manejos</h4>
-                <google-chart [data]="pieChart"></google-chart>
+                <google-chart #myPieChart [data]="pieChart"></google-chart>
             </div>
         </div>
     </div>
@@ -101,7 +102,7 @@
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">Balance Anual</h4>
-                <google-chart [data]="columnChart"></google-chart>
+                <google-chart #myColumnChart [data]="columnChart"></google-chart>
             </div>
         </div>
     </div>

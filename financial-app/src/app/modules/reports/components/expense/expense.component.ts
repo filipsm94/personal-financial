@@ -5,18 +5,6 @@ import { OPTIONS_TYPE_REGISTER_EXPENSE, TYPE_REGISTER_EXPENSE } from 'src/app/sh
 import { ExpenseService } from 'src/app/shared/services/expense/expense.service';
 import { StorageService } from 'src/app/shared/services/storage/storage.service';
 
-export const MY_FORMATS = {
-  parse: {
-    dateInput: 'LL',
-  },
-  display: {
-    dateInput: 'LL',
-    monthYearLabel: 'MMM YYYY',
-    dateA11yLabel: 'LL',
-    monthYearA11yLabel: 'MMMM YYYY',
-  },
-};
-
 @Component({
   selector: 'app-revenue-and-expense',
   templateUrl: './expense.component.html',
@@ -27,7 +15,7 @@ export class ExpenseComponent implements OnInit {
   idClient = this.storageService.getUser().clientId;
 
   private infoExpense: any;
-  private filterExpense: any;
+  private idExpenseUpdated = null;
   public movements: any = [];
   public updateRecord: boolean = false;
   public applyFilter: boolean = false;
@@ -46,7 +34,7 @@ export class ExpenseComponent implements OnInit {
     this.expenseForm = new FormGroup({
       typeRevenueExpense: new FormControl(null, [
         Validators.required,
-        Validators.minLength(4)]),
+        Validators.minLength(2)]),
       name: new FormControl(null, [
         Validators.maxLength(100)
       ]),
@@ -71,8 +59,8 @@ export class ExpenseComponent implements OnInit {
     this.movements = await this.revenueService.getListExpense(this.idClient);
   }
 
-  validFilter(){
-    if(this.filterForm.valid){
+  validFilter() {
+    if (this.filterForm.valid) {
       this.disabledFilter = false;
     }
   }
@@ -96,11 +84,15 @@ export class ExpenseComponent implements OnInit {
     this.infoExpense = {
       ...this.expenseForm.value,
       date: this.getFullDate(),
-      clientId: this.idClient
+      clientId: this.idClient,
+      id: this.idExpenseUpdated ?? 0,
     };
     try {
       await this.revenueService.updateExpense(this.infoExpense);
       this.updateRecord = false;
+      this.idExpenseUpdated = null;
+      alert('Se actualizo correctamente');
+      this.ngOnInit();
     } catch (error) {
       this.hasError = true;
     }
@@ -115,7 +107,9 @@ export class ExpenseComponent implements OnInit {
   }
 
   goToDashboard(): void {
-    this.router.navigate(['/dashboard']);
+    this.router.navigate(['/dashboard']).then(() => {
+      window.location.reload();
+    });
   }
 
   getOptionMovement(label: TYPE_REGISTER_EXPENSE) {
@@ -126,35 +120,38 @@ export class ExpenseComponent implements OnInit {
     this.expenseForm.controls['typeRevenueExpense'].setValue(item.typeRevenueExpense);
     this.expenseForm.controls['name'].setValue(item.name);
     this.expenseForm.controls['amount'].setValue(item.amount);
+    this.idExpenseUpdated = item.id;
     this.updateRecord = true;
   }
 
   async deleteMovement(item: any) {
-    this.infoExpense = { 'id': item.id };
+
     try {
-      await this.revenueService.deleteExpense(this.infoExpense);
+      await this.revenueService.deleteExpense(item.id);
       this.updateRecord = false;
+      alert('Se eliminó correctamente');
+      this.ngOnInit();
     } catch (error) {
       this.hasError = true;
     }
   }
 
-  filter(){
+  filter() {
     this.applyFilter = true;
   }
 
-  cancelFilter(){
+  cancelFilter() {
     this.applyFilter = false;
   }
 
-  async searchFilter(){
+  async searchFilter() {
     let dateInit = this.getFullDate(this.filterForm.value.dateInit);
     let dateEnd = this.getFullDate(this.filterForm.value.dateEnd);
     let url = `${this.idClient}/${dateInit}/${dateEnd}/`;
-    if(this.filterForm.value.typeRevenue){
+    if (this.filterForm.value.typeRevenue) {
       url += `?typeRevenueExpense=${this.filterForm.value.typeRevenue}`;
     }
-    
+
     try {
       this.movements = await this.revenueService.filterExpense(url);
       this.applyFilter = false;
