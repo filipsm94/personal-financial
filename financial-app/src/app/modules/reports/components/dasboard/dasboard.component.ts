@@ -56,7 +56,7 @@ export class DasboardComponent implements OnInit {
   }
 
   chargePieData(saleData: ISummary) {
-    this.pieChart = {...this.pieChart};
+    // this.pieChart = {...this.pieChart};
 
     this.pieChart.dataTable = [
       ['Movimiento', 'Monto']
@@ -79,13 +79,11 @@ export class DasboardComponent implements OnInit {
     movimientos.forEach((item: any) => {
       this.pieChart.dataTable.push(item);
     });
-
-    console.log(this.pieChart.component);
      
   }
 
   chargeColumnData(saleData: ISummary){
-    this.columnChart = {...this.columnChart};
+    // this.columnChart = {...this.columnChart};
     this.columnChart.dataTable = [
       ['Mes', 'Ingresos', 'Gastos']
     ];
