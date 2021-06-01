@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GoogleChartInterface } from 'ng2-google-charts';
-import { OPTIONS_TYPE_MOVEMENTS, TYPE_MOVEMENTS } from 'src/app/shared/enums/enums';
+import { OPTIONS_TYPE_MOVEMENTS, TYPE_MOVEMENTS, ALL_TYPE_REGISTER, TYPE_REGISTER_EXPENSE, TYPE_REGISTER_REVENUE } from 'src/app/shared/enums/enums';
 import { IMontly, ISummary, listRevenueExpense } from 'src/app/shared/models/sales.model';
 import { DashboardService } from 'src/app/shared/services/dashboard/dashboard.service';
 import { StorageService } from 'src/app/shared/services/storage/storage.service';
@@ -17,6 +17,7 @@ export class DasboardComponent implements OnInit {
     allAvailable: 0
   };
   public optionMovement = OPTIONS_TYPE_MOVEMENTS;
+  public allOptions = ALL_TYPE_REGISTER;
   public movements: any;
   public pieChart: GoogleChartInterface = {
     chartType: 'PieChart',
@@ -36,6 +37,22 @@ export class DasboardComponent implements OnInit {
     // firstRowIsData: true,
     options: { title: 'Balance anual' },
   };
+  public lineChart: GoogleChartInterface = {
+    chartType: 'LineChart',
+    dataTable: [
+      ["Tipo", "Monto"],
+      ["Comida", 400000],
+      ["Diversión", 1500000],
+      ["Educación", 6000000],
+      ["Salario", 3500000],
+      ["Trabajo extra", 1500000]
+    ],
+    // firstRowIsData: true,
+    options: {
+      title: 'Balance Mensual',
+      pointSize: 5
+    },
+  };
 
   constructor(
     private authService: DashboardService,
@@ -54,53 +71,79 @@ export class DasboardComponent implements OnInit {
     };
     this.chargePieData(saleData);
     this.chargeColumnData(saleData);
-
   }
 
   chargePieData(saleData: ISummary) {
-    this.pieChart = {...this.pieChart};
+    this.pieChart = { ...this.pieChart };
 
     this.pieChart.dataTable = [
       ['Movimiento', 'Monto']
     ];
+    this.lineChart.dataTable = [
+      ["Tipo", "Monto"],
+    ];
     const movimientos: any = [];
     saleData.listRevenueExpense.forEach((element: listRevenueExpense) => {
+      let find = false;
+      let indice = 0;
       for (let i = 0; i < movimientos.length; i++) {
         if (movimientos[i][0] == element.typeRevenueExpense) {
-          movimientos[i][1] += element.amount;
-        } else {
-          movimientos.push([element.typeRevenueExpense, element.amount]);
-          break;
+          find = true;
+          indice = i;
         }
       }
+
+      if (find) {
+        movimientos[indice][1] += element.amount;
+      } else {
+        movimientos.push([element.typeRevenueExpense, element.amount]);
+      }
+
       if (movimientos.length == 0) {
         movimientos.push([element.typeRevenueExpense, element.amount]);
       }
     });
 
     movimientos.forEach((item: any) => {
-      this.pieChart.dataTable.push(item);
+      console.log(ALL_TYPE_REGISTER)
+      console.log(ALL_TYPE_REGISTER["EDUCATION"])
+      console.log(this.getRegister(item[0]))
+
+      //console.log(ALL_TYPE_REGISTER[item[0]])
+      this.pieChart.dataTable.push([this.getRegister(item[0]), item[1]]);
+      this.lineChart.dataTable.push([this.getRegister(item[0]), item[1]]);
     });
-     
+
   }
 
-  chargeColumnData(saleData: ISummary){
-    this.columnChart = {...this.columnChart};
+  getRegister(data: TYPE_REGISTER_EXPENSE | TYPE_REGISTER_REVENUE) {
+    return this.allOptions[data];
+  }
+
+  chargeColumnData(saleData: ISummary) {
+    this.columnChart = { ...this.columnChart };
     this.columnChart.dataTable = [
       ['Mes', 'Ingresos', 'Gastos']
     ];
 
     const movimientos: any = [];
     saleData.monthlySummary.forEach((element: IMontly) => {
+      let find = false;
+      let indice = 0;
       for (let i = 0; i < movimientos.length; i++) {
         if (movimientos[i][0] == element.month) {
-          movimientos[i][1] += element.revenue;
-          movimientos[i][1] += element.expense;
-        } else {
-          movimientos.push([element.month, element.revenue, element.expense]);
-          break;
+          find = true;
+          indice = i;
         }
       }
+
+      if (find) {
+        movimientos[indice][1] += element.revenue;
+        movimientos[indice][1] += element.expense;
+      } else {
+        movimientos.push([element.month, element.revenue, element.expense]);
+      }
+
       if (movimientos.length == 0) {
         movimientos.push([element.month, element.revenue, element.expense]);
       }
@@ -111,11 +154,11 @@ export class DasboardComponent implements OnInit {
     });
   }
 
-  chargeEnum(data: string){
+  chargeEnum(data: string) {
     return data;
   }
 
-  getOptionMovement(label: TYPE_MOVEMENTS){
+  getOptionMovement(label: TYPE_MOVEMENTS) {
     return this.optionMovement[label];
   }
 

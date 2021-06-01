@@ -66,8 +66,8 @@ export class RevenueComponent implements OnInit {
     this.movements = await this.revenueService.getListRevenue(this.idClient);
   }
 
-  validFilter(){
-    if(this.filterForm.valid){
+  validFilter() {
+    if (this.filterForm.valid) {
       this.disabledFilter = false;
     }
   }
@@ -92,7 +92,7 @@ export class RevenueComponent implements OnInit {
       ...this.revenueForm.value,
       date: this.getFullDate(),
       clientId: this.idClient,
-      id: this.idRevenueUpdated??0,
+      id: this.idRevenueUpdated ?? 0,
     };
     try {
       await this.revenueService.updateRevenue(this.infoRevenue);
@@ -144,22 +144,22 @@ export class RevenueComponent implements OnInit {
     }
   }
 
-  filter(){
+  filter() {
     this.applyFilter = true;
   }
 
-  cancelFilter(){
+  cancelFilter() {
     this.applyFilter = false;
   }
 
-  async searchFilter(){
+  async searchFilter() {
     let dateInit = this.getFullDate(this.filterForm.value.dateInit);
     let dateEnd = this.getFullDate(this.filterForm.value.dateEnd);
     let url = `${this.idClient}/${dateInit}/${dateEnd}/`;
-    if(this.filterForm.value.typeRevenue){
+    if (this.filterForm.value.typeRevenue) {
       url += `?typeRevenueExpense=${this.filterForm.value.typeRevenue}`;
     }
-    
+
     try {
       this.movements = await this.revenueService.filterExpense(url);
       this.applyFilter = false;
