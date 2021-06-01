@@ -15,6 +15,7 @@ export class ExpenseComponent implements OnInit {
   idClient = this.storageService.getUser().clientId;
 
   private infoExpense: any;
+  private idExpenseUpdated = null;
   public movements: any = [];
   public updateRecord: boolean = false;
   public applyFilter: boolean = false;
@@ -83,11 +84,13 @@ export class ExpenseComponent implements OnInit {
     this.infoExpense = {
       ...this.expenseForm.value,
       date: this.getFullDate(),
-      clientId: this.idClient
+      clientId: this.idClient,
+      id: this.idExpenseUpdated?? 0,
     };
     try {
       await this.revenueService.updateExpense(this.infoExpense);
       this.updateRecord = false;
+      this.idExpenseUpdated = null;
       alert('Se actualizo correctamente');
       this.ngOnInit();
     } catch (error) {
@@ -115,6 +118,7 @@ export class ExpenseComponent implements OnInit {
     this.expenseForm.controls['typeRevenueExpense'].setValue(item.typeRevenueExpense);
     this.expenseForm.controls['name'].setValue(item.name);
     this.expenseForm.controls['amount'].setValue(item.amount);
+    this.idExpenseUpdated = item.id;
     this.updateRecord = true;
   }
 

@@ -16,6 +16,7 @@ export class RevenueComponent implements OnInit {
   private idClient = this.storageService.getUser().clientId;
 
   private infoRevenue: IListRevenue;
+  private idRevenueUpdated = null;
   public movements: any;
   public updateRecord: boolean = false;
   public applyFilter: boolean = false;
@@ -75,10 +76,12 @@ export class RevenueComponent implements OnInit {
     this.infoRevenue = {
       ...this.revenueForm.value,
       date: this.getFullDate(this.revenueForm.value.date),
-      clientId: this.idClient
+      clientId: this.idClient,
+      id: this.idRevenueUpdated??0,
     };
     try {
       await this.revenueService.saveRevenue(this.infoRevenue);
+      this.idRevenueUpdated = null;
       this.goToDashboard();
     } catch (error) {
       this.hasError = true;
@@ -118,6 +121,7 @@ export class RevenueComponent implements OnInit {
     this.revenueForm.controls['typeRevenueExpense'].setValue(item.typeRevenueExpense);
     this.revenueForm.controls['name'].setValue(item.name);
     this.revenueForm.controls['amount'].setValue(item.amount);
+    this.idRevenueUpdated = item.id;
     this.updateRecord = true;
   }
 
