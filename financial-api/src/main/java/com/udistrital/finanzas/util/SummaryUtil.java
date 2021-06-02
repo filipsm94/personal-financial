@@ -19,7 +19,7 @@ public class SummaryUtil {
             Calendar cal = Calendar.getInstance();
             cal.setTime(r.getDate());
             int mesActual = cal.get(Calendar.MONTH);
-            String month = convertMonth(mesActual);
+            String month = mesActual+"";
             MonthlySummary sum = summaryMonth.get(month);
             if (sum != null) {
                 if (r.getType().equals("REVENUE")) {
@@ -43,11 +43,14 @@ public class SummaryUtil {
             summaryMonth.put(month, sum);
         }
 
+        TreeMap<String, MonthlySummary> tm=new  TreeMap<String, MonthlySummary> (summaryMonth);
 
-        Iterator it = summaryMonth.entrySet().iterator();
+        Iterator it = tm.entrySet().iterator();
         while (it.hasNext()) {
             Map.Entry pair = (Map.Entry) it.next();
-            listMonthly.add((MonthlySummary) pair.getValue());
+            MonthlySummary aux = (MonthlySummary) pair.getValue();
+            aux.setMonth(convertMonth(Integer.parseInt(aux.getMonth())));
+            listMonthly.add(aux);
             it.remove();
 
         }
